@@ -23,54 +23,28 @@ export function RevealHeading({
       registerGsap();
 
       let split: SplitText | null = null;
-      let cancelled = false;
-      let resizeTimer: ReturnType<typeof setTimeout> | null = null;
-      let hasRevealed = false;
 
-      // autoSplit's own resize handling re-splits immediately on resize,
-      // which can race with layout/font settling the same way the initial
-      // split can. Splitting (and re-splitting on resize) is done manually
-      // here, always behind the same "wait two frames" safety net, so a
-      // line's clipped mask box is never sized against stale metrics.
-      function settleThenSplit(reveal: boolean) {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            if (cancelled || !ref.current) return;
-            split?.revert();
-            split = SplitText.create(ref.current, {
-              type: "lines",
-              mask: "lines",
-            });
-            if (reveal && !hasRevealed) {
-              hasRevealed = true;
-              gsap.from(split.lines, {
-                yPercent: 100,
-                duration: durations.reveal,
-                stagger: 0.08,
-                ease: "report",
-              });
-            }
-          });
-        });
-      }
-
-      document.fonts.ready.then(() => {
-        if (cancelled) return;
-        settleThenSplit(true);
+      // Split by words, not lines, and animate opacity/transform only: no
+      // element here ever gets `overflow: clip`. A line-mask reveal clips
+      // each line to a box sized at split time, which silently cuts off
+      // real text if that measurement races a webfont swap or a later
+      // resize (confirmed happening intermittently with `type: "lines"` +
+      // `mask: "lines"`). Word-level fade-and-rise reads almost the same
+      // but can never hide content if the measurement is ever stale.
+      split = SplitText.create(ref.current, {
+        type: "words",
+        wordsClass: "inline-block",
       });
 
-      function onResize() {
-        if (resizeTimer) clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => settleThenSplit(false), 150);
-      }
-      window.addEventListener("resize", onResize);
+      gsap.from(split.words, {
+        opacity: 0,
+        y: 16,
+        duration: durations.reveal,
+        stagger: 0.025,
+        ease: "report",
+      });
 
-      return () => {
-        cancelled = true;
-        if (resizeTimer) clearTimeout(resizeTimer);
-        window.removeEventListener("resize", onResize);
-        split?.revert();
-      };
+      return () => split?.revert();
     },
     { scope: ref, dependencies: [reducedMotion] },
   );

@@ -30,7 +30,7 @@ export function OSShell({ children }: { children: React.ReactNode }) {
             onClick={() => setMobileOpen(false)}
             aria-hidden="true"
           />
-          <div className="glass-strong absolute inset-y-0 left-0 w-64">
+          <div className="absolute inset-y-0 left-0 w-72 border-r border-white/10 bg-paper shadow-2xl">
             <div className="flex justify-end p-4">
               <button
                 type="button"

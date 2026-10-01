@@ -60,7 +60,7 @@
   --font-mono:
     var(--font-ibm-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --text-display-xl: clamp(2.75rem, 6vw, 5.25rem);
+  --text-display-xl: clamp(2.5rem, 4.4vw, 3.75rem);
   --text-display-xl--line-height: 1.02;
   --text-display-l: clamp(2rem, 4.2vw, 3.25rem);
   --text-display-l--line-height: 1.08;
@@ -94,6 +94,14 @@ body {
   font-size: var(--text-body);
   line-height: var(--text-body--line-height);
   -webkit-font-smoothing: antialiased;
+}
+
+/* Safety net: a long word at a fluid display size should never be able to
+   visually overflow its column, no matter the copy or viewport. */
+h1,
+h2,
+h3 {
+  overflow-wrap: break-word;
 }
 
 ::selection {
