@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "@/motion/useReducedMotion";
 import { facts } from "@/content/facts";
 
@@ -12,29 +12,49 @@ const lines = [
   `[ OK ] confirming ${facts.signalResult.verified} verified findings`,
   "welcome.",
 ];
+const LINE_MS = 220;
+const HOLD_MS = 500;
+const TOTAL_MS = lines.length * LINE_MS + HOLD_MS;
 
 export function BootSequence() {
   const reducedMotion = useReducedMotion();
   const [visibleLines, setVisibleLines] = useState(0);
   const [hidden, setHidden] = useState(true);
+  const completedRef = useRef(false);
 
   useEffect(() => {
-    // This is a one-time client-only bootstrap check (sessionStorage isn't
-    // available during SSR), so it necessarily sets state directly here.
-    if (reducedMotion || sessionStorage.getItem("skilledscan-booted")) {
+    // Gate on sessionStorage only to read it; the "booted" flag is written
+    // only once the sequence actually completes (see below). Writing it
+    // eagerly at the start of this effect, instead of at the end, breaks
+    // under React Strict Mode's dev-only mount -> cleanup -> mount replay:
+    // the first (soon-to-be-cleaned-up) invocation would mark the session
+    // as booted and set the overlay visible, its own cleanup would then
+    // cancel its timers before they fire, and the second invocation would
+    // see the session already marked booted and skip starting a new timer
+    // loop entirely, leaving the overlay permanently stuck on screen.
+    if (reducedMotion || completedRef.current || sessionStorage.getItem("skilledscan-booted")) {
       return;
     }
-    sessionStorage.setItem("skilledscan-booted", "1");
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time reveal gated on a client-only sessionStorage check; there is no non-effect way to make this decision.
+
+    const startedAt = Date.now();
     setHidden(false);
 
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    lines.forEach((_, i) => {
-      timers.push(setTimeout(() => setVisibleLines(i + 1), i * 220));
-    });
-    timers.push(setTimeout(() => setHidden(true), lines.length * 220 + 500));
+    let rafId: number;
+    function tick() {
+      const elapsed = Date.now() - startedAt;
+      setVisibleLines(Math.min(lines.length, Math.floor(elapsed / LINE_MS) + 1));
 
-    return () => timers.forEach(clearTimeout);
+      if (elapsed >= TOTAL_MS) {
+        completedRef.current = true;
+        sessionStorage.setItem("skilledscan-booted", "1");
+        setHidden(true);
+        return;
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+    rafId = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(rafId);
   }, [reducedMotion]);
 
   if (hidden) return null;

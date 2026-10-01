@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { osApps, osLegalApps } from "@/components/os/osConfig";
+import { osApps, osLegalApps, terminalApp } from "@/components/os/osConfig";
 
 function AppIcon({ slug }: { slug: string }) {
   const common = {
@@ -69,6 +69,13 @@ function AppIcon({ slug }: { slug: string }) {
           <path d="m4 7 8 6 8-6" />
         </svg>
       );
+    case "terminal":
+      return (
+        <svg {...common}>
+          <rect x="3" y="4" width="18" height="16" rx="2" />
+          <path d="m7 9 3 3-3 3M13 15h4" />
+        </svg>
+      );
     default:
       return (
         <svg {...common}>
@@ -78,7 +85,13 @@ function AppIcon({ slug }: { slug: string }) {
   }
 }
 
-export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
+export function Sidebar({
+  onNavigate,
+  onOpenTerminal,
+}: {
+  onNavigate?: () => void;
+  onOpenTerminal?: () => void;
+}) {
   const pathname = usePathname();
 
   return (
@@ -91,7 +104,31 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
       </div>
 
       <nav aria-label="Main" className="mt-8 flex flex-col gap-1">
-        {osApps.map((app) => {
+        <Link
+          href={osApps[0].href}
+          onClick={onNavigate}
+          aria-current={pathname === osApps[0].href ? "page" : undefined}
+          className={`flex items-center gap-3 rounded-[var(--radius-xs)] px-3 py-2 font-[family-name:var(--font-mono)] text-[13px] transition-colors ${
+            pathname === osApps[0].href ? "glass text-ink" : "text-ink-soft hover:text-ink"
+          }`}
+        >
+          <AppIcon slug={osApps[0].slug} />
+          {osApps[0].label}
+        </Link>
+
+        <button
+          type="button"
+          onClick={() => {
+            onOpenTerminal?.();
+            onNavigate?.();
+          }}
+          className="flex items-center gap-3 rounded-[var(--radius-xs)] px-3 py-2 text-left font-[family-name:var(--font-mono)] text-[13px] text-ink-soft transition-colors hover:text-ink"
+        >
+          <AppIcon slug={terminalApp.slug} />
+          {terminalApp.label}
+        </button>
+
+        {osApps.slice(1).map((app) => {
           const current = pathname === app.href;
           return (
             <Link

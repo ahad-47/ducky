@@ -16,6 +16,13 @@ export const osApps: OSApp[] = [
   { slug: "contact", label: "contact", href: "/contact", keywords: ["contact", "assessment", "request"] },
 ];
 
+export const terminalApp: OSApp = {
+  slug: "terminal",
+  label: "terminal",
+  href: "",
+  keywords: ["terminal", "term", "console", "shell"],
+};
+
 export const osLegalApps: OSApp[] = [
   { slug: "privacy", label: "privacy", href: "/legal/privacy", keywords: ["privacy"] },
   { slug: "terms", label: "terms", href: "/legal/terms", keywords: ["terms"] },

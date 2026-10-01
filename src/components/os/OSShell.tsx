@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "@/components/os/Sidebar";
 import { TopBar } from "@/components/os/TopBar";
-import { CommandBar } from "@/components/os/CommandBar";
+import { TerminalWindow } from "@/components/os/TerminalWindow";
 
 export function OSShell({ children }: { children: React.ReactNode }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [terminalOpen, setTerminalOpen] = useState(false);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -17,10 +18,21 @@ export function OSShell({ children }: { children: React.ReactNode }) {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    function onKeydown(e: KeyboardEvent) {
+      if ((e.ctrlKey || e.metaKey) && e.key === "`") {
+        e.preventDefault();
+        setTerminalOpen((v) => !v);
+      }
+    }
+    window.addEventListener("keydown", onKeydown);
+    return () => window.removeEventListener("keydown", onKeydown);
+  }, []);
+
   return (
     <div className="xl:pl-64">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r border-white/10 xl:block">
-        <Sidebar />
+        <Sidebar onOpenTerminal={() => setTerminalOpen(true)} />
       </aside>
 
       {mobileOpen ? (
@@ -40,21 +52,22 @@ export function OSShell({ children }: { children: React.ReactNode }) {
                 [ x ] close
               </button>
             </div>
-            <Sidebar onNavigate={() => setMobileOpen(false)} />
+            <Sidebar
+              onNavigate={() => setMobileOpen(false)}
+              onOpenTerminal={() => setTerminalOpen(true)}
+            />
           </div>
         </div>
       ) : null}
 
-      <div className="flex min-h-screen flex-col gap-4 p-4 pb-24">
-        <TopBar onMenuClick={() => setMobileOpen(true)} />
+      <div className="flex min-h-screen flex-col gap-4 p-4">
+        <TopBar onMenuClick={() => setMobileOpen(true)} onTerminalClick={() => setTerminalOpen(true)} />
         <main id="main" className="flex-1">
           {children}
         </main>
       </div>
 
-      <div className="fixed inset-x-4 bottom-4 z-30 xl:inset-x-auto xl:left-[17rem] xl:right-4">
-        <CommandBar />
-      </div>
+      <TerminalWindow isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
     </div>
   );
 }

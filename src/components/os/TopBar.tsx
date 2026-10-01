@@ -18,7 +18,13 @@ function useClock() {
   return now;
 }
 
-export function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
+export function TopBar({
+  onMenuClick,
+  onTerminalClick,
+}: {
+  onMenuClick: () => void;
+  onTerminalClick: () => void;
+}) {
   const pathname = usePathname();
   const now = useClock();
   const signInUrl = appSignInUrl;
@@ -47,6 +53,28 @@ export function TopBar({ onMenuClick }: { onMenuClick: () => void }) {
         </p>
       </div>
       <div className="flex items-center gap-4">
+        <button
+          type="button"
+          onClick={onTerminalClick}
+          className="hidden items-center gap-1.5 font-[family-name:var(--font-mono)] text-[13px] text-ink-soft hover:text-ink sm:flex"
+          aria-label="Open terminal"
+          title="Open terminal (Ctrl+`)"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-4 w-4"
+            aria-hidden="true"
+          >
+            <rect x="3" y="4" width="18" height="16" rx="2" />
+            <path d="m7 9 3 3-3 3M13 15h4" />
+          </svg>
+          terminal
+        </button>
         <p className="hidden font-[family-name:var(--font-mono)] text-[12px] text-ink-soft sm:block" suppressHydrationWarning>
           {timeLabel}
         </p>
