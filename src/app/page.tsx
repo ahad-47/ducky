@@ -1,4 +1,3 @@
-import { BootSequence } from "@/components/os/BootSequence";
 import { Hero } from "@/components/sections/Hero";
 import { ProofLine } from "@/components/sections/ProofLine";
 import { Problem } from "@/components/sections/Problem";
@@ -20,7 +19,6 @@ export const metadata = buildMetadata({
 export default function Home() {
   return (
     <>
-      <BootSequence />
       <Hero />
       <ProofLine />
       <Problem />

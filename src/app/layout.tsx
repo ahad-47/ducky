@@ -2,7 +2,10 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { dmSans, ibmPlexMono } from "@/fonts";
 import { SkipLink } from "@/components/layout/SkipLink";
-import { OSShell } from "@/components/os/OSShell";
+import { DesktopClient } from "@/components/desktop/DesktopClient";
+import { EmbedBridge } from "@/components/desktop/EmbedBridge";
+import { Footer } from "@/components/layout/Footer";
+import { pages } from "@/components/desktop/pages";
 import { SmoothScroll } from "@/motion/SmoothScroll";
 import { facts } from "@/content/facts";
 import { env } from "@/lib/env";
@@ -19,7 +22,11 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
-  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const requestHeaders = await headers();
+  const nonce = requestHeaders.get("x-nonce") ?? undefined;
+  // Top-level visits get the desktop; pages inside its browser windows
+  // (iframes, flagged by src/proxy.ts) render as plain pages.
+  const embedded = requestHeaders.get("x-os-embed") === "1";
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -29,15 +36,45 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     description: facts.brand.oneLiner,
   };
 
+  const structuredData = (
+    <script
+      type="application/ld+json"
+      nonce={nonce}
+      // Built only from facts via JSON.stringify, per the brief's CSP policy.
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+
+  if (!embedded) {
+    return (
+      <html lang="en" className={`${dmSans.variable} ${ibmPlexMono.variable} h-full`}>
+        <body className="h-full overflow-hidden bg-black text-ink">
+          {structuredData}
+          <noscript>
+            <div className="p-8">
+              <p className="mb-4">SkilledScan OS needs JavaScript. The pages are available directly:</p>
+              <ul className="list-disc pl-6">
+                {pages.map((p) => (
+                  <li key={p.route}>
+                    <a className="underline" href={`${p.route}?embed=1`}>
+                      {p.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </noscript>
+          <DesktopClient />
+        </body>
+      </html>
+    );
+  }
+
   return (
     <html lang="en" className={`${dmSans.variable} ${ibmPlexMono.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-paper text-ink">
-        <script
-          type="application/ld+json"
-          nonce={nonce}
-          // Built only from facts via JSON.stringify, per the brief's CSP policy.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        {structuredData}
+        <EmbedBridge />
         <SmoothScroll>
           <SkipLink />
           <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
@@ -53,7 +90,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
               }}
             />
           </div>
-          <OSShell>{children}</OSShell>
+          <main id="main" className="relative flex-1 p-4">
+            {children}
+          </main>
+          <div className="relative">
+            <Footer />
+          </div>
         </SmoothScroll>
       </body>
     </html>
