@@ -1,3 +1,4 @@
+import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Container } from "@/components/ui/Container";
 import { PrimaryButton, SecondaryLink } from "@/components/ui/Button";
 import { HeroSignal } from "@/components/hero/HeroSignal";
@@ -9,9 +10,9 @@ export function Hero() {
       <Container>
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div>
-            <h1 className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
+            <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
               {homeCopy.hero.h1}
-            </h1>
+            </RevealHeading>
             <p className="measure mt-6 text-[18px] text-ink-soft">
               {homeCopy.hero.subhead}
             </p>

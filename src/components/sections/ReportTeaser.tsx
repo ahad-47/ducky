@@ -17,6 +17,7 @@ export function ReportTeaser() {
       </p>
       <div className="mt-10 max-w-xl">
         <SeverityBar
+          animated
           total={counts.total}
           segments={[
             { label: "medium", value: counts.medium, severity: "Medium" },

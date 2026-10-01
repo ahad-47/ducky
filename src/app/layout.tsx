@@ -4,6 +4,7 @@ import { instrumentSerif, dmSans, ibmPlexMono } from "@/fonts";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { SmoothScroll } from "@/motion/SmoothScroll";
 import { facts } from "@/content/facts";
 import { env, appSignInUrl } from "@/lib/env";
 import "./globals.css";
@@ -52,20 +53,22 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           // Built only from facts via JSON.stringify, per the brief's CSP policy.
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <SkipLink />
-        <Header signInUrl={appSignInUrl} />
-        <main id="main" className="relative flex-1">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 hidden lg:block"
-          >
-            <div className="mx-auto h-full max-w-[var(--content-max)] px-[var(--side-padding)]">
-              <div className="h-full border-l border-rule" />
+        <SmoothScroll>
+          <SkipLink />
+          <Header signInUrl={appSignInUrl} />
+          <main id="main" className="relative flex-1">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 hidden lg:block"
+            >
+              <div className="mx-auto h-full max-w-[var(--content-max)] px-[var(--side-padding)]">
+                <div className="h-full border-l border-rule" />
+              </div>
             </div>
-          </div>
-          {children}
-        </main>
-        <Footer />
+            {children}
+          </main>
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

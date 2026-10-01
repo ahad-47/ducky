@@ -3,8 +3,11 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useGSAP } from "@gsap/react";
 import { PrimaryButton } from "@/components/ui/Button";
 import { MobileMenu, type NavLink } from "@/components/layout/MobileMenu";
+import { gsap, ScrollTrigger, registerGsap, durations } from "@/motion/gsap";
+import { useReducedMotion } from "@/motion/useReducedMotion";
 
 const navLinks: NavLink[] = [
   { href: "/method", label: "Method" },
@@ -19,10 +22,56 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
+  const reducedMotion = useReducedMotion();
+
+  function toggleMenu(open: boolean) {
+    setMenuOpen(open);
+    window.dispatchEvent(new CustomEvent("skilledscan:menu-toggle", { detail: { open } }));
+  }
+
+  useGSAP(
+    () => {
+      registerGsap();
+      const header = headerRef.current;
+      if (!header) return;
+
+      if (reducedMotion) {
+        header.classList.add("bg-paper/[0.92]", "backdrop-blur-sm", "border-b", "border-rule");
+        return;
+      }
+
+      const trigger = ScrollTrigger.create({
+        start: 0,
+        end: "max",
+        onUpdate: (self) => {
+          const y = self.scroll();
+          header.classList.toggle("bg-paper/[0.92]", y > 24);
+          header.classList.toggle("backdrop-blur-sm", y > 24);
+          header.classList.toggle("border-b", y > 24);
+          header.classList.toggle("border-rule", y > 24);
+
+          const shouldHide = self.direction === 1 && y > 120;
+          gsap.to(header, {
+            yPercent: shouldHide ? -100 : 0,
+            duration: durations.ui,
+            ease: "report",
+            overwrite: true,
+          });
+        },
+      });
+
+      return () => trigger.kill();
+    },
+    { scope: headerRef, dependencies: [reducedMotion] },
+  );
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-rule bg-paper/[0.92]">
+      <header
+        ref={headerRef}
+        className="sticky top-0 z-40 transition-colors duration-[280ms]"
+      >
         <div className="mx-auto flex h-20 max-w-[var(--content-max)] items-center justify-between px-[var(--side-padding)]">
           <Link
             href="/"
@@ -31,7 +80,7 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
             SkilledScan
           </Link>
 
-          <nav aria-label="Main" className="hidden items-center gap-8 lg:flex">
+          <nav aria-label="Main" className="hidden items-center gap-5 xl:flex">
             {navLinks.map((link) => {
               const current = pathname === link.href;
               return (
@@ -39,7 +88,7 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
                   key={link.href}
                   href={link.href}
                   aria-current={current ? "page" : undefined}
-                  className={`font-[family-name:var(--font-sans)] text-[15px] font-medium ${
+                  className={`whitespace-nowrap font-[family-name:var(--font-sans)] text-[15px] font-medium ${
                     current
                       ? "text-accent underline decoration-[2px] underline-offset-[6px]"
                       : "text-ink hover:text-accent"
@@ -51,16 +100,18 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
             })}
           </nav>
 
-          <div className="hidden items-center gap-6 lg:flex">
+          <div className="hidden items-center gap-5 xl:flex">
             {signInUrl ? (
               <a
                 href={signInUrl}
-                className="font-[family-name:var(--font-sans)] text-[15px] font-medium text-ink underline decoration-accent decoration-[1px] underline-offset-4"
+                className="whitespace-nowrap font-[family-name:var(--font-sans)] text-[15px] font-medium text-ink underline decoration-accent decoration-[1px] underline-offset-4"
               >
                 Client sign in
               </a>
             ) : null}
-            <PrimaryButton href="/contact">Request an assessment</PrimaryButton>
+            <PrimaryButton href="/contact" className="whitespace-nowrap">
+              Request an assessment
+            </PrimaryButton>
           </div>
 
           <button
@@ -68,8 +119,8 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
             type="button"
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
-            onClick={() => setMenuOpen(true)}
-            className="font-[family-name:var(--font-sans)] text-base font-medium text-ink lg:hidden"
+            onClick={() => toggleMenu(true)}
+            className="font-[family-name:var(--font-sans)] text-base font-medium text-ink xl:hidden"
           >
             Menu
           </button>
@@ -78,7 +129,7 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
 
       <MobileMenu
         isOpen={menuOpen}
-        onClose={() => setMenuOpen(false)}
+        onClose={() => toggleMenu(false)}
         links={navLinks}
         signInUrl={signInUrl}
         menuButtonRef={menuButtonRef}

@@ -1,3 +1,4 @@
+import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Section } from "@/components/ui/Container";
 import { SecondaryLink } from "@/components/ui/Button";
 import { ExternalLink } from "@/components/ui/ExternalLink";
@@ -17,9 +18,9 @@ export default function PracticePage() {
   return (
     <>
       <Section>
-        <h1 className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
+        <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
           {practiceCopy.h1}
-        </h1>
+        </RevealHeading>
         <div className="measure mt-6 flex flex-col gap-4 text-[18px] text-ink-soft">
           {practiceCopy.paragraphs.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>

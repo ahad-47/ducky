@@ -1,3 +1,4 @@
+import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Section } from "@/components/ui/Container";
 import { complianceCopy } from "@/content/copy/compliance";
 import { buildMetadata } from "@/lib/seo";
@@ -13,9 +14,9 @@ export default function CompliancePage() {
   return (
     <>
       <Section>
-        <h1 className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
+        <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
           {complianceCopy.h1}
-        </h1>
+        </RevealHeading>
         <p className="measure mt-6 text-[18px] text-ink-soft">
           {complianceCopy.intro}
         </p>

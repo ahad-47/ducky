@@ -1,3 +1,4 @@
+import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Section } from "@/components/ui/Container";
 import { roadmapCopy } from "@/content/copy/roadmap";
 import { facts } from "@/content/facts";
@@ -13,9 +14,9 @@ export default function RoadmapPage() {
   return (
     <>
       <Section>
-        <h1 className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
+        <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
           {roadmapCopy.h1}
-        </h1>
+        </RevealHeading>
         <p className="measure mt-6 text-[18px] text-ink-soft">
           {roadmapCopy.intro}
         </p>

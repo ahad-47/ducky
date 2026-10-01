@@ -1,3 +1,4 @@
+import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Section } from "@/components/ui/Container";
 import { SecondaryLink } from "@/components/ui/Button";
 import { MethodLine } from "@/components/sections/MethodLine";
@@ -17,9 +18,9 @@ export default function MethodPage() {
   return (
     <>
       <Section>
-        <h1 className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
+        <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
           {methodCopy.h1}
-        </h1>
+        </RevealHeading>
         <p className="measure mt-6 text-[18px] text-ink-soft">
           {methodCopy.intro}
         </p>

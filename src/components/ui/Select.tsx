@@ -29,7 +29,6 @@ export function Select({
         className="w-full rounded-[var(--radius-xs)] border border-rule bg-paper-raised px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-accent"
         aria-describedby={errorId}
         aria-invalid={error ? true : undefined}
-        defaultValue=""
         {...rest}
       >
         {placeholder ? (

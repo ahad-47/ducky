@@ -1,3 +1,4 @@
+import { RevealHeading } from "@/components/ui/RevealHeading";
 import Link from "next/link";
 import { Section } from "@/components/ui/Container";
 
@@ -19,9 +20,9 @@ export function LegalPage({
 }) {
   return (
     <Section>
-      <h1 className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
+      <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
         {h1}
-      </h1>
+      </RevealHeading>
       <p className="mt-4 text-[15px] text-ink-soft">{lastUpdated}</p>
       <div className="measure mt-10 flex flex-col gap-8">
         {sections.map((section) => (
