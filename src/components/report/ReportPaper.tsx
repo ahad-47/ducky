@@ -1,9 +1,9 @@
 export function ReportPaper({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-8 sm:p-12"
+      className="glass-strong rounded-[var(--radius-paper)] p-8 sm:p-12"
       style={{
-        boxShadow: "0 1px 2px rgba(0,0,0,.06), 0 12px 32px rgba(0,0,0,.05)",
+        boxShadow: "0 1px 0 rgba(255,255,255,.08) inset, 0 24px 48px rgba(0,0,0,.35)",
       }}
     >
       {children}

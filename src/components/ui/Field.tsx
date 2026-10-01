@@ -18,7 +18,7 @@ type TextareaFieldProps = BaseProps & {
 type FieldProps = InputFieldProps | TextareaFieldProps;
 
 const inputClass =
-  "w-full rounded-[var(--radius-xs)] border border-rule bg-paper-raised px-4 py-3 text-ink placeholder:text-ink-soft focus-visible:outline-2 focus-visible:outline-accent";
+  "glass w-full rounded-[var(--radius-xs)] px-4 py-3 text-ink placeholder:text-ink-soft focus-visible:outline-2 focus-visible:outline-accent";
 
 export function Field(props: FieldProps) {
   const { id, label, hint, error, as, ...rest } = props;

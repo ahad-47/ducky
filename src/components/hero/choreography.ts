@@ -3,6 +3,29 @@ import { facts } from "@/content/facts";
 export const TOTAL_POINTS = facts.signalResult.raw;
 export const FINDING_COUNT = facts.signalResult.verified;
 export const TIMELINE_SECONDS = 3.2;
+export const HOLD_SECONDS = 2.6;
+export const FADE_SECONDS = 0.5;
+export const LOOP_SECONDS = TIMELINE_SECONDS + HOLD_SECONDS + FADE_SECONDS;
+
+/**
+ * Maps real elapsed time onto the repeating loop: converge, hold, fade to
+ * black, then jump back to the scattered start and fade back in. Returns the
+ * in-loop time (for getFrame) and a global alpha multiplier (for the fade).
+ */
+export function getLoopState(elapsed: number): { t: number; loopAlpha: number } {
+  const cursor = elapsed % LOOP_SECONDS;
+  const fadeStart = TIMELINE_SECONDS + HOLD_SECONDS;
+  if (cursor < fadeStart) {
+    return { t: cursor, loopAlpha: 1 };
+  }
+  const fadeProgress = (cursor - fadeStart) / FADE_SECONDS;
+  // First half of the fade window dims the settled frame; second half rises
+  // back from the scattered (t=0) frame, so the reposition happens unseen.
+  if (fadeProgress < 0.5) {
+    return { t: fadeStart, loopAlpha: 1 - fadeProgress * 2 };
+  }
+  return { t: 0, loopAlpha: (fadeProgress - 0.5) * 2 };
+}
 
 export type PointFrame = {
   id: number;

@@ -5,6 +5,7 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import {
   getFrame,
+  getLoopState,
   TOTAL_POINTS,
   FINDING_COUNT,
   type PointFrame,
@@ -47,11 +48,13 @@ function PointsLayer({
   color,
   additive,
   frameGetter,
+  loopAlphaGetter,
 }: {
   ids: number[];
   color: string;
   additive: boolean;
   frameGetter: () => Map<number, PointFrame>;
+  loopAlphaGetter: () => number;
 }) {
   const count = ids.length;
   const geomRef = useRef<THREE.BufferGeometry>(null);
@@ -69,6 +72,7 @@ function PointsLayer({
      point cloud; `positions`/`sizes`/`alphas` are GPU buffers, not render state. */
   useFrame(() => {
     const frame = frameGetter();
+    const loopAlpha = loopAlphaGetter();
     for (let i = 0; i < ids.length; i++) {
       const p = frame.get(ids[i]);
       if (!p) continue;
@@ -77,7 +81,7 @@ function PointsLayer({
       positions[i * 3 + 1] = y;
       positions[i * 3 + 2] = z;
       sizes[i] = p.radius;
-      alphas[i] = p.alpha;
+      alphas[i] = p.alpha * loopAlpha;
     }
     const geom = geomRef.current;
     if (!geom) return;
@@ -127,7 +131,7 @@ function Baseline() {
             args={[new Float32Array(points.flatMap((p) => [p.x, p.y, p.z])), 3]}
           />
         </bufferGeometry>
-        <lineBasicMaterial color="#c9c2b5" transparent opacity={0.4} />
+        <lineBasicMaterial color="#33415f" transparent opacity={0.5} />
       </line>
       <line>
         <bufferGeometry>
@@ -136,7 +140,7 @@ function Baseline() {
             args={[new Float32Array(vPoints.flatMap((p) => [p.x, p.y, p.z])), 3]}
           />
         </bufferGeometry>
-        <lineBasicMaterial color="#e2ddd3" />
+        <lineBasicMaterial color="#243049" />
       </line>
     </>
   );
@@ -150,6 +154,7 @@ function Scene({
   playingRef: React.RefObject<boolean>;
 }) {
   const frameMapRef = useRef<Map<number, PointFrame>>(new Map());
+  const loopAlphaRef = useRef(1);
   const pointer = useRef({ x: 0, y: 0 });
   const cameraTarget = useRef({ x: 0, y: 0 });
 
@@ -174,7 +179,9 @@ function Scene({
     if (playingRef.current) {
       elapsedRef.current += delta;
     }
-    const frame = getFrame(elapsedRef.current);
+    const { t, loopAlpha } = getLoopState(elapsedRef.current);
+    loopAlphaRef.current = loopAlpha;
+    const frame = getFrame(t);
     frameMapRef.current = new Map(frame.map((p) => [p.id, p]));
 
     cameraTarget.current.x += (pointer.current.y * 3 - cameraTarget.current.x) * 0.06;
@@ -188,15 +195,17 @@ function Scene({
       <Baseline />
       <PointsLayer
         ids={observationIds}
-        color="#5b554e"
+        color="#9ba8c2"
         additive={false}
         frameGetter={() => frameMapRef.current}
+        loopAlphaGetter={() => loopAlphaRef.current}
       />
       <PointsLayer
         ids={findingIds}
-        color="#1f4fd8"
+        color="#4f7cff"
         additive
         frameGetter={() => frameMapRef.current}
+        loopAlphaGetter={() => loopAlphaRef.current}
       />
     </>
   );

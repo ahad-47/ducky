@@ -6,7 +6,7 @@ import { homeCopy } from "@/content/copy/home";
 
 export function Hero() {
   return (
-    <section className="py-[var(--section-padding)]">
+    <section className="flex min-h-screen items-center py-[var(--section-padding)]">
       <Container>
         <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div>

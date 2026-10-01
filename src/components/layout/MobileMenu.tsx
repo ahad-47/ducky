@@ -69,7 +69,7 @@ export function MobileMenu({
     <div
       ref={panelRef}
       id="mobile-menu"
-      className="fixed inset-0 z-50 flex flex-col bg-paper-raised"
+      className="glass-strong fixed inset-0 z-50 flex flex-col"
     >
       <div className="flex items-center justify-between px-[var(--side-padding)] py-6">
         <Link
@@ -102,7 +102,7 @@ export function MobileMenu({
               href={link.href}
               onClick={onClose}
               aria-current={current ? "page" : undefined}
-              className={`font-[family-name:var(--font-serif)] text-4xl ${current ? "text-accent" : "text-ink"}`}
+              className={`font-[family-name:var(--font-serif)] text-4xl ${current ? "text-accent-text" : "text-ink"}`}
             >
               {link.label}
             </Link>

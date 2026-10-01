@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { headers } from "next/headers";
-import { instrumentSerif, dmSans, ibmPlexMono } from "@/fonts";
+import { dmSans, ibmPlexMono } from "@/fonts";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -27,25 +27,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     "@type": "ProfessionalService",
     name: facts.brand.name,
     url: facts.brand.url,
-    areaServed: facts.practitioner.clientCountries,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: facts.brand.city,
-      addressRegion: facts.brand.region,
-      addressCountry: facts.brand.countryCode,
-    },
-    founder: {
-      "@type": "Person",
-      name: facts.practitioner.name,
-      sameAs: [facts.practitioner.profileUrl],
-    },
+    description: facts.brand.oneLiner,
   };
 
   return (
-    <html
-      lang="en"
-      className={`${instrumentSerif.variable} ${dmSans.variable} ${ibmPlexMono.variable} h-full`}
-    >
+    <html lang="en" className={`${dmSans.variable} ${ibmPlexMono.variable} h-full`}>
       <body className="flex min-h-full flex-col bg-paper text-ink">
         <script
           type="application/ld+json"
@@ -55,18 +41,21 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         />
         <SmoothScroll>
           <SkipLink />
-          <Header signInUrl={appSignInUrl} />
-          <main id="main" className="relative flex-1">
+          <div aria-hidden className="pointer-events-none fixed inset-0 overflow-hidden">
             <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 hidden lg:block"
-            >
-              <div className="mx-auto h-full max-w-[var(--content-max)] px-[var(--side-padding)]">
-                <div className="h-full border-l border-rule" />
-              </div>
-            </div>
-            {children}
-          </main>
+              className="ambient-blob absolute -left-[10%] -top-[10%] h-[50vw] w-[50vw] rounded-full opacity-40 blur-[120px]"
+              style={{ background: "radial-gradient(circle, #3d5fde 0%, transparent 70%)" }}
+            />
+            <div
+              className="ambient-blob absolute -right-[15%] top-[30%] h-[45vw] w-[45vw] rounded-full opacity-30 blur-[120px]"
+              style={{
+                background: "radial-gradient(circle, #5eead4 0%, transparent 70%)",
+                animationDelay: "-9s",
+              }}
+            />
+          </div>
+          <Header signInUrl={appSignInUrl} />
+          <main id="main" className="relative flex-1">{children}</main>
           <Footer />
         </SmoothScroll>
       </body>

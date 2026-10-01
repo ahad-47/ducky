@@ -1,16 +1,14 @@
-import { facts } from "@/content/facts";
-
 export const complianceCopy = {
   h1: "Evidence for the rules you answer to.",
   intro:
-    "SkilledScan does not certify compliance. It produces the testing evidence a compliance program needs: scope, method, findings with evidence, and remediation, in a report your auditor can read.",
-  dpdp: {
-    h2: "India's DPDP Rules",
-    body: `The Digital Personal Data Protection Rules were notified on ${facts.compliance.dpdpRulesNotified}, with substantive obligations from ${facts.compliance.dpdpSubstantiveFrom}. Data fiduciaries must take reasonable security safeguards, and failing to do so can draw a penalty of up to ${facts.compliance.dpdpMaxPenaltySafeguards} under the Digital Personal Data Protection Act, 2023. Periodic vulnerability assessment and penetration testing is a common way to show those safeguards are in place.`,
+    "SkilledScan does not certify compliance. It produces the testing evidence a compliance program needs: scope, method, findings with evidence, and remediation, in a report your auditor can read, wherever you operate.",
+  frameworks: {
+    h2: "Built to support global frameworks",
+    body: "Data protection and security regulations differ by region, but most share one expectation: show that you test for weaknesses and fix what you find. A SkilledScan report gives your auditor that evidence, whether you answer to GDPR in Europe, a SOC 2 readiness review, ISO 27001 alignment, or a regional data protection law elsewhere.",
   },
   regulated: {
-    h2: "Regulated sectors",
-    body: "Regulators including RBI and SEBI expect periodic vulnerability assessment and penetration testing from the entities they supervise. A SkilledScan report gives your auditor a record of scope, method, findings, and remediation.",
+    h2: "Regulated industries",
+    body: "Financial services, healthcare, and other regulated industries commonly require periodic vulnerability assessment and penetration testing from the entities they supervise, regardless of jurisdiction. A SkilledScan report gives your auditor a record of scope, method, findings, and remediation.",
   },
   record: {
     h2: "What a report leaves on record",

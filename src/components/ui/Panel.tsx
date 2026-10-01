@@ -6,9 +6,7 @@ export function Panel({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={`rounded-[var(--radius-xs)] border border-rule bg-paper-raised p-6 ${className}`}
-    >
+    <div className={`glass rounded-[var(--radius-sm)] p-6 ${className}`}>
       {children}
     </div>
   );

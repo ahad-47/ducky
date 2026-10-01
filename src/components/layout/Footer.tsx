@@ -3,12 +3,11 @@ import { facts } from "@/content/facts";
 
 const columns = [
   {
-    heading: "Practice",
+    heading: "Platform",
     links: [
       { href: "/method", label: "Method" },
       { href: "/engagements", label: "Engagements" },
       { href: "/report-sample", label: "Report sample" },
-      { href: "/practice", label: "Practice" },
     ],
   },
   {
@@ -55,7 +54,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-[15px] text-ink-soft hover:text-accent"
+                      className="text-[15px] text-ink-soft hover:text-accent-text"
                     >
                       {link.label}
                     </Link>
@@ -66,7 +65,7 @@ export function Footer() {
           ))}
         </div>
         <p className="mt-12 border-t border-rule pt-6 text-sm text-ink-soft">
-          © {year} SkilledScan. Built in Hyderabad, India.
+          © {year} SkilledScan.
         </p>
       </div>
     </footer>

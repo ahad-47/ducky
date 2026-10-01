@@ -13,7 +13,6 @@ const navLinks: NavLink[] = [
   { href: "/method", label: "Method" },
   { href: "/engagements", label: "Engagements" },
   { href: "/report-sample", label: "Report sample" },
-  { href: "/practice", label: "Practice" },
   { href: "/compliance", label: "Compliance" },
   { href: "/roadmap", label: "Roadmap" },
 ];
@@ -37,7 +36,7 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
       if (!header) return;
 
       if (reducedMotion) {
-        header.classList.add("bg-paper/[0.92]", "backdrop-blur-sm", "border-b", "border-rule");
+        header.classList.add("glass");
         return;
       }
 
@@ -46,10 +45,7 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
         end: "max",
         onUpdate: (self) => {
           const y = self.scroll();
-          header.classList.toggle("bg-paper/[0.92]", y > 24);
-          header.classList.toggle("backdrop-blur-sm", y > 24);
-          header.classList.toggle("border-b", y > 24);
-          header.classList.toggle("border-rule", y > 24);
+          header.classList.toggle("glass", y > 24);
 
           const shouldHide = self.direction === 1 && y > 120;
           gsap.to(header, {
@@ -90,8 +86,8 @@ export function Header({ signInUrl }: { signInUrl: string | null }) {
                   aria-current={current ? "page" : undefined}
                   className={`whitespace-nowrap font-[family-name:var(--font-sans)] text-[15px] font-medium ${
                     current
-                      ? "text-accent underline decoration-[2px] underline-offset-[6px]"
-                      : "text-ink hover:text-accent"
+                      ? "text-accent-text underline decoration-[2px] underline-offset-[6px]"
+                      : "text-ink hover:text-accent-text"
                   }`}
                 >
                   {link.label}

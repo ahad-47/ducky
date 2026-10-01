@@ -6,7 +6,7 @@ export const privacyCopy = {
   sections: [
     {
       heading: "Who we are",
-      body: "SkilledScan, Hyderabad, Telangana, India. This policy covers the website at skilledscan.com. Data processed during an assessment is covered by the agreement for that engagement.",
+      body: "SkilledScan, India. This policy covers the website at skilledscan.com. Data processed during an assessment is covered by the agreement for that engagement.",
     },
     {
       heading: "What we collect",
@@ -75,7 +75,7 @@ export const termsCopy = {
     },
     {
       heading: "Governing law",
-      body: `These terms are governed by the laws of ${facts.legal.governingLaw}. Courts at ${facts.legal.courts} have jurisdiction.`,
+      body: `These terms are governed by the laws of ${facts.legal.governingLaw}.`,
     },
   ],
 } as const;

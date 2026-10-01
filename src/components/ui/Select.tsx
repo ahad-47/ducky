@@ -26,7 +26,7 @@ export function Select({
       </label>
       <select
         id={id}
-        className="w-full rounded-[var(--radius-xs)] border border-rule bg-paper-raised px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-accent"
+        className="glass w-full rounded-[var(--radius-xs)] px-4 py-3 text-ink focus-visible:outline-2 focus-visible:outline-accent"
         aria-describedby={errorId}
         aria-invalid={error ? true : undefined}
         {...rest}

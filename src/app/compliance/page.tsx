@@ -6,7 +6,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Compliance | SkilledScan",
   description:
-    "Testing evidence for DPDP safeguards and regulated-sector VAPT: scope, method, findings, and remediation in one report.",
+    "Testing evidence for global compliance frameworks and regulated industries: scope, method, findings, and remediation in one report.",
   path: "/compliance",
 });
 
@@ -24,10 +24,10 @@ export default function CompliancePage() {
 
       <Section>
         <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {complianceCopy.dpdp.h2}
+          {complianceCopy.frameworks.h2}
         </h2>
         <p className="measure mt-4 text-[18px] text-ink-soft">
-          {complianceCopy.dpdp.body}
+          {complianceCopy.frameworks.body}
         </p>
       </Section>
 

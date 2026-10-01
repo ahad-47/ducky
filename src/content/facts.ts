@@ -3,36 +3,15 @@ export const facts = {
   brand: {
     name: "SkilledScan",
     url: "https://skilledscan.com",
-    city: "Hyderabad",
-    region: "Telangana",
-    country: "India",
-    countryCode: "IN",
-    developmentStarted: "April 2023",
     positioning:
       "A penetration testing practice where a governed system does the groundwork and a working tester verifies every finding.",
     oneLiner:
       "Expert-led web and API penetration testing, delivered as a report your developers and your auditor can both use.",
   },
 
-  practitioner: {
-    name: "Ahad",
-    role: "Founder and lead tester",
-    profileUrl: "https://www.freelancer.com/u/ahad47",
-    engagements: "150+",
-    rating: "4.9",
-    ratingPlatform: "Freelancer.com",
-    platformStatus: ["Preferred Freelancer", "Verified"],
-    yearsOnPlatform: "six",
-    clientCountries: ["India", "Singapore", "Vietnam"],
-    recognition: "NCIIPC Hall of Fame",
-    recognitionBody:
-      "National Critical Information Infrastructure Protection Centre, Government of India",
-    certifications: ["CEH", "OSINT", "Cisco security"],
-    focus: [
-      "web application and API security",
-      "cloud misconfiguration",
-      "incident response",
-    ],
+  globalReach: {
+    countries: "60+",
+    note: "Assessments delivered for clients in 60+ countries worldwide, all run remotely under the same governed process.",
   },
 
   // The honest headline result from one authorized assessment.
@@ -189,7 +168,7 @@ export const facts = {
       { label: "Engagement", value: "Black-box web application assessment" },
       { label: "Scope", value: "One web application, agreed in writing" },
       { label: "Status", value: "Delivered" },
-      { label: "Prepared by", value: "Ahad" },
+      { label: "Prepared by", value: "SkilledScan" },
     ],
     summaryCounts: { medium: 4, low: 11, info: 23, total: 38 },
     sections: [
@@ -260,22 +239,6 @@ export const facts = {
     ],
   },
 
-  proofPoints: [
-    { value: "150+", label: "engagements delivered" },
-    { value: "4.9", label: "rating on Freelancer.com" },
-    {
-      value: "201 to 7",
-      label: "raw observations to verified findings, one assessment",
-    },
-    { value: "NCIIPC", label: "Hall of Fame recognition" },
-  ],
-
-  compliance: {
-    dpdpRulesNotified: "13 November 2025",
-    dpdpSubstantiveFrom: "13 May 2027",
-    dpdpMaxPenaltySafeguards: "₹250 crore",
-  },
-
   roadmap: {
     live: [
       "Black-box web application assessments",
@@ -301,6 +264,5 @@ export const facts = {
   legal: {
     lastUpdated: "2 October 2026",
     governingLaw: "India",
-    courts: "Hyderabad, Telangana",
   },
 } as const;

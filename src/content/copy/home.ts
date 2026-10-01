@@ -9,7 +9,7 @@ export const homeCopy = {
     secondaryCta: "See a sample report",
     caption: facts.signalResult.note,
   },
-  proofLine: `${facts.proofPoints[0].value} engagements delivered. A ${facts.proofPoints[1].value} rating on ${facts.practitioner.ratingPlatform}. Recognized in the ${facts.practitioner.recognition}. One assessment took ${facts.signalResult.raw} raw observations down to ${facts.signalResult.verified} verified findings.`,
+  proofLine: `Every reported finding is reproduced by hand before it reaches you. One authorized assessment took ${facts.signalResult.raw} raw observations down to ${facts.signalResult.verified} verified findings, each one confirmed, not guessed at.`,
   problem: {
     h2: "A scan is not an assessment.",
     items: [
@@ -46,11 +46,6 @@ export const homeCopy = {
   engagementsTeaser: {
     h2: "Three ways to work together",
     link: { label: "See engagements", href: "/engagements" },
-  },
-  practice: {
-    h2: "A real tester stands behind every report.",
-    body: `SkilledScan is run by ${facts.practitioner.name}, a penetration tester in Hyderabad with ${facts.practitioner.engagements} engagements delivered, a ${facts.practitioner.rating} rating on ${facts.practitioner.ratingPlatform}, Preferred Freelancer and Verified status, clients in India, Singapore, and Vietnam, and recognition in the ${facts.practitioner.recognition}. Certifications: CEH, OSINT, and Cisco security.`,
-    link: { label: "About the practice", href: "/practice" },
   },
   closing: {
     h2: "Start with one target.",

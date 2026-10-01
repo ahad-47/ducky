@@ -4,7 +4,7 @@ import { Problem } from "@/components/sections/Problem";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { ReportTeaser } from "@/components/sections/ReportTeaser";
 import { EngagementsTeaser } from "@/components/sections/EngagementsTeaser";
-import { PracticeTeaser } from "@/components/sections/PracticeTeaser";
+import { GlobalReach } from "@/components/sections/GlobalReach";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { homeCopy } from "@/content/copy/home";
 import { buildMetadata } from "@/lib/seo";
@@ -25,7 +25,7 @@ export default function Home() {
       <HowItWorks />
       <ReportTeaser />
       <EngagementsTeaser />
-      <PracticeTeaser />
+      <GlobalReach />
       <ClosingCta
         h2={homeCopy.closing.h2}
         body={homeCopy.closing.body}
