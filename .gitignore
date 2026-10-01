@@ -36,6 +36,14 @@ yarn-error.log*
 # vercel
 .vercel
 
+# generated at build time (scripts/write-security-txt.mjs)
+/public/.well-known/
+
+# test artifacts
+/test-results/
+/playwright-report/
+/.lighthouseci/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
