@@ -2,6 +2,7 @@ import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Container } from "@/components/ui/Container";
 import { PrimaryButton, SecondaryLink } from "@/components/ui/Button";
 import { HeroSignal } from "@/components/hero/HeroSignal";
+import { WindowChrome } from "@/components/os/WindowChrome";
 import { homeCopy } from "@/content/copy/home";
 
 export function Hero() {
@@ -25,7 +26,8 @@ export function Hero() {
               </SecondaryLink>
             </div>
           </div>
-          <div>
+          <div className="glass rounded-[var(--radius-sm)] p-5">
+            <WindowChrome title="scan.live" />
             <HeroSignal />
             <p className="mt-4 text-[15px] text-ink-soft">
               {homeCopy.hero.caption}

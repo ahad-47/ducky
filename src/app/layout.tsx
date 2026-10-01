@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import { headers } from "next/headers";
 import { dmSans, ibmPlexMono } from "@/fonts";
 import { SkipLink } from "@/components/layout/SkipLink";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { OSShell } from "@/components/os/OSShell";
 import { SmoothScroll } from "@/motion/SmoothScroll";
 import { facts } from "@/content/facts";
-import { env, appSignInUrl } from "@/lib/env";
+import { env } from "@/lib/env";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -54,9 +53,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
               }}
             />
           </div>
-          <Header signInUrl={appSignInUrl} />
-          <main id="main" className="relative flex-1">{children}</main>
-          <Footer />
+          <OSShell>{children}</OSShell>
         </SmoothScroll>
       </body>
     </html>

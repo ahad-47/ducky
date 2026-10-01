@@ -1,10 +1,11 @@
+import { BootSequence } from "@/components/os/BootSequence";
 import { Hero } from "@/components/sections/Hero";
 import { ProofLine } from "@/components/sections/ProofLine";
 import { Problem } from "@/components/sections/Problem";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { ReportTeaser } from "@/components/sections/ReportTeaser";
 import { EngagementsTeaser } from "@/components/sections/EngagementsTeaser";
-import { GlobalReach } from "@/components/sections/GlobalReach";
+import { GlobalReach } from "@/components/sections/GlobalReachLazy";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { homeCopy } from "@/content/copy/home";
 import { buildMetadata } from "@/lib/seo";
@@ -19,6 +20,7 @@ export const metadata = buildMetadata({
 export default function Home() {
   return (
     <>
+      <BootSequence />
       <Hero />
       <ProofLine />
       <Problem />
