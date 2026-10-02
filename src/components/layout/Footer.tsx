@@ -33,11 +33,17 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-rule">
-      <div className="mx-auto max-w-[var(--content-max)] px-[var(--side-padding)] py-16">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <footer className="border-t border-rule bg-paper/60">
+      <div className="mx-auto max-w-[var(--content-max)] px-[var(--side-padding)] py-14">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <p className="font-[family-name:var(--font-serif)] text-2xl text-ink">
+            <p className="flex items-center gap-2.5 font-[family-name:var(--font-serif)] text-2xl text-ink">
+              <span
+                aria-hidden
+                className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-[family-name:var(--font-mono)] text-[12px] font-bold text-accent-ink"
+              >
+                SS
+              </span>
               SkilledScan
             </p>
             <p className="mt-4 max-w-sm text-[15px] text-ink-soft">
@@ -64,9 +70,10 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <p className="mt-12 border-t border-rule pt-6 text-sm text-ink-soft">
-          © {year} SkilledScan.
-        </p>
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-rule pt-6 text-sm text-ink-soft">
+          <p>© {year} SkilledScan.</p>
+          <p className="font-[family-name:var(--font-mono)] text-[12.5px]">Every finding verified by hand.</p>
+        </div>
       </div>
     </footer>
   );

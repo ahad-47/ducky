@@ -1,6 +1,8 @@
-import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Section } from "@/components/ui/Container";
 import { SecondaryLink } from "@/components/ui/Button";
+import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
+import { Badge, Card } from "@/components/ui/Card";
+import { Icon } from "@/components/ui/Icon";
 import { MethodLine } from "@/components/sections/MethodLine";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { methodCopy } from "@/content/copy/method";
@@ -14,110 +16,140 @@ export const metadata = buildMetadata({
   path: "/method",
 });
 
+const raw = facts.verificationResult.raw;
+const reported = facts.verificationResult.reported;
+
 export default function MethodPage() {
   return (
     <>
-      <Section>
-        <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
-          {methodCopy.h1}
-        </RevealHeading>
-        <p className="measure mt-6 text-[18px] text-ink-soft">
-          {methodCopy.intro}
-        </p>
-      </Section>
+      <PageHeader eyebrow="Method" title={methodCopy.h1} intro={methodCopy.intro}>
+        <Badge>{facts.method.length} phases</Badge>
+        <Badge tone="live">Every finding confirmed by hand</Badge>
+        <Badge tone="neutral">Audit log of every action</Badge>
+      </PageHeader>
 
       <Section>
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {methodCopy.phases.h2}
-        </h2>
-        <div className="mt-12">
-          <MethodLine steps={facts.method} showDetail />
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <SectionHeading eyebrow="Phases" title={methodCopy.phases.h2} />
+          </div>
+          <div className="pl-4">
+            <MethodLine steps={facts.method} showDetail />
+          </div>
         </div>
       </Section>
 
       <Section>
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {methodCopy.system.h2}
-        </h2>
-        <p className="measure mt-4 text-[18px] text-ink-soft">
-          {methodCopy.system.intro}
-        </p>
-        <p className="measure mt-4 text-[18px] text-ink-soft">
-          {methodCopy.system.body}
-        </p>
-        <div className="mt-12 grid grid-cols-1 gap-10 sm:grid-cols-2">
-          <div>
-            <h3 className="font-[family-name:var(--font-serif)] text-h3 text-ink">
+        <SectionHeading
+          eyebrow="The governed system"
+          title={methodCopy.system.h2}
+          intro={
+            <>
+              <p>{methodCopy.system.intro}</p>
+              <p className="mt-4">{methodCopy.system.body}</p>
+            </>
+          }
+        />
+        <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
+          <Card>
+            <h3 className="flex items-center gap-3 font-[family-name:var(--font-serif)] text-h3 text-ink">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-severity-low/15 text-severity-low">
+                <Icon name="check" className="h-5 w-5" />
+              </span>
               {methodCopy.system.doesLabel}
             </h3>
-            <ul className="mt-4 flex flex-col gap-3">
+            <ul className="mt-6 flex flex-col gap-4">
               {facts.system.does.map((item) => (
-                <li
-                  key={item}
-                  className="border-t border-rule pt-3 text-[17px] text-ink-soft first:border-t-0 first:pt-0"
-                >
+                <li key={item} className="flex gap-3 text-[16.5px] text-ink-soft">
+                  <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-severity-low" />
                   {item}
                 </li>
               ))}
             </ul>
-          </div>
-          <div>
-            <h3 className="font-[family-name:var(--font-serif)] text-h3 text-ink">
+          </Card>
+          <Card>
+            <h3 className="flex items-center gap-3 font-[family-name:var(--font-serif)] text-h3 text-ink">
+              <span className="grid h-9 w-9 place-items-center rounded-full bg-severity-critical/15 text-severity-critical">
+                <Icon name="x" className="h-5 w-5" />
+              </span>
               {methodCopy.system.doesNotLabel}
             </h3>
-            <ul className="mt-4 flex flex-col gap-3">
+            <ul className="mt-6 flex flex-col gap-4">
               {facts.system.doesNot.map((item) => (
-                <li
-                  key={item}
-                  className="border-t border-rule pt-3 text-[17px] text-ink-soft first:border-t-0 first:pt-0"
-                >
+                <li key={item} className="flex gap-3 text-[16.5px] text-ink-soft">
+                  <Icon name="x" className="mt-1 h-4 w-4 shrink-0 text-severity-critical" />
                   {item}
                 </li>
               ))}
             </ul>
-          </div>
+          </Card>
         </div>
-        <p className="mt-10 text-[17px] text-ink-soft">{facts.system.note}</p>
+        <p className="mt-6 flex items-start gap-3 rounded-[var(--radius-sm)] border border-accent/30 bg-accent/10 px-5 py-4 text-[16px] text-ink">
+          <Icon name="shield" className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
+          {facts.system.note}
+        </p>
       </Section>
 
       <Section>
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {methodCopy.governance.h2}
-        </h2>
-        <ul className="mt-10 flex flex-col gap-3">
-          {facts.system.governance.map((item) => (
-            <li
-              key={item}
-              className="border-t border-rule pt-3 text-[17px] text-ink-soft first:border-t-0 first:pt-0"
-            >
-              {item}
-            </li>
+        <SectionHeading eyebrow="Guardrails" title={methodCopy.governance.h2} />
+        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {facts.system.governance.map((item, i) => (
+            <Card as="li" key={item} className="flex flex-col gap-4">
+              <span className="flex items-center justify-between">
+                <span className="grid h-9 w-9 place-items-center rounded-lg bg-white/5 text-accent-text">
+                  <Icon name={(["shield", "pulse", "lock", "doc", "layers"] as const)[i % 5]} className="h-5 w-5" />
+                </span>
+                <span className="font-[family-name:var(--font-mono)] text-[12px] text-ink-soft">G-0{i + 1}</span>
+              </span>
+              <span className="text-[16.5px] text-ink">{item}</span>
+            </Card>
           ))}
         </ul>
       </Section>
 
       <Section>
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {methodCopy.verification.h2}
-        </h2>
-        <p className="measure mt-4 text-[18px] text-ink-soft">
-          {methodCopy.verification.body}
-        </p>
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <SectionHeading eyebrow="Verification" title={methodCopy.verification.h2} intro={methodCopy.verification.body} />
+          <Card pad="p-8">
+            <p className="font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-wide text-ink-soft">
+              One engagement
+            </p>
+            <div className="mt-6 flex items-end gap-4">
+              <div>
+                <p className="font-[family-name:var(--font-serif)] text-[clamp(2.75rem,5vw,4rem)] leading-none text-ink-soft">{raw}</p>
+                <p className="mt-2 text-[14px] text-ink-soft">raw observations</p>
+              </div>
+              <Icon name="arrow" className="mb-8 h-7 w-7 shrink-0 text-accent-text" />
+              <div>
+                <p className="font-[family-name:var(--font-serif)] text-[clamp(2.75rem,5vw,4rem)] leading-none text-ink">{reported}</p>
+                <p className="mt-2 text-[14px] text-ink-soft">reported findings</p>
+              </div>
+            </div>
+            <div className="mt-8 h-2 overflow-hidden rounded-full bg-white/10" aria-hidden>
+              <div className="h-full rounded-full bg-accent" style={{ width: `${Math.max(2, (reported / raw) * 100)}%` }} />
+            </div>
+            <p className="mt-3 text-[14px] text-ink-soft">
+              {((reported / raw) * 100).toFixed(1)}% of raw observations survived manual verification.
+            </p>
+          </Card>
+        </div>
       </Section>
 
       <Section>
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {methodCopy.authorization.h2}
-        </h2>
-        <p className="measure mt-4 text-[18px] text-ink-soft">
-          {methodCopy.authorization.body}
-        </p>
-        <SecondaryLink
-          href={methodCopy.authorization.link.href}
-          className="mt-6"
-        >
-          {methodCopy.authorization.link.label}
-        </SecondaryLink>
+        <Card pad="p-8 sm:p-10" className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex gap-5">
+            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent-text">
+              <Icon name="lock" className="h-6 w-6" />
+            </span>
+            <div>
+              <h2 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{methodCopy.authorization.h2}</h2>
+              <p className="mt-2 text-[17px] text-ink-soft">{methodCopy.authorization.body}</p>
+            </div>
+          </div>
+          <SecondaryLink href={methodCopy.authorization.link.href} className="shrink-0">
+            {methodCopy.authorization.link.label}
+          </SecondaryLink>
+        </Card>
       </Section>
 
       <ClosingCta primaryCta={methodCopy.closing.primaryCta} />

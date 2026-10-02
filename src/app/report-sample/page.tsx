@@ -1,4 +1,5 @@
-import { RevealHeading } from "@/components/ui/RevealHeading";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { Badge } from "@/components/ui/Card";
 import { Section } from "@/components/ui/Container";
 import { ReportPaper } from "@/components/report/ReportPaper";
 import { MetaGrid } from "@/components/report/MetaGrid";
@@ -22,14 +23,11 @@ const counts = facts.reportSample.summaryCounts;
 export default function ReportSamplePage() {
   return (
     <>
-      <Section>
-        <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
-          {reportSampleCopy.h1}
-        </RevealHeading>
-        <p className="measure mt-6 text-[18px] text-ink-soft">
-          {reportSampleCopy.intro}
-        </p>
-      </Section>
+      <PageHeader eyebrow="Report sample" title={reportSampleCopy.h1} intro={reportSampleCopy.intro}>
+        <Badge tone="neutral">Redacted</Badge>
+        <Badge tone="neutral">{counts.total} findings</Badge>
+        <Badge tone="neutral">HTML and PDF</Badge>
+      </PageHeader>
 
       <Section className="pt-0">
         <ReportPaper>
@@ -65,10 +63,13 @@ export default function ReportSamplePage() {
             <h3 className="font-[family-name:var(--font-mono)] text-[13px] uppercase tracking-wide text-ink-soft">
               {reportSampleCopy.contents}
             </h3>
-            <ol className="mt-4 flex flex-col gap-2">
+            <ol className="mt-4 grid grid-cols-1 gap-x-10 gap-y-3 md:grid-cols-2">
               {facts.reportSample.sections.map((item, index) => (
-                <li key={item} className="text-[17px] text-ink">
-                  {index + 1}. {item}
+                <li key={item} className="flex gap-3 border-b border-rule pb-3 text-[16.5px] text-ink">
+                  <span className="font-[family-name:var(--font-mono)] text-[13px] leading-7 text-accent-text">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {item}
                 </li>
               ))}
             </ol>
@@ -100,7 +101,7 @@ export default function ReportSamplePage() {
             </div>
           </section>
 
-          <p className="mt-12 text-[15px] text-ink-soft">
+          <p className="mt-12 rounded-[var(--radius-xs)] border border-rule bg-black/20 px-5 py-4 text-[15px] text-ink-soft">
             {facts.reportSample.note}
           </p>
         </ReportPaper>

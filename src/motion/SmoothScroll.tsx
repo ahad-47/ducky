@@ -1,12 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger, registerGsap } from "@/motion/gsap";
 import { useReducedMotion } from "@/motion/useReducedMotion";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
-  const lenisRef = useRef<Lenis | null>(null);
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
@@ -18,8 +17,9 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
       lerp: 0.1,
       smoothWheel: true,
       syncTouch: false,
+      // In-page links (legal tables of contents) clear the sticky header.
+      anchors: { offset: -88 },
     });
-    lenisRef.current = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -34,19 +34,8 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     return () => {
       gsap.ticker.remove(tick);
       lenis.destroy();
-      lenisRef.current = null;
     };
   }, [reducedMotion]);
-
-  useEffect(() => {
-    function onMenuToggle(e: Event) {
-      const detail = (e as CustomEvent<{ open: boolean }>).detail;
-      if (detail.open) lenisRef.current?.stop();
-      else lenisRef.current?.start();
-    }
-    window.addEventListener("skilledscan:menu-toggle", onMenuToggle);
-    return () => window.removeEventListener("skilledscan:menu-toggle", onMenuToggle);
-  }, []);
 
   return <>{children}</>;
 }

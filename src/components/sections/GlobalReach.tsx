@@ -5,6 +5,7 @@ import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps
 import countriesTopology from "world-atlas/countries-110m.json";
 import { Section } from "@/components/ui/Container";
 import { facts } from "@/content/facts";
+import { SectionHeading } from "@/components/ui/PageHeader";
 
 const countries = countriesTopology as unknown as GeoJsonObject;
 
@@ -28,14 +29,9 @@ const markers: [number, number][] = [
 export function GlobalReach() {
   return (
     <Section>
-      <div className="flex flex-col gap-2">
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          Built for a global audience
-        </h2>
-        <p className="measure text-[18px] text-ink-soft">{facts.globalReach.note}</p>
-      </div>
+      <SectionHeading eyebrow="Reach" title="Built for a global audience" intro={facts.globalReach.note} />
 
-      <div className="relative mt-12 overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl sm:p-8">
+      <div className="relative mt-10 overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-4 backdrop-blur-xl sm:p-8">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(79,124,255,0.25),transparent_60%)]"

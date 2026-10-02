@@ -5,10 +5,11 @@ import { SkipLink } from "@/components/layout/SkipLink";
 import { DesktopClient } from "@/components/desktop/DesktopClient";
 import { EmbedBridge } from "@/components/desktop/EmbedBridge";
 import { Footer } from "@/components/layout/Footer";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { pages } from "@/components/desktop/pages";
 import { SmoothScroll } from "@/motion/SmoothScroll";
 import { facts } from "@/content/facts";
-import { env } from "@/lib/env";
+import { appSignInUrl, env } from "@/lib/env";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -90,7 +91,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
               }}
             />
           </div>
-          <main id="main" className="relative flex-1 p-4">
+          <SiteHeader signInUrl={appSignInUrl} />
+          <main id="main" className="relative flex-1">
             {children}
           </main>
           <div className="relative">

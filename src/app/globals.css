@@ -28,7 +28,7 @@
 
   --content-max: 1400px;
   --side-padding: clamp(20px, 5vw, 56px);
-  --section-padding: clamp(88px, 12vh, 160px);
+  --section-padding: clamp(64px, 9vh, 112px);
 
   --glass-bg: rgba(255, 255, 255, 0.06);
   --glass-bg-strong: rgba(255, 255, 255, 0.1);
@@ -78,8 +78,10 @@
   --radius-paper: 24px;
 }
 
-* {
-  border-color: var(--rule);
+@layer base {
+  * {
+    border-color: var(--rule);
+  }
 }
 
 html {
@@ -118,18 +120,26 @@ h3 {
   max-width: 68ch;
 }
 
-.glass {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+/* Anchor targets clear the sticky site header. */
+[id] {
+  scroll-margin-top: 88px;
 }
 
-.glass-strong {
-  background: var(--glass-bg-strong);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+/* In the components layer so utilities (border colour, padding) can override. */
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-strong {
+    background: var(--glass-bg-strong);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+  }
 }
 
 @keyframes marquee {

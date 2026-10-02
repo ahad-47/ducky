@@ -1,10 +1,13 @@
-import { RevealHeading } from "@/components/ui/RevealHeading";
 import { Section } from "@/components/ui/Container";
 import { SecondaryLink } from "@/components/ui/Button";
+import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
+import { Badge, Card } from "@/components/ui/Card";
+import { Icon, type IconName } from "@/components/ui/Icon";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { engagementsCopy } from "@/content/copy/engagements";
 import { facts } from "@/content/facts";
 import { buildMetadata } from "@/lib/seo";
+import { slugify } from "@/lib/slug";
 
 export const metadata = buildMetadata({
   title: "Engagements | SkilledScan",
@@ -13,90 +16,85 @@ export const metadata = buildMetadata({
   path: "/engagements",
 });
 
+const engagementIcons: IconName[] = ["globe", "layers", "check"];
+const coverageIcons: IconName[] = ["search", "bug", "lock", "shield", "doc"];
+
 export default function EngagementsPage() {
   return (
     <>
-      <Section>
-        <RevealHeading className="font-[family-name:var(--font-serif)] text-display-xl text-ink">
-          {engagementsCopy.h1}
-        </RevealHeading>
-        <p className="measure mt-6 text-[18px] text-ink-soft">
-          {engagementsCopy.intro}
-        </p>
-      </Section>
+      <PageHeader eyebrow="Engagements" title={engagementsCopy.h1} intro={engagementsCopy.intro} />
 
-      <Section>
-        <div className="flex flex-col gap-12">
-          {facts.engagements.map((engagement) => (
-            <div
-              key={engagement.name}
-              className="border-t border-rule pt-10 first:border-t-0 first:pt-0"
-            >
-              <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-                {engagement.name}
-              </h2>
-              <p className="measure mt-4 text-[18px] text-ink-soft">
-                {engagement.summary}
-              </p>
-              <p className="mt-3 text-[15px] text-ink-soft">
+      <Section className="pt-0">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+          {facts.engagements.map((engagement, i) => (
+            <Card as="article" key={engagement.name} id={slugify(engagement.name)} pad="p-8" className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent-text">
+                  <Icon name={engagementIcons[i]} className="h-6 w-6" />
+                </span>
+                <span className="font-[family-name:var(--font-mono)] text-[12.5px] text-ink-soft">0{i + 1}</span>
+              </div>
+              <h2 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{engagement.name}</h2>
+              <p className="text-[16.5px] text-ink-soft">{engagement.summary}</p>
+              <p className="mt-auto flex items-start gap-2 border-t border-rule pt-4 text-[14.5px] text-ink-soft">
+                <Icon name="clock" className="mt-0.5 h-4 w-4 shrink-0 text-accent-text" />
                 {engagement.scopeNote}
               </p>
-            </div>
+            </Card>
           ))}
         </div>
       </Section>
 
       <Section>
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {engagementsCopy.coverage.h2}
-        </h2>
-        <div className="mt-10 grid grid-cols-1 gap-10 sm:grid-cols-2">
-          {facts.coverage.map((group) => (
-            <div key={group.area}>
-              <h3 className="font-[family-name:var(--font-serif)] text-h3 text-ink">
+        <SectionHeading eyebrow="Coverage" title={engagementsCopy.coverage.h2} intro={engagementsCopy.coverage.note} />
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {facts.coverage.map((group, i) => (
+            <Card key={group.area}>
+              <h3 className="flex items-center gap-3 text-[18px] font-semibold text-ink">
+                <Icon name={coverageIcons[i % coverageIcons.length]} className="h-5 w-5 text-accent-text" />
                 {group.area}
               </h3>
-              <ul className="mt-3 flex flex-col gap-2">
+              <ul className="mt-4 flex flex-col gap-2.5">
                 {group.items.map((item) => (
-                  <li key={item} className="text-[17px] text-ink-soft">
+                  <li key={item} className="flex gap-3 text-[15.5px] text-ink-soft">
+                    <span aria-hidden className="mt-2.5 h-1 w-1 shrink-0 rounded-full bg-accent-text" />
                     {item}
                   </li>
                 ))}
               </ul>
-            </div>
+            </Card>
           ))}
         </div>
-        <p className="measure mt-10 text-[15px] text-ink-soft">
-          {engagementsCopy.coverage.note}
-        </p>
       </Section>
 
       <Section>
-        <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-          {engagementsCopy.receive.h2}
-        </h2>
-        <p className="mt-4 text-[18px] text-ink-soft">
-          {engagementsCopy.receive.bodyLead}
-        </p>
-        <ol className="mt-4 flex flex-col gap-2">
-          {facts.reportSample.sections.map((section, index) => (
-            <li key={section} className="text-[17px] text-ink-soft">
-              {index + 1}. {section}
-            </li>
-          ))}
-        </ol>
-        <p className="mt-4 text-[18px] text-ink-soft">
-          {engagementsCopy.receive.bodyTrailing}
-        </p>
-        <SecondaryLink
-          href={engagementsCopy.receive.link.href}
-          className="mt-6"
-        >
-          {engagementsCopy.receive.link.label}
-        </SecondaryLink>
+        <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div>
+            <SectionHeading eyebrow="Deliverable" title={engagementsCopy.receive.h2} intro={engagementsCopy.receive.bodyLead} />
+            <div className="mt-6 flex flex-wrap gap-2">
+              <Badge tone="neutral">HTML</Badge>
+              <Badge tone="neutral">PDF</Badge>
+            </div>
+            <SecondaryLink href={engagementsCopy.receive.link.href} className="mt-8">
+              {engagementsCopy.receive.link.label}
+            </SecondaryLink>
+          </div>
+          <Card pad="p-0">
+            <ol className="divide-y divide-rule">
+              {facts.reportSample.sections.map((section, index) => (
+                <li key={section} className="flex items-center gap-4 px-6 py-4 text-[16.5px] text-ink">
+                  <span className="font-[family-name:var(--font-mono)] text-[13px] text-accent-text">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  {section}
+                </li>
+              ))}
+            </ol>
+          </Card>
+        </div>
       </Section>
 
-      <ClosingCta primaryCta="Request an assessment" />
+      <ClosingCta />
     </>
   );
 }

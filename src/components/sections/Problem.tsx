@@ -1,5 +1,6 @@
 import { Section } from "@/components/ui/Container";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
+import { SectionHeading } from "@/components/ui/PageHeader";
 import { homeCopy } from "@/content/copy/home";
 
 const icons = [
@@ -17,15 +18,14 @@ const icons = [
 export function Problem() {
   return (
     <Section id="problem">
-      <h2 className="font-[family-name:var(--font-serif)] text-display-l text-ink">
-        {homeCopy.problem.h2}
-      </h2>
-      <ScrollReveal as="ul" className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+      <SectionHeading eyebrow="The problem" title={homeCopy.problem.h2} />
+      <ScrollReveal as="ul" className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
         {homeCopy.problem.items.map((item, i) => (
           <li
             key={item.lead}
-            className="glass flex flex-col gap-4 rounded-[var(--radius-sm)] p-8"
+            className="glass flex flex-col gap-4 rounded-[var(--radius-sm)] p-7"
           >
+            <span className="font-[family-name:var(--font-mono)] text-[12.5px] text-ink-soft">0{i + 1}</span>
             <svg
               aria-hidden="true"
               viewBox="0 0 24 24"
@@ -43,7 +43,8 @@ export function Problem() {
           </li>
         ))}
       </ScrollReveal>
-      <p className="mt-12 font-[family-name:var(--font-serif)] text-display-l text-ink">
+      <p className="mt-10 flex items-center gap-3 font-[family-name:var(--font-serif)] text-h3 text-ink">
+        <span aria-hidden className="h-px w-10 bg-accent" />
         {homeCopy.problem.closing}
       </p>
     </Section>
