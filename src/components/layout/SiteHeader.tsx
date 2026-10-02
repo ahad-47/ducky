@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Logo } from "@/components/ui/Logo";
 
-const links = [
+const links: { href: string; label: string; soon?: boolean }[] = [
   { href: "/method", label: "Method" },
   { href: "/engagements", label: "Engagements" },
   { href: "/report-sample", label: "Report sample" },
   { href: "/compliance", label: "Compliance" },
   { href: "/roadmap", label: "Roadmap" },
+  { href: "/scanner", label: "Scanner", soon: true },
 ];
 
 export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
@@ -30,13 +32,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
     >
       <div className="mx-auto flex h-16 max-w-[var(--content-max)] items-center gap-6 px-[var(--side-padding)]">
         <Link prefetch={false} href="/" className="flex shrink-0 items-center gap-2.5 text-ink" aria-label="SkilledScan home">
-          <span
-            aria-hidden
-            className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-[family-name:var(--font-mono)] text-[12px] font-bold text-accent-ink"
-          >
-            SS
-          </span>
-          <span className="font-[family-name:var(--font-serif)] text-[19px] tracking-[-0.01em]">SkilledScan</span>
+          <Logo markClassName="h-7 w-7 text-accent-text" textClassName="text-[18px]" />
         </Link>
 
         <nav aria-label="Main" className="hidden min-w-0 flex-1 items-center gap-1 lg:flex">
@@ -52,6 +48,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
                 }`}
               >
                 {link.label}
+                {link.soon ? <SoonPill /> : null}
               </Link>
             );
           })}
@@ -89,10 +86,19 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
               }`}
             >
               {link.label}
+              {link.soon ? <SoonPill /> : null}
             </Link>
           );
         })}
       </nav>
     </header>
+  );
+}
+
+function SoonPill() {
+  return (
+    <span className="ml-1.5 rounded-full bg-severity-medium/15 px-1.5 py-0.5 align-middle font-[family-name:var(--font-mono)] text-[10px] uppercase tracking-wide text-severity-medium">
+      Soon
+    </span>
   );
 }

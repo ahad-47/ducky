@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { facts } from "@/content/facts";
+import { Logo } from "@/components/ui/Logo";
 
 const columns = [
   {
@@ -8,6 +9,7 @@ const columns = [
       { href: "/method", label: "Method" },
       { href: "/engagements", label: "Engagements" },
       { href: "/report-sample", label: "Report sample" },
+      { href: "/scanner", label: "Scanner (coming soon)" },
     ],
   },
   {
@@ -37,14 +39,8 @@ export function Footer() {
       <div className="mx-auto max-w-[var(--content-max)] px-[var(--side-padding)] py-14">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
-            <p className="flex items-center gap-2.5 font-[family-name:var(--font-serif)] text-2xl text-ink">
-              <span
-                aria-hidden
-                className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-[family-name:var(--font-mono)] text-[12px] font-bold text-accent-ink"
-              >
-                SS
-              </span>
-              SkilledScan
+            <p className="text-ink">
+              <Logo markClassName="h-8 w-8 text-accent-text" textClassName="text-[22px]" />
             </p>
             <p className="mt-4 max-w-sm text-[15px] text-ink-soft">
               {facts.brand.oneLiner}

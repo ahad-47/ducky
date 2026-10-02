@@ -55,7 +55,7 @@ export function DesktopIcons() {
     const bin: Item = { key: "::trash", label: "Trash", path: TRASH, node: { type: "dir", mtime: 0 }, special: "trash" };
     const files = list(DESKTOP, fs).map((e) => ({ key: e.name, label: e.name, path: e.path, node: e.node }));
     // Pages first in site order, then everything else alphabetically.
-    const order = ["home.html", "method.html", "engagements.html", "report-sample.html", "compliance.html", "roadmap.html", "security.html", "contact.html", "legal", "README.txt"];
+    const order = ["home.html", "method.html", "engagements.html", "report-sample.html", "compliance.html", "roadmap.html", "security.html", "contact.html", "scanner.html", "legal", "README.txt"];
     files.sort((a, b) => {
       const ia = order.indexOf(a.key);
       const ib = order.indexOf(b.key);

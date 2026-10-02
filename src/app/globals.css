@@ -87,6 +87,8 @@
 html {
   background: var(--paper);
   color-scheme: dark;
+  /* Smooth jumps for in-page links (legal tables of contents). */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -167,6 +169,30 @@ h3 {
 
 .ambient-blob {
   animation: drift 18s ease-in-out infinite;
+}
+
+/* Scanner coming-soon radar. */
+@keyframes scanner-sweep {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes scanner-blip {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+.scanner-sweep {
+  animation: scanner-sweep 4s linear infinite;
+}
+.scanner-blip {
+  animation: scanner-blip 3.5s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

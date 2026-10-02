@@ -1,12 +1,10 @@
 import { ImageResponse } from "next/og";
-import { getInstrumentSerifFont } from "@/lib/og-font";
+import { OgLogoMark } from "@/lib/logo-mark";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default async function AppleIcon() {
-  const font = await getInstrumentSerifFont();
-
+export default function AppleIcon() {
   return new ImageResponse(
     (
       <div
@@ -17,14 +15,12 @@ export default async function AppleIcon() {
           alignItems: "center",
           justifyContent: "center",
           background: "#0B1120",
+          borderRadius: 36,
         }}
       >
-        <span style={{ fontFamily: "Instrument Serif", fontSize: 140, color: "#8FA8FF" }}>S</span>
+        <OgLogoMark size={124} color="#8FA8FF" />
       </div>
     ),
-    {
-      ...size,
-      fonts: [{ name: "Instrument Serif", data: font, style: "normal", weight: 400 }],
-    },
+    size,
   );
 }

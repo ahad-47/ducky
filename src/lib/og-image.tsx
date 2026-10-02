@@ -1,11 +1,12 @@
 import { ImageResponse } from "next/og";
-import { getInstrumentSerifFont } from "@/lib/og-font";
+import { getInstrumentSerifFont, getLogoFont } from "@/lib/og-font";
+import { OgLogoMark } from "@/lib/logo-mark";
 
 export const ogSize = { width: 1200, height: 630 };
 export const ogContentType = "image/png";
 
 export async function buildOgImage({ title, showMarks = false }: { title: string; showMarks?: boolean }) {
-  const font = await getInstrumentSerifFont();
+  const [font, logoBold, logoLight] = await Promise.all([getInstrumentSerifFont(), getLogoFont(800), getLogoFont(300)]);
 
   return new ImageResponse(
     (
@@ -33,8 +34,12 @@ export async function buildOgImage({ title, showMarks = false }: { title: string
           {title}
         </div>
         <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div style={{ display: "flex", fontFamily: "Instrument Serif", fontSize: 32, color: "#F4F6FB" }}>
-            SkilledScan
+          <div style={{ display: "flex", alignItems: "center", gap: 16, color: "#F4F6FB" }}>
+            <OgLogoMark size={52} color="#8FA8FF" />
+            <div style={{ display: "flex", fontFamily: "Montserrat", fontSize: 36, letterSpacing: 1 }}>
+              <span style={{ fontWeight: 800 }}>SKILLED</span>
+              <span style={{ fontWeight: 300 }}>SCAN</span>
+            </div>
           </div>
           {showMarks ? (
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -56,7 +61,11 @@ export async function buildOgImage({ title, showMarks = false }: { title: string
     ),
     {
       ...ogSize,
-      fonts: [{ name: "Instrument Serif", data: font, style: "normal", weight: 400 }],
+      fonts: [
+        { name: "Instrument Serif", data: font, style: "normal", weight: 400 },
+        { name: "Montserrat", data: logoBold, style: "normal", weight: 800 },
+        { name: "Montserrat", data: logoLight, style: "normal", weight: 300 },
+      ],
     },
   );
 }

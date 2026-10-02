@@ -3,6 +3,7 @@
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 import { useClock } from "@/components/desktop/Panel";
 import { Glyph } from "@/components/desktop/icons";
+import { Logo } from "@/components/ui/Logo";
 import { facts } from "@/content/facts";
 
 const bootLines = [
@@ -45,6 +46,10 @@ export function BootScreen({ onDone, quick }: { onDone: () => void; quick: boole
         </p>
       ))}
       <span className="inline-block h-4 w-2 animate-pulse bg-[#c9d1e0]" />
+      {/* Splash mark, like a distribution's boot logo. */}
+      <div className="absolute inset-x-0 bottom-[12%] flex justify-center text-white/85">
+        <Logo markClassName="h-10 w-10 text-[#8fa8ff]" textClassName="text-[26px]" />
+      </div>
     </div>
   );
 }
@@ -103,6 +108,7 @@ export function LockScreen({ wallpaper, onUnlock }: { wallpaper: string; onUnloc
           </form>
         ) : (
           <>
+            <Logo className="mb-10 text-white/80" markClassName="h-7 w-7" textClassName="text-[17px]" />
             <p className="text-[88px] font-light leading-none tracking-tight" suppressHydrationWarning>
               {now?.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}
             </p>

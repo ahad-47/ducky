@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { resetFs } from "@/components/desktop/fs";
+import { LogoMark, Wordmark } from "@/components/ui/Logo";
 import { accents, useOS, useWin, wallpapers } from "@/components/desktop/wm";
 
 const sections = ["Appearance", "Display", "Sound", "Network", "About"] as const;
@@ -129,11 +130,13 @@ function About() {
   return (
     <>
       <div className="mb-6 flex items-center gap-4">
-        <div className="grid h-16 w-16 place-items-center rounded-2xl bg-[var(--os-accent)] font-[family-name:var(--font-mono)] text-xl font-bold text-white">
-          SS
+        <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-[var(--os-accent)] text-white">
+          <LogoMark className="h-10 w-10" />
         </div>
         <div>
-          <p className="text-[18px] font-semibold text-[var(--os-fg)]">SkilledScan OS</p>
+          <p className="text-[var(--os-fg)]">
+            <Wordmark className="text-[20px]" /> <span className="text-[15px] font-semibold text-[var(--os-muted)]">OS 1.0</span>
+          </p>
           <p className="text-[var(--os-muted)]">Expert-led penetration testing, on a desktop.</p>
         </div>
       </div>

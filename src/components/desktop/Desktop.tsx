@@ -16,6 +16,7 @@ import { Overview } from "@/components/desktop/Overview";
 import { Panel } from "@/components/desktop/Panel";
 import { BootScreen, LockScreen, OffScreen } from "@/components/desktop/Screens";
 import { Window } from "@/components/desktop/Window";
+import { Logo } from "@/components/ui/Logo";
 import { installLongPress } from "@/components/desktop/longPress";
 import { installTouchKeyboardGuard, isTouchDevice } from "@/components/desktop/touchKeyboard";
 import {
@@ -297,11 +298,8 @@ export function Desktop() {
         className="os-root fixed inset-x-0 select-none overflow-hidden"
         style={{ background: wallpaper.css, top: viewport.top, height: viewport.h }}
       >
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 grid place-items-center font-[family-name:var(--font-mono)] text-[clamp(28px,6vw,72px)] font-bold tracking-tight text-white/[0.035]"
-        >
-          SkilledScan
+        <div aria-hidden className="pointer-events-none absolute inset-0 grid place-items-center text-white/[0.05]">
+          <Logo markClassName="h-[clamp(36px,6vw,80px)] w-[clamp(36px,6vw,80px)]" textClassName="text-[clamp(26px,5vw,68px)]" />
         </div>
 
         <h1 className="sr-only">SkilledScan OS desktop</h1>

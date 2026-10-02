@@ -87,6 +87,8 @@ export function Window({ win, children }: { win: Win; children: React.ReactNode 
     beginGesture("grabbing");
 
     function onMove(ev: PointerEvent) {
+      // Button released somewhere we never heard about (outside the browser).
+      if (ev.buttons === 0) return onUp();
       if (!moved && Math.hypot(ev.clientX - startX, ev.clientY - startY) < 4) return;
       moved = true;
       if (tiled) {
@@ -117,6 +119,7 @@ export function Window({ win, children }: { win: Win; children: React.ReactNode 
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("blur", onUp);
       endGesture();
       setSnap(null);
       setLive(null);
@@ -128,6 +131,9 @@ export function Window({ win, children }: { win: Win; children: React.ReactNode 
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
     window.addEventListener("pointercancel", onUp);
+    // Alt-tab or a release outside the browser must not leave every page
+    // window ignoring the mouse (frames are click-through during a gesture).
+    window.addEventListener("blur", onUp);
   }
 
   function onResizePointerDown(e: React.PointerEvent, dir: Dir) {
@@ -145,6 +151,7 @@ export function Window({ win, children }: { win: Win; children: React.ReactNode 
     beginGesture(`${dir}-resize`);
 
     function onMove(ev: PointerEvent) {
+      if (ev.buttons === 0) return onUp();
       const dx = ev.clientX - startX;
       const dy = ev.clientY - startY;
       let { x, y, w, h } = base;
@@ -167,6 +174,7 @@ export function Window({ win, children }: { win: Win; children: React.ReactNode 
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       window.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("blur", onUp);
       endGesture();
       setLive(null);
       os.setRect(win.id, last);
@@ -175,6 +183,9 @@ export function Window({ win, children }: { win: Win; children: React.ReactNode 
     window.addEventListener("pointermove", onMove);
     window.addEventListener("pointerup", onUp);
     window.addEventListener("pointercancel", onUp);
+    // Alt-tab or a release outside the browser must not leave every page
+    // window ignoring the mouse (frames are click-through during a gesture).
+    window.addEventListener("blur", onUp);
   }
 
   const snapRect = snap ? tiledRect(snap, area) : null;

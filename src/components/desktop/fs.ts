@@ -102,6 +102,27 @@ function seed(): FsTable {
 
 const STORAGE_KEY = "skilledscan-os:fs:v1";
 
+// Saved desktops predate pages added to the site later (scanner.html).
+// Any page with no file anywhere, trash included, is added at its default
+// place. A page the visitor deleted permanently therefore comes back on the
+// next visit, which is fine for a demo filesystem.
+function addMissingPages(saved: FsTable): FsTable {
+  const routes = new Set<string>();
+  for (const node of Object.values(saved)) {
+    if (node.type === "file" && node.kind === "html") routes.add(node.route);
+  }
+  const next = { ...saved };
+  for (const p of pages) {
+    if (routes.has(p.route)) continue;
+    const path = `${DESKTOP}/${p.file}`;
+    const parent = path.slice(0, path.lastIndexOf("/"));
+    if (next[parent]?.type === "dir" && !next[path]) {
+      next[path] = { type: "file", kind: "html", route: p.route, mtime: Date.now() };
+    }
+  }
+  return next;
+}
+
 let table: FsTable = seed();
 let loaded = false;
 const listeners = new Set<() => void>();
@@ -111,7 +132,7 @@ function load() {
   loaded = true;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (raw) table = JSON.parse(raw) as FsTable;
+    if (raw) table = addMissingPages(JSON.parse(raw) as FsTable);
   } catch {
     // Storage unavailable or corrupt: keep the seeded table.
   }
