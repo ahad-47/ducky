@@ -4,22 +4,23 @@ export const facts = {
     name: "SkilledScan",
     url: "https://skilledscan.com",
     positioning:
-      "A penetration testing practice where a governed system does the groundwork and a working tester verifies every finding.",
+      "A security scanning platform for web applications and APIs. It maps your attack surface, runs approved checks under strict limits, and reports only confirmed findings.",
     oneLiner:
-      "Expert-led web and API penetration testing, delivered as a report your developers and your auditor can both use.",
+      "Security scanning for web applications and APIs, with confirmed findings and reports your developers and auditors can both use.",
+    email: "contact@skilledscan.com",
   },
 
   globalReach: {
     countries: "60+",
-    note: "Assessments delivered for clients in 60+ countries worldwide, all run remotely under the same governed process.",
+    note: "Scans delivered for teams in 60+ countries, all run remotely under the same governed process.",
   },
 
-  // The honest headline result from one authorized assessment.
-  // Raw observations are what tooling surfaces; verified findings are what a human confirmed and reported.
+  // The honest headline result from one authorized scan.
+  // Raw observations are what checks surface; confirmed findings are what was reproduced and reported.
   signalResult: {
     raw: 201,
     verified: 7,
-    note: "One authorized assessment: 201 raw observations, 7 verified findings reported. The rest were duplicates, non-issues, or noise, kept in the raw log for audit.",
+    note: "One authorized scan: 201 raw observations, 7 confirmed findings reported. The rest were duplicates, non-issues, or noise, kept in the raw log for audit.",
   },
 
   // A second, separate real result, used on /method only.
@@ -60,8 +61,8 @@ export const facts = {
     },
     {
       step: 5,
-      name: "Manual verification",
-      short: "A tester confirms every finding by hand.",
+      name: "Verification",
+      short: "Every candidate finding is reproduced before it is reported.",
       detail:
         "Each candidate finding is reproduced and confirmed before it enters the report. Unconfirmed items stay in the raw log.",
     },
@@ -74,10 +75,10 @@ export const facts = {
     },
   ],
 
-  // What the governed system does. Stated once, on /method. Honest, no overclaim.
+  // What the scanning engine does and never does. Honest, no overclaim.
   system: {
     summary:
-      "Between recon and the written report, a governed system does the repeatable groundwork at machine speed so the tester spends time on judgement, not setup.",
+      "The SkilledScan engine does the repeatable work of a security assessment at machine speed: discovery, check selection, and execution, all under policy.",
     does: [
       "Maps the target's technology and attack surface.",
       "Proposes checks that fit what it found, from a fixed registry of approved checks.",
@@ -85,40 +86,40 @@ export const facts = {
       "Keeps raw observations separate from confirmed findings.",
     ],
     doesNot: [
-      "Decides on its own what counts as a finding.",
-      "Writes the client report unsupervised.",
-      "Runs anything the policy gate has not approved.",
-      "Expands scope or removes rate limits.",
+      "Test anything outside the approved scope.",
+      "Run a check the policy gate has not approved.",
+      "Remove rate limits or run destructive checks.",
+      "Brute-force credentials by default.",
     ],
     governance: [
       "Only approved, in-scope targets are tested.",
       "Every check is rate-limited and non-destructive.",
       "No brute force by default.",
       "Every proposed, allowed, and blocked action is written to an audit log.",
-      "If the planning model is unavailable, the groundwork continues on a fixed plan.",
+      "If the planning model is unavailable, scanning continues on a fixed plan.",
     ],
-    note: "A human reviews the evidence and produces the report. The system does the groundwork; it does not sign off.",
+    note: "Only findings that are reproduced and confirmed reach your report. Everything else stays in the raw log for audit.",
   },
 
   engagements: [
     {
-      name: "Web application assessment",
+      name: "Web application scanning",
       summary:
-        "A full assessment of a web application: authentication, access control, injection, configuration, and business logic, verified by hand and reported.",
+        "Full coverage of a web application: authentication, access control, injection, configuration, and business logic, with confirmed findings in the report.",
       scopeNote: "Scope and depth agreed before testing starts.",
     },
     {
-      name: "API assessment",
+      name: "API scanning",
       summary:
         "Testing of REST and GraphQL APIs for broken authorization, injection, and data exposure, driven from your routes or specification.",
       scopeNote:
         "Bring an OpenAPI or Postman collection, or we map the routes first.",
     },
     {
-      name: "Retest and sign-off",
+      name: "Rescan and sign-off",
       summary:
-        "After you fix, we retest the reported findings and issue a closeout that states what was resolved.",
-      scopeNote: "Covers the findings from a prior assessment.",
+        "After you fix, the reported findings are scanned again and a closeout states what was resolved.",
+      scopeNote: "Covers the findings from a prior scan.",
     },
   ],
 
@@ -162,10 +163,10 @@ export const facts = {
   ],
 
   reportSample: {
-    title: "Web application assessment",
-    subtitle: "Confidential security assessment report",
+    title: "Web application security scan",
+    subtitle: "Confidential security report",
     meta: [
-      { label: "Engagement", value: "Black-box web application assessment" },
+      { label: "Scan type", value: "Black-box web application scan" },
       { label: "Scope", value: "One web application, agreed in writing" },
       { label: "Status", value: "Delivered" },
       { label: "Prepared by", value: "SkilledScan" },
@@ -219,7 +220,7 @@ export const facts = {
     { field: "Fix", text: "A specific step for the developer who owns it." },
     {
       field: "Confidence",
-      text: "Confirmed by hand, or flagged for your review.",
+      text: "Confirmed, or flagged for your review.",
     },
   ],
 
@@ -241,21 +242,21 @@ export const facts = {
 
   roadmap: {
     live: [
-      "Black-box web application assessments",
-      "API assessments from routes or an OpenAPI or Postman collection",
-      "Governed groundwork with an audit log of every action",
-      "Manual verification of every reported finding",
+      "Black-box web application scanning",
+      "API scanning from routes or an OpenAPI or Postman collection",
+      "Policy-gated checks with an audit log of every action",
+      "Verification of every reported finding",
       "Client-ready reports in HTML and PDF with a tools appendix",
-      "Retest and closeout",
+      "Rescan and closeout",
     ],
     next: [
       "Authenticated testing with saved browser sessions",
-      "One-click retest after fixes",
+      "One-click rescan after fixes",
       "Before and after remediation comparison",
       "White-label report branding for agencies",
       "Client portal",
       "Jira and GitHub issue export",
-      "Scheduled assessments",
+      "Scheduled scans",
       "OWASP Top 10 mapping in the report",
       "CVSS and business-impact scoring on every finding",
     ],

@@ -1,9 +1,9 @@
 import { z } from "zod";
 
 export const engagementOptions = [
-  "Web application assessment",
-  "API assessment",
-  "Retest and sign-off",
+  "Web application scanning",
+  "API scanning",
+  "Rescan and sign-off",
   "Not sure yet",
 ] as const;
 

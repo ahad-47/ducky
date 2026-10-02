@@ -4,12 +4,12 @@ import { Logo } from "@/components/ui/Logo";
 
 const columns = [
   {
-    heading: "Platform",
+    heading: "Product",
     links: [
-      { href: "/method", label: "Method" },
-      { href: "/engagements", label: "Engagements" },
+      { href: "/method", label: "Platform" },
+      { href: "/engagements", label: "Scan types" },
       { href: "/report-sample", label: "Report sample" },
-      { href: "/scanner", label: "Scanner (coming soon)" },
+      { href: "/scanner", label: "Self-serve console (soon)" },
     ],
   },
   {
@@ -17,7 +17,7 @@ const columns = [
     links: [
       { href: "/compliance", label: "Compliance" },
       { href: "/roadmap", label: "Roadmap" },
-      { href: "/contact", label: "Request an assessment" },
+      { href: "/contact", label: "Contact" },
     ],
   },
   {
@@ -68,7 +68,9 @@ export function Footer() {
         </div>
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-rule pt-6 text-sm text-ink-soft">
           <p>© {year} SkilledScan.</p>
-          <p className="font-[family-name:var(--font-mono)] text-[12.5px]">Every finding verified by hand.</p>
+          <a href={`mailto:${facts.brand.email}`} className="font-[family-name:var(--font-mono)] text-[12.5px] hover:text-ink">
+            {facts.brand.email}
+          </a>
         </div>
       </div>
     </footer>

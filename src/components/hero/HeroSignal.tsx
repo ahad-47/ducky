@@ -78,7 +78,7 @@ export function HeroSignal() {
   }
 
   const showControls = !reducedMotion && ready;
-  const caption = counter <= FINDING_COUNT ? "verified findings" : "raw observations";
+  const caption = counter <= FINDING_COUNT ? "confirmed findings" : "raw observations";
 
   return (
     <div className="relative aspect-square w-full">

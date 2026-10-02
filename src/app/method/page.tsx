@@ -10,9 +10,9 @@ import { facts } from "@/content/facts";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Method | SkilledScan",
+  title: "Platform | SkilledScan",
   description:
-    "Six phases from recon to report. Fast groundwork under strict limits, every finding confirmed by hand.",
+    "The SkilledScan engine: six stages from discovery to report, policy-gated checks, sandboxed execution, and a full audit log.",
   path: "/method",
 });
 
@@ -22,16 +22,16 @@ const reported = facts.verificationResult.reported;
 export default function MethodPage() {
   return (
     <>
-      <PageHeader eyebrow="Method" title={methodCopy.h1} intro={methodCopy.intro}>
-        <Badge>{facts.method.length} phases</Badge>
-        <Badge tone="live">Every finding confirmed by hand</Badge>
-        <Badge tone="neutral">Audit log of every action</Badge>
+      <PageHeader eyebrow={methodCopy.eyebrow} title={methodCopy.h1} intro={methodCopy.intro}>
+        <Badge>{methodCopy.badges[0]}</Badge>
+        <Badge tone="live">{methodCopy.badges[1]}</Badge>
+        <Badge tone="neutral">{methodCopy.badges[2]}</Badge>
       </PageHeader>
 
       <Section>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div className="lg:sticky lg:top-28 lg:self-start">
-            <SectionHeading eyebrow="Phases" title={methodCopy.phases.h2} />
+            <SectionHeading eyebrow="Pipeline" title={methodCopy.phases.h2} />
           </div>
           <div className="pl-4">
             <MethodLine steps={facts.method} showDetail />
@@ -41,7 +41,7 @@ export default function MethodPage() {
 
       <Section>
         <SectionHeading
-          eyebrow="The governed system"
+          eyebrow={methodCopy.system.eyebrow}
           title={methodCopy.system.h2}
           intro={
             <>
@@ -112,7 +112,7 @@ export default function MethodPage() {
           <SectionHeading eyebrow="Verification" title={methodCopy.verification.h2} intro={methodCopy.verification.body} />
           <Card pad="p-8">
             <p className="font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-wide text-ink-soft">
-              One engagement
+              {methodCopy.verification.figureLabel}
             </p>
             <div className="mt-6 flex items-end gap-4">
               <div>
@@ -129,7 +129,7 @@ export default function MethodPage() {
               <div className="h-full rounded-full bg-accent" style={{ width: `${Math.max(2, (reported / raw) * 100)}%` }} />
             </div>
             <p className="mt-3 text-[14px] text-ink-soft">
-              {((reported / raw) * 100).toFixed(1)}% of raw observations survived manual verification.
+              {((reported / raw) * 100).toFixed(1)}% {methodCopy.verification.survived}
             </p>
           </Card>
         </div>

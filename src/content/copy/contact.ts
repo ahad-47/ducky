@@ -1,13 +1,27 @@
+import { facts } from "@/content/facts";
+
 export const contactCopy = {
-  h1: "Request an assessment",
-  intro:
-    "Tell us the target and the scope. We confirm authorization before any testing begins.",
+  eyebrow: "Contact",
+  h1: "Talk to SkilledScan",
+  intro: "Request early access, set up a scan, or ask a question. Everything goes to one address.",
+  email: facts.brand.email,
+  emailLabel: "Email us",
+  include: {
+    h2: "To set up a scan, include",
+    items: [
+      "Your name and company",
+      "The application URL or API you want scanned",
+      "The scan type: web application, API, or rescan",
+      "Production or staging, and any timing constraints",
+      "Confirmation that you own the target or have written permission to test it",
+    ],
+  },
   sidePanel: {
     h2: "What happens next",
     steps: [
-      "We review the target and the engagement you chose.",
+      "We reply to confirm the target and scan type.",
       "We confirm scope and written authorization.",
-      "The assessment runs and you receive the report.",
+      "The scan runs and you receive the report.",
     ],
   },
 } as const;

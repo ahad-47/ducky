@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
 
 const links: { href: string; label: string; soon?: boolean }[] = [
-  { href: "/method", label: "Method" },
-  { href: "/engagements", label: "Engagements" },
+  { href: "/method", label: "Platform" },
+  { href: "/engagements", label: "Scan types" },
   { href: "/report-sample", label: "Report sample" },
   { href: "/compliance", label: "Compliance" },
   { href: "/roadmap", label: "Roadmap" },
-  { href: "/scanner", label: "Scanner", soon: true },
+  { href: "/scanner", label: "Console", soon: true },
 ];
 
 export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
@@ -64,7 +64,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
             href="/contact"
             className="inline-flex h-9 items-center rounded-[var(--radius-xs)] bg-accent px-4 text-[14px] font-semibold text-accent-ink transition-colors duration-[160ms] hover:bg-accent-hover"
           >
-            Request an assessment
+            Request early access
           </Link>
         </div>
       </div>

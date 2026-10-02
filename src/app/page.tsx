@@ -1,6 +1,7 @@
 import { Hero } from "@/components/sections/Hero";
 import { ProofLine } from "@/components/sections/ProofLine";
 import { Problem } from "@/components/sections/Problem";
+import { Features } from "@/components/sections/Features";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { ReportTeaser } from "@/components/sections/ReportTeaser";
 import { EngagementsTeaser } from "@/components/sections/EngagementsTeaser";
@@ -11,9 +12,9 @@ import { homeCopy } from "@/content/copy/home";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "SkilledScan | Expert-led penetration testing",
+  title: "SkilledScan | Web and API security scanning",
   description:
-    "A penetration testing practice where a governed system does the groundwork and a working tester verifies every finding. Reports your developers and your auditor can both use.",
+    "SkilledScan maps your attack surface, runs approved security checks under strict limits, and reports only confirmed findings, with evidence and a fix for each.",
   path: "/",
 });
 
@@ -23,6 +24,7 @@ export default function Home() {
       <Hero />
       <ProofLine />
       <Problem />
+      <Features />
       <HowItWorks />
       <ReportTeaser />
       <EngagementsTeaser />

@@ -12,7 +12,7 @@ export function Hero() {
       <Container>
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
           <div>
-            <Eyebrow>Expert-led penetration testing</Eyebrow>
+            <Eyebrow>{homeCopy.hero.eyebrow}</Eyebrow>
             <RevealHeading className="mt-4 font-[family-name:var(--font-serif)] text-display-xl text-ink">
               {homeCopy.hero.h1}
             </RevealHeading>

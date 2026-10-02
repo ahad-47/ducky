@@ -4,5 +4,5 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function Image() {
-  return buildOgImage({ title: "The SkilledScan scanner is coming." });
+  return buildOgImage({ title: "Self-serve scanning is coming." });
 }

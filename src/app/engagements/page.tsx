@@ -10,9 +10,9 @@ import { buildMetadata } from "@/lib/seo";
 import { slugify } from "@/lib/slug";
 
 export const metadata = buildMetadata({
-  title: "Engagements | SkilledScan",
+  title: "Scan types | SkilledScan",
   description:
-    "Web application assessments, API assessments, and retest with sign-off. Each ends in a report with evidence and a fix.",
+    "Web application scanning, API scanning, and rescan with sign-off. Each ends in a report with evidence and a fix for every finding.",
   path: "/engagements",
 });
 
@@ -22,7 +22,7 @@ const coverageIcons: IconName[] = ["search", "bug", "lock", "shield", "doc"];
 export default function EngagementsPage() {
   return (
     <>
-      <PageHeader eyebrow="Engagements" title={engagementsCopy.h1} intro={engagementsCopy.intro} />
+      <PageHeader eyebrow={engagementsCopy.eyebrow} title={engagementsCopy.h1} intro={engagementsCopy.intro} />
 
       <Section className="pt-0">
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">

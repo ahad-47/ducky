@@ -6,11 +6,11 @@ export const privacyCopy = {
   sections: [
     {
       heading: "Who we are",
-      body: "SkilledScan, India. This policy covers the website at skilledscan.com. Data processed during an assessment is covered by the agreement for that engagement.",
+      body: "SkilledScan, India. This policy covers the website at skilledscan.com. Data processed during a scan is covered by the agreement for that engagement.",
     },
     {
       heading: "What we collect",
-      body: "When you submit the request form or the disclosure form, we collect the details you enter: name, email, company, domain, engagement choice, message, and your authorization confirmation. Our hosting provider records standard server logs, including IP addresses, to keep the site secure and running.",
+      body: "When you email us or submit the disclosure form, we collect what you send: typically your name, email address, company, the target you want scanned, your message, and your authorization confirmation. Our hosting provider records standard server logs, including IP addresses, to keep the site secure and running.",
     },
     {
       heading: "What we do not collect",
@@ -18,11 +18,11 @@ export const privacyCopy = {
     },
     {
       heading: "Why we use it",
-      body: "To reply, to confirm scope and authorization, and to keep a record of authorization for any assessment we run.",
+      body: "To reply, to confirm scope and authorization, and to keep a record of authorization for any scan we run.",
     },
     {
       heading: "Legal basis",
-      body: "Your consent, given when you submit a form, under the Digital Personal Data Protection Act, 2023.",
+      body: "Your consent, given when you email us or submit a form, under the Digital Personal Data Protection Act, 2023.",
     },
     {
       heading: "Sharing",
@@ -34,8 +34,8 @@ export const privacyCopy = {
     },
     {
       heading: "Your rights",
-      body: "You can ask to access, correct, or erase your data, withdraw consent, raise a grievance, or nominate someone to exercise these rights. Use the form at /contact and say which right you are exercising.",
-      link: { label: "/contact", href: "/contact" },
+      body: `You can ask to access, correct, or erase your data, withdraw consent, raise a grievance, or nominate someone to exercise these rights. Email ${facts.brand.email} and say which right you are exercising.`,
+      link: { label: facts.brand.email, href: `mailto:${facts.brand.email}` },
     },
     {
       heading: "Changes",
@@ -50,7 +50,7 @@ export const termsCopy = {
   sections: [
     {
       heading: "Use of this site",
-      body: "This site describes SkilledScan and how to request an assessment. Its content is general information, not legal or security advice for your situation.",
+      body: "This site describes SkilledScan and how to request a scan. Its content is general information, not legal or security advice for your situation.",
     },
     {
       heading: "Changes to content",
@@ -69,8 +69,8 @@ export const termsCopy = {
       body: "This site is provided as is. To the extent the law allows, SkilledScan is not liable for any indirect loss arising from your use of it.",
     },
     {
-      heading: "Assessments",
-      body: "Assessments are governed by a separate agreement and by the acceptable use policy.",
+      heading: "Scans",
+      body: "Scans are governed by a separate agreement and by the acceptable use policy.",
       link: { label: "/legal/acceptable-use", href: "/legal/acceptable-use" },
     },
     {
@@ -98,16 +98,16 @@ export const acceptableUseCopy = {
     },
     {
       heading: "Our controls",
-      body: "We enforce scope, rate limits, and safety rules on every assessment and keep an audit log of every action.",
+      body: "We enforce scope, rate limits, and safety rules on every scan and keep an audit log of every action.",
     },
     {
       heading: "Enforcement",
-      body: "We may refuse, pause, or stop any assessment, and suspend access, when we believe this policy has been breached.",
+      body: "We may refuse, pause, or stop any scan, and suspend access, when we believe this policy has been breached.",
     },
     {
       heading: "Report misuse",
-      body: "Report suspected misuse through the form at /contact.",
-      link: { label: "/contact", href: "/contact" },
+      body: `Report suspected misuse to ${facts.brand.email}.`,
+      link: { label: facts.brand.email, href: `mailto:${facts.brand.email}` },
     },
   ],
 } as const;

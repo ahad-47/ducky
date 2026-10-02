@@ -1,34 +1,73 @@
-import Link from "@/components/ui/SiteLink";
 import { Section } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
-import { ContactForm } from "@/components/sections/ContactForm";
+import Link from "@/components/ui/SiteLink";
+import { CopyEmail } from "@/components/sections/CopyEmail";
 import { contactCopy } from "@/content/copy/contact";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Request an assessment | SkilledScan",
-  description:
-    "Tell us the target and the scope. We confirm authorization before any testing begins.",
+  title: "Contact | SkilledScan",
+  description: `Request early access or set up a scan. Email ${contactCopy.email}.`,
   path: "/contact",
 });
 
 const related = [
   { href: "/report-sample", label: "See a sample report", icon: "doc" as const },
-  { href: "/engagements", label: "Compare engagements", icon: "layers" as const },
+  { href: "/engagements", label: "Compare scan types", icon: "layers" as const },
   { href: "/legal/acceptable-use", label: "Acceptable use policy", icon: "lock" as const },
 ];
 
 export default function ContactPage() {
   return (
     <>
-      <PageHeader eyebrow="Contact" title={contactCopy.h1} intro={contactCopy.intro} />
+      <PageHeader eyebrow={contactCopy.eyebrow} title={contactCopy.h1} intro={contactCopy.intro} />
       <Section className="pt-0">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
-          <Card pad="p-6 sm:p-8" className="lg:col-span-7">
-            <ContactForm />
-          </Card>
+          <div className="flex flex-col gap-5 lg:col-span-7">
+            <Card pad="p-6 sm:p-8" className="relative overflow-hidden">
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-40 blur-[80px]"
+                style={{ background: "radial-gradient(circle, #3d5fde 0%, transparent 70%)" }}
+              />
+              <div className="relative">
+                <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent/15 text-accent-text">
+                  <Icon name="mail" className="h-6 w-6" />
+                </span>
+                <p className="mt-5 font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-wide text-ink-soft">
+                  {contactCopy.emailLabel}
+                </p>
+                <a
+                  href={`mailto:${contactCopy.email}`}
+                  className="mt-1 block break-all font-[family-name:var(--font-serif)] text-[clamp(1.5rem,3.6vw,2.25rem)] text-ink underline decoration-accent decoration-[1.5px] underline-offset-[6px] hover:text-accent-text"
+                >
+                  {contactCopy.email}
+                </a>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a
+                    href={`mailto:${contactCopy.email}?subject=${encodeURIComponent("SkilledScan early access")}`}
+                    className="inline-flex h-11 items-center rounded-[var(--radius-xs)] bg-accent px-5 text-[15px] font-semibold text-accent-ink hover:bg-accent-hover"
+                  >
+                    Write an email
+                  </a>
+                  <CopyEmail email={contactCopy.email} />
+                </div>
+              </div>
+            </Card>
+            <Card pad="p-6 sm:p-8">
+              <h2 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{contactCopy.include.h2}</h2>
+              <ul className="mt-5 flex flex-col gap-3">
+                {contactCopy.include.items.map((item) => (
+                  <li key={item} className="flex gap-3 text-[16px] text-ink-soft">
+                    <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-severity-low" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
           <aside className="flex flex-col gap-5 lg:sticky lg:top-28 lg:col-span-5">
             <Card>
               <h2 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{contactCopy.sidePanel.h2}</h2>

@@ -11,7 +11,7 @@ import { slugify } from "@/lib/slug";
 export function EngagementsTeaser() {
   return (
     <Section id="engagements">
-      <SectionHeading eyebrow="Engagements" title={homeCopy.engagementsTeaser.h2} />
+      <SectionHeading eyebrow="Scan types" title={homeCopy.engagementsTeaser.h2} />
       <ScrollReveal as="ul" className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
         {facts.engagements.map((engagement, i) => (
           <li key={engagement.name}>

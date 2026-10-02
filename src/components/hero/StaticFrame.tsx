@@ -11,7 +11,7 @@ export function StaticFrame() {
   return (
     <div
       role="img"
-      aria-label={`${TOTAL_POINTS} raw observations resolved to ${FINDING_COUNT} verified findings.`}
+      aria-label={`${TOTAL_POINTS} raw observations resolved to ${FINDING_COUNT} confirmed findings.`}
       className="relative aspect-square w-full"
     >
       <svg
@@ -53,7 +53,7 @@ export function StaticFrame() {
         <span className="font-[family-name:var(--font-serif)] text-display-l tabular-nums text-ink">
           {FINDING_COUNT}
         </span>
-        <span className="text-[15px] text-ink-soft">verified findings</span>
+        <span className="text-[15px] text-ink-soft">confirmed findings</span>
       </div>
     </div>
   );

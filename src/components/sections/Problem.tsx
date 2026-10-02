@@ -18,7 +18,7 @@ const icons = [
 export function Problem() {
   return (
     <Section id="problem">
-      <SectionHeading eyebrow="The problem" title={homeCopy.problem.h2} />
+      <SectionHeading eyebrow={homeCopy.problem.eyebrow} title={homeCopy.problem.h2} />
       <ScrollReveal as="ul" className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
         {homeCopy.problem.items.map((item, i) => (
           <li

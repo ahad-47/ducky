@@ -9,8 +9,8 @@ import { scannerCopy } from "@/content/copy/scanner";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Scanner (coming soon) | SkilledScan",
-  description: "The SkilledScan scanner is in development and not available yet.",
+  title: "Self-serve console (coming soon) | SkilledScan",
+  description: "The self-serve SkilledScan console is in development. Request early access by email.",
   path: "/scanner",
 });
 
@@ -18,7 +18,7 @@ export default function ScannerPage() {
   return (
     <>
       <div className="grid grid-cols-1 items-center lg:grid-cols-[1.2fr_1fr]">
-        <PageHeader eyebrow="Scanner" title={scannerCopy.h1} intro={scannerCopy.intro}>
+        <PageHeader eyebrow="Console" title={scannerCopy.h1} intro={scannerCopy.intro}>
           <Badge tone="next">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-severity-medium" />
             {scannerCopy.status}

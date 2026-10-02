@@ -226,7 +226,7 @@ export function WebGLRenderer({
   return (
     <div
       role="img"
-      aria-label={`${TOTAL_POINTS} raw observations resolved to ${FINDING_COUNT} verified findings.`}
+      aria-label={`${TOTAL_POINTS} raw observations resolved to ${FINDING_COUNT} confirmed findings.`}
       className="absolute inset-0 h-full w-full"
     >
       <Canvas

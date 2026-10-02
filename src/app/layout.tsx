@@ -28,11 +28,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
-    default: "SkilledScan | Expert-led penetration testing",
+    default: "SkilledScan | Web and API security scanning",
     template: "%s",
   },
   description:
-    "A penetration testing practice where a governed system does the groundwork and a working tester verifies every finding. Reports your developers and your auditor can both use.",
+    "SkilledScan maps your attack surface, runs approved security checks under strict limits, and reports only confirmed findings, with evidence and a fix for each.",
 };
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {

@@ -3,10 +3,10 @@ import { homeCopy } from "@/content/copy/home";
 import { facts } from "@/content/facts";
 
 const stats = [
-  { value: String(facts.signalResult.raw), label: "raw observations surfaced by tooling" },
-  { value: String(facts.signalResult.verified), label: "findings verified by hand and reported" },
-  { value: String(facts.method.length), label: "phases, from recon to report" },
-  { value: facts.globalReach.countries, label: "countries served, all remotely" },
+  { value: String(facts.signalResult.raw), label: homeCopy.stats.raw },
+  { value: String(facts.signalResult.verified), label: homeCopy.stats.confirmed },
+  { value: String(facts.method.length), label: homeCopy.stats.phases },
+  { value: facts.globalReach.countries, label: homeCopy.stats.countries },
 ];
 
 export function ProofLine() {
