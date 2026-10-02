@@ -401,8 +401,20 @@ export function TerminalApp() {
   const [value, setValue] = useState("");
   const [history, setHistory] = useState<string[]>([]);
   const [hIndex, setHIndex] = useState<number | null>(null);
+  const [caret, setCaret] = useState(0);
+  const [focused, setFocused] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  function syncCaret(el: HTMLInputElement) {
+    setCaret(el.selectionStart ?? el.value.length);
+  }
+
+  // Replace the whole line (history, completion, Enter) with the caret at the end.
+  function setLine(text: string) {
+    setValue(text);
+    setCaret(text.length);
+  }
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
@@ -477,14 +489,14 @@ export function TerminalApp() {
     if (!candidates.length) return;
     if (candidates.length === 1) {
       parts[parts.length - 1] = candidates[0] + (candidates[0].endsWith("/") ? "" : " ");
-      setValue(parts.join(" "));
+      setLine(parts.join(" "));
       return;
     }
     let prefix = candidates[0];
     for (const c of candidates) while (!c.startsWith(prefix)) prefix = prefix.slice(0, -1);
     if (prefix.length > last.length) {
       parts[parts.length - 1] = prefix;
-      setValue(parts.join(" "));
+      setLine(parts.join(" "));
     } else {
       setLines((prev) => [...prev, { kind: "prompt", cwd, text: value }, { kind: "out", text: candidates.join("  ") }]);
     }
@@ -493,7 +505,7 @@ export function TerminalApp() {
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       execute(value);
-      setValue("");
+      setLine("");
     } else if (e.key === "Tab") {
       e.preventDefault();
       complete();
@@ -502,17 +514,17 @@ export function TerminalApp() {
       if (!history.length) return;
       const i = hIndex === null ? history.length - 1 : Math.max(0, hIndex - 1);
       setHIndex(i);
-      setValue(history[i]);
+      setLine(history[i]);
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
       if (hIndex === null) return;
       const i = hIndex + 1;
       if (i >= history.length) {
         setHIndex(null);
-        setValue("");
+        setLine("");
       } else {
         setHIndex(i);
-        setValue(history[i]);
+        setLine(history[i]);
       }
     } else if (e.ctrlKey && (e.key === "l" || e.key === "L")) {
       e.preventDefault();
@@ -520,7 +532,7 @@ export function TerminalApp() {
     } else if (e.ctrlKey && (e.key === "c" || e.key === "C") && !window.getSelection()?.toString()) {
       e.preventDefault();
       setLines((prev) => [...prev, { kind: "prompt", cwd, text: value + "^C" }]);
-      setValue("");
+      setLine("");
     }
   }
 
@@ -547,21 +559,41 @@ export function TerminalApp() {
           </div>
         ),
       )}
-      <div className="flex">
-        <span className="shrink-0 whitespace-pre">
-          <Prompt cwd={cwd} />
+      {/* The real input is invisible; the line is drawn as plain terminal
+          text with a block cursor at the caret position. */}
+      <div className="relative whitespace-pre-wrap break-all">
+        <Prompt cwd={cwd} />
+        <span aria-hidden>
+          {value.slice(0, caret)}
+          <span className="os-term-cursor" data-focused={focused ? "true" : "false"}>
+            {value[caret] ?? " "}
+          </span>
+          {value.slice(caret + 1)}
         </span>
         <input
           ref={inputRef}
           data-autofocus
           value={value}
-          onChange={(e) => setValue(e.target.value)}
-          onKeyDown={onKeyDown}
+          onChange={(e) => {
+            setValue(e.target.value);
+            syncCaret(e.target);
+          }}
+          onKeyDown={(e) => {
+            onKeyDown(e);
+            // Held arrow keys move the caret before keyup; follow it each repeat.
+            const el = e.currentTarget;
+            requestAnimationFrame(() => syncCaret(el));
+          }}
+          onKeyUp={(e) => syncCaret(e.currentTarget)}
+          onSelect={(e) => syncCaret(e.currentTarget)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
           spellCheck={false}
           autoCapitalize="off"
           autoComplete="off"
+          autoCorrect="off"
           aria-label="Terminal input"
-          className="min-w-0 flex-1 bg-transparent text-inherit caret-[#5eead4] outline-none"
+          className="pointer-events-none absolute inset-0 h-full w-full bg-transparent text-transparent caret-transparent opacity-0 outline-none"
         />
       </div>
     </div>

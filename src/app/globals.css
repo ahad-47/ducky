@@ -111,9 +111,13 @@ h3 {
   color: var(--accent-ink);
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+/* Base layer, so a component's own outline utilities (outline-none on the
+   terminal prompt, address bar and editor) can override it. */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 }
 
 .measure {
@@ -595,6 +599,25 @@ body.wm-gesture {
   background: #12151c;
   color: #d8dee9;
   cursor: text;
+}
+
+/* Block cursor drawn in the text flow, like a real terminal. Solid and
+   blinking while focused, hollow when the window loses focus. */
+.os-term-cursor {
+  outline: 1px solid #d8dee9;
+  outline-offset: -1px;
+}
+.os-term-cursor[data-focused="true"] {
+  background: #d8dee9;
+  color: #12151c;
+  outline: none;
+  animation: os-term-blink 1.06s steps(1) infinite;
+}
+@keyframes os-term-blink {
+  50% {
+    background: transparent;
+    color: inherit;
+  }
 }
 
 .os-calc-key {
