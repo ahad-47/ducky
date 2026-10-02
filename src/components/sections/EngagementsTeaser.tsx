@@ -15,7 +15,7 @@ export function EngagementsTeaser() {
       <ScrollReveal as="ul" className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
         {facts.engagements.map((engagement, i) => (
           <li key={engagement.name}>
-            <Link
+            <Link prefetch={false}
               href={`/engagements#${slugify(engagement.name)}`}
               className="glass group flex h-full flex-col gap-3 rounded-[var(--radius-sm)] p-7 transition-colors duration-[160ms] hover:border-accent/60 hover:bg-white/[0.08]"
             >

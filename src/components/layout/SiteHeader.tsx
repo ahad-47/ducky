@@ -29,7 +29,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[var(--content-max)] items-center gap-6 px-[var(--side-padding)]">
-        <Link href="/" className="flex shrink-0 items-center gap-2.5 text-ink" aria-label="SkilledScan home">
+        <Link prefetch={false} href="/" className="flex shrink-0 items-center gap-2.5 text-ink" aria-label="SkilledScan home">
           <span
             aria-hidden
             className="grid h-8 w-8 place-items-center rounded-lg bg-accent font-[family-name:var(--font-mono)] text-[12px] font-bold text-accent-ink"
@@ -43,7 +43,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
           {links.map((link) => {
             const current = pathname === link.href;
             return (
-              <Link
+              <Link prefetch={false}
                 key={link.href}
                 href={link.href}
                 aria-current={current ? "page" : undefined}
@@ -63,7 +63,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
               Client sign in
             </a>
           ) : null}
-          <Link
+          <Link prefetch={false}
             href="/contact"
             className="inline-flex h-9 items-center rounded-[var(--radius-xs)] bg-accent px-4 text-[14px] font-semibold text-accent-ink transition-colors duration-[160ms] hover:bg-accent-hover"
           >
@@ -80,7 +80,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
         {links.map((link) => {
           const current = pathname === link.href;
           return (
-            <Link
+            <Link prefetch={false}
               key={link.href}
               href={link.href}
               aria-current={current ? "page" : undefined}

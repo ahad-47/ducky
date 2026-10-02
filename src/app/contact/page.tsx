@@ -47,7 +47,7 @@ export default function ContactPage() {
               <ul>
                 {related.map((r) => (
                   <li key={r.href}>
-                    <Link
+                    <Link prefetch={false}
                       href={r.href}
                       className="group flex items-center gap-3 rounded-[var(--radius-xs)] px-4 py-3 text-[15.5px] text-ink hover:bg-white/5"
                     >

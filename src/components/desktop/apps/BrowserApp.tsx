@@ -49,6 +49,9 @@ export function BrowserApp() {
   const [address, setAddress] = useState(() => addressFor(initial));
   const [editing, setEditing] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
+  const pending = useRef(initial);
+  const retries = useRef(0);
   const [stack, setStack] = useState<{ entries: string[]; index: number }>({ entries: [initial], index: 0 });
   const travelling = useRef(false);
   const activeRef = useRef(false);
@@ -60,6 +63,9 @@ export function BrowserApp() {
     const frame = frameRef.current;
     if (!frame?.contentWindow) return;
     setLoading(true);
+    setFailed(false);
+    if (pending.current !== target) retries.current = 0;
+    pending.current = target;
     const url = `${target}${target.includes("?") ? "&" : "?"}embed=1`;
     try {
       frame.contentWindow.location.replace(url);
@@ -195,14 +201,61 @@ export function BrowserApp() {
           className="h-full w-full border-0"
           onLoad={() => {
             setLoading(false);
+            let doc: Document | null | undefined;
             try {
-              const doc = frameRef.current?.contentDocument;
-              if (doc?.title) os.setTitle(win.id, doc.title);
+              doc = frameRef.current?.contentDocument;
             } catch {
-              // Cross-origin frame: leave the title alone.
+              doc = null;
             }
+            // Every site page renders <main id="main">. An empty or foreign
+            // document means the server refused the request (for example a
+            // CDN rate limit answering 429 with no body), which would
+            // otherwise show as a blank white window.
+            if (!doc?.getElementById("main")) {
+              setFailed(true);
+              if (retries.current < 2) {
+                retries.current += 1;
+                window.setTimeout(() => navigate(pending.current), 1500 * retries.current);
+              }
+              return;
+            }
+            retries.current = 0;
+            setFailed(false);
+            if (doc.title) os.setTitle(win.id, doc.title);
           }}
         />
+        {failed ? (
+          <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-[#0b1120] p-6 text-center">
+            <p className="text-[15px] font-semibold text-[var(--os-fg)]">This page did not load</p>
+            <p className="max-w-sm text-[13px] text-[var(--os-muted)]">
+              {loading
+                ? "Retrying…"
+                : "The server returned an empty response. This usually clears up after a few seconds."}
+            </p>
+            <div className="flex gap-2">
+              <button
+                type="button"
+                className="os-pill os-pill-accent"
+                onClick={() => {
+                  retries.current = 0;
+                  navigate(pending.current);
+                }}
+              >
+                Try again
+              </button>
+              <button
+                type="button"
+                className="os-pill"
+                onClick={() => {
+                  const t = pending.current;
+                  window.open(`${t}${t.includes("?") ? "&" : "?"}embed=1`, "_blank", "noopener,noreferrer");
+                }}
+              >
+                Open in a tab
+              </button>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

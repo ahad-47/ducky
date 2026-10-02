@@ -22,7 +22,7 @@ export function PrimaryButton({
 }: PrimaryButtonProps) {
   if (href) {
     return (
-      <Link href={href} className={`${primaryClass} ${className}`}>
+      <Link prefetch={false} href={href} className={`${primaryClass} ${className}`}>
         {children}
       </Link>
     );
@@ -46,7 +46,7 @@ export function SecondaryLink({
   children,
 }: SecondaryLinkProps) {
   return (
-    <Link href={href} className={`${secondaryClass} ${className}`}>
+    <Link prefetch={false} href={href} className={`${secondaryClass} ${className}`}>
       {children}
     </Link>
   );

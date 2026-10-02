@@ -52,7 +52,7 @@ export function LegalPage({
             <ul className="mt-3 flex flex-col gap-1">
               {legalPages.map((p) => (
                 <li key={p.href}>
-                  <Link href={p.href} className="text-[14.5px] text-ink-soft underline-offset-4 hover:text-ink hover:underline">
+                  <Link prefetch={false} href={p.href} className="text-[14.5px] text-ink-soft underline-offset-4 hover:text-ink hover:underline">
                     {p.label}
                   </Link>
                 </li>
@@ -83,7 +83,7 @@ export function LegalPage({
                   </ul>
                 ) : null}
                 {section.link ? (
-                  <Link
+                  <Link prefetch={false}
                     href={section.link.href}
                     className="mt-3 inline-block text-[15px] text-ink underline decoration-accent decoration-[1px] underline-offset-4"
                   >

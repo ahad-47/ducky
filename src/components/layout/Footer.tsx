@@ -58,7 +58,7 @@ export function Footer() {
               <ul className="mt-4 flex flex-col gap-3">
                 {column.links.map((link) => (
                   <li key={link.href}>
-                    <Link
+                    <Link prefetch={false}
                       href={link.href}
                       className="text-[15px] text-ink-soft hover:text-accent-text"
                     >
