@@ -162,7 +162,7 @@ export function FilesApp() {
 
   return (
     <div
-      className="flex h-full bg-[var(--os-surface)] text-[13px]"
+      className="@container flex h-full bg-[var(--os-surface)] text-[13px]"
       onKeyDown={(e) => {
         if (renaming) return;
         if (e.key === "Enter" && selected) open(selected);
@@ -171,7 +171,7 @@ export function FilesApp() {
         else if (e.key === "Backspace" && cwd !== "/") go(dirname(cwd));
       }}
     >
-      <aside className="hidden w-44 shrink-0 flex-col gap-0.5 border-r border-[var(--os-border)] bg-black/15 p-2 sm:flex">
+      <aside className="hidden w-44 shrink-0 flex-col gap-0.5 border-r border-[var(--os-border)] bg-black/15 p-2 @xl:flex">
         {places.map((p) => (
           <button
             key={p.path}
@@ -220,6 +220,18 @@ export function FilesApp() {
               Empty
             </button>
           ) : null}
+        </div>
+        <div className="flex shrink-0 gap-1.5 overflow-x-auto border-b border-[var(--os-border)] px-2 py-2 [scrollbar-width:none] @xl:hidden">
+          {places.map((p) => (
+            <button
+              key={p.path}
+              type="button"
+              onClick={() => go(p.path)}
+              className={`shrink-0 rounded-full border px-3 py-1 text-[12.5px] pointer-coarse:py-1.5 ${cwd === p.path ? "border-[var(--os-accent)] bg-[var(--os-accent-soft)] text-[var(--os-fg)]" : "border-[var(--os-border)] text-[var(--os-muted)]"}`}
+            >
+              {p.label}
+            </button>
+          ))}
         </div>
         {error ? (
           <div className="flex items-center justify-between bg-[#5a1d1d] px-3 py-1.5 text-[12.5px] text-[#ffd6d6]">

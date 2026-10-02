@@ -16,6 +16,8 @@ import { Overview } from "@/components/desktop/Overview";
 import { Panel } from "@/components/desktop/Panel";
 import { BootScreen, LockScreen, OffScreen } from "@/components/desktop/Screens";
 import { Window } from "@/components/desktop/Window";
+import { installLongPress } from "@/components/desktop/longPress";
+import { installTouchKeyboardGuard, isTouchDevice } from "@/components/desktop/touchKeyboard";
 import {
   OSContext,
   activeWindow,
@@ -45,6 +47,28 @@ const appViews: Record<AppId, () => React.ReactNode> = {
   monitor: () => <MonitorApp />,
 };
 
+function readViewport() {
+  const vv = window.visualViewport;
+  return {
+    w: window.innerWidth,
+    h: Math.round(vv?.height ?? window.innerHeight),
+    top: Math.round(vv?.offsetTop ?? 0),
+    layoutH: window.innerHeight,
+  };
+}
+
+// env(safe-area-inset-*) is only readable through CSS, so measure a probe.
+function readSafeInsets() {
+  const probe = document.createElement("div");
+  probe.style.cssText =
+    "position:fixed;visibility:hidden;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)";
+  document.body.appendChild(probe);
+  const cs = getComputedStyle(probe);
+  const insets = { top: parseFloat(cs.paddingTop) || 0, bottom: parseFloat(cs.paddingBottom) || 0 };
+  probe.remove();
+  return insets;
+}
+
 type Toast = { id: number; title: string; body?: string };
 
 function hexToRgb(hex: string) {
@@ -54,7 +78,8 @@ function hexToRgb(hex: string) {
 
 export function Desktop() {
   const [wm, dispatch] = useReducer(wmReducer, initialWm);
-  const [viewport, setViewport] = useState(() => ({ w: window.innerWidth, h: window.innerHeight }));
+  const [viewport, setViewport] = useState(readViewport);
+  const [insets] = useState(readSafeInsets);
   const [settings, setSettings] = useState<Settings>(() => {
     try {
       const raw = window.localStorage.getItem(SETTINGS_KEY);
@@ -76,18 +101,41 @@ export function Desktop() {
   const ready = useRef(false);
 
   const mobile = viewport.w < 768;
+  // On phones the on-screen keyboard shrinks the visual viewport; the dock
+  // steps aside so the focused window keeps the space.
+  const keyboardOpen = mobile && viewport.layoutH - viewport.h > 120;
+  const panelH = PANEL_H + insets.top;
+  const dockH = keyboardOpen ? 0 : DOCK_H + insets.bottom;
   const area: Rect = useMemo(
     () =>
       mobile
-        ? { x: 0, y: PANEL_H, w: viewport.w, h: viewport.h - PANEL_H - DOCK_H }
-        : { x: DOCK_W, y: PANEL_H, w: viewport.w - DOCK_W, h: viewport.h - PANEL_H },
-    [mobile, viewport],
+        ? { x: 0, y: panelH, w: viewport.w, h: viewport.h - panelH - dockH }
+        : { x: DOCK_W, y: panelH, w: viewport.w - DOCK_W, h: viewport.h - panelH },
+    [mobile, viewport, panelH, dockH],
   );
 
   useEffect(() => {
-    const measure = () => setViewport({ w: window.innerWidth, h: window.innerHeight });
+    const measure = () => setViewport(readViewport());
+    const vv = window.visualViewport;
     window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
+    vv?.addEventListener("resize", measure);
+    vv?.addEventListener("scroll", measure);
+    return () => {
+      window.removeEventListener("resize", measure);
+      vv?.removeEventListener("resize", measure);
+      vv?.removeEventListener("scroll", measure);
+    };
+  }, []);
+
+  // Touch screens: no keyboard until a text field is tapped twice, and a
+  // long press acts as a right-click.
+  useEffect(() => {
+    const uninstallGuard = installTouchKeyboardGuard(document);
+    const uninstallLongPress = installLongPress(document);
+    return () => {
+      uninstallGuard();
+      uninstallLongPress();
+    };
   }, []);
 
   const open = useCallback(
@@ -146,6 +194,8 @@ export function Desktop() {
       activeId: active?.id,
       area,
       mobile,
+      insets,
+      keyboardOpen,
       open,
       openPath,
       openRoute: (route: string) => open("browser", { route }),
@@ -163,7 +213,7 @@ export function Desktop() {
       power,
       bootedAt,
     }),
-    [wm.wins, active?.id, area, mobile, open, openPath, settings, updateSettings, notify, power, bootedAt],
+    [wm.wins, active?.id, area, mobile, insets, keyboardOpen, open, openPath, settings, updateSettings, notify, power, bootedAt],
   );
 
   // Once booted on first load, open the page the visitor asked for.
@@ -180,7 +230,13 @@ export function Desktop() {
         if (!window.localStorage.getItem("skilledscan-os:welcomed")) {
           window.localStorage.setItem("skilledscan-os:welcomed", "1");
           window.setTimeout(
-            () => notify("Welcome to SkilledScan OS", "Every page is an .html file on the desktop. Press Ctrl+Alt+T for a terminal."),
+            () =>
+              notify(
+                "Welcome to SkilledScan OS",
+                isTouchDevice()
+                  ? "Every page is an .html file on the desktop. Tap one to open it, long-press for options, and double-tap a text field to type."
+                  : "Every page is an .html file on the desktop. Press Ctrl+Alt+T for a terminal.",
+              ),
             900,
           );
         }
@@ -237,7 +293,10 @@ export function Desktop() {
 
   return (
     <OSContext.Provider value={os}>
-      <div className="os-root fixed inset-0 select-none overflow-hidden" style={{ background: wallpaper.css }}>
+      <div
+        className="os-root fixed inset-x-0 select-none overflow-hidden"
+        style={{ background: wallpaper.css, top: viewport.top, height: viewport.h }}
+      >
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 grid place-items-center font-[family-name:var(--font-mono)] text-[clamp(28px,6vw,72px)] font-bold tracking-tight text-white/[0.035]"

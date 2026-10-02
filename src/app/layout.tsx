@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
 import { dmSans, ibmPlexMono } from "@/fonts";
 import { SkipLink } from "@/components/layout/SkipLink";
@@ -11,6 +11,18 @@ import { SmoothScroll } from "@/motion/SmoothScroll";
 import { facts } from "@/content/facts";
 import { appSignInUrl, env } from "@/lib/env";
 import "./globals.css";
+
+// The desktop is an app surface, not a document: no pinch or double-tap
+// zoom (which also stops iOS zooming into focused inputs), and draw under
+// the notch and home indicator, which the shell pads for itself.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  viewportFit: "cover",
+  themeColor: "#000000",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),

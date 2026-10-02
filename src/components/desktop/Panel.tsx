@@ -44,12 +44,18 @@ export function Panel({ onActivities, overviewOpen }: { onActivities: () => void
   const [calOpen, setCalOpen, calRef] = usePopover();
   const [sysOpen, setSysOpen, sysRef] = usePopover();
 
+  const time = now?.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false }) ?? "";
   const clock = now
-    ? `${now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}  ${now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false })}`
+    ? os.mobile
+      ? time
+      : `${now.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}  ${time}`
     : "";
 
   return (
-    <div className="os-panel absolute inset-x-0 top-0 z-[5000] flex h-8 items-center px-1.5 text-[13px] font-semibold text-white">
+    <div
+      className="os-panel absolute inset-x-0 top-0 z-[5000] flex items-center px-1.5 text-[13px] font-semibold text-white"
+      style={{ paddingTop: os.insets.top, height: 32 + os.insets.top }}
+    >
       <button
         type="button"
         onClick={onActivities}
@@ -93,7 +99,7 @@ function CalendarPopover({ now }: { now: Date }) {
   const isToday = (d: number) => offset === 0 && d === now.getDate();
 
   return (
-    <div className="os-popover absolute left-1/2 top-9 w-[320px] -translate-x-1/2 p-4 font-normal">
+    <div className="os-popover absolute left-1/2 top-9 w-[min(320px,calc(100vw-16px))] -translate-x-1/2 p-4 font-normal">
       <p className="text-[12px] text-[var(--os-muted)]">{now.toLocaleDateString("en-US", { weekday: "long" })}</p>
       <p className="mb-3 text-[18px] font-semibold">
         {now.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
@@ -137,7 +143,7 @@ function SystemMenu({ close }: { close: () => void }) {
     `flex items-center gap-2 rounded-full px-3 py-2.5 text-left text-[12.5px] font-semibold ${on ? "bg-[var(--os-accent)] text-white" : "bg-white/10 text-[var(--os-fg)] hover:bg-white/15"}`;
 
   return (
-    <div className="os-popover absolute right-0 top-9 w-[320px] p-3 font-normal">
+    <div className="os-popover absolute right-0 top-9 w-[min(320px,calc(100vw-12px))] p-3 font-normal">
       <div className="mb-3 flex items-center gap-2">
         <button
           type="button"

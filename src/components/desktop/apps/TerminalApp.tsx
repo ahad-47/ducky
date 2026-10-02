@@ -540,7 +540,7 @@ export function TerminalApp() {
     <div
       ref={scrollRef}
       className="os-terminal h-full overflow-y-auto px-3 py-2 font-[family-name:var(--font-mono)] text-[13px] leading-[1.45]"
-      onMouseUp={() => {
+      onClick={() => {
         if (!window.getSelection()?.toString()) inputRef.current?.focus();
       }}
     >
@@ -561,7 +561,7 @@ export function TerminalApp() {
       )}
       {/* The real input is invisible; the line is drawn as plain terminal
           text with a block cursor at the caret position. */}
-      <div className="relative whitespace-pre-wrap break-all">
+      <div className="relative whitespace-pre-wrap break-all" data-keyboard="always">
         <Prompt cwd={cwd} />
         <span aria-hidden>
           {value.slice(0, caret)}

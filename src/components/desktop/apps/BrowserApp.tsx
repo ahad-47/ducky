@@ -135,8 +135,8 @@ export function BrowserApp() {
   const canForward = stack.index < stack.entries.length - 1;
 
   return (
-    <div className="flex h-full flex-col bg-[var(--os-surface)]">
-      <div className="flex h-11 shrink-0 items-center gap-1 border-b border-[var(--os-border)] px-2">
+    <div className="@container flex h-full flex-col bg-[var(--os-surface)]">
+      <div className="flex h-11 shrink-0 items-center gap-0.5 border-b border-[var(--os-border)] px-1.5 pointer-coarse:h-12 @md:gap-1 @md:px-2">
         <button type="button" className="os-tbtn" aria-label="Back" disabled={!canBack} onClick={() => go(-1)}>
           <Glyph.Back className="h-4 w-4" />
         </button>
@@ -156,7 +156,7 @@ export function BrowserApp() {
         >
           {loading ? <Glyph.Stop className="h-4 w-4" /> : <Glyph.Reload className="h-4 w-4" />}
         </button>
-        <button type="button" className="os-tbtn" aria-label="Home" onClick={() => navigate("/")}>
+        <button type="button" className="os-tbtn hidden @md:grid" aria-label="Home" onClick={() => navigate("/")}>
           <Glyph.Home className="h-4 w-4" />
         </button>
         <form onSubmit={submit} className="mx-1 min-w-0 flex-1">
@@ -184,7 +184,7 @@ export function BrowserApp() {
         </form>
         <button
           type="button"
-          className="os-tbtn"
+          className="os-tbtn hidden @md:grid"
           aria-label="Open in new window"
           title="Open in new window"
           onClick={() => os.open("browser", { route })}

@@ -42,12 +42,20 @@ export function Dock({ onShowApps, overviewOpen }: { onShowApps: () => void; ove
     });
   }
 
+  // While the on-screen keyboard is up the dock steps aside.
+  if (os.keyboardOpen) return null;
+
   return (
     <nav
       aria-label="Dock"
-      className={`os-dock absolute z-[4500] flex items-center gap-1.5 p-1.5 ${
-        os.mobile ? "inset-x-0 bottom-0 h-[60px] flex-row justify-between overflow-x-auto" : "bottom-0 left-0 top-8 w-16 flex-col"
+      className={`os-dock absolute z-[4500] flex items-center gap-1 p-1.5 ${
+        os.mobile ? "inset-x-0 bottom-0 flex-row justify-between overflow-x-auto" : "bottom-0 left-0 w-16 flex-col gap-1.5"
       }`}
+      style={
+        os.mobile
+          ? { height: 60 + os.insets.bottom, paddingBottom: 6 + os.insets.bottom }
+          : { top: 32 + os.insets.top }
+      }
     >
       {dockApps.map((app) => {
         const running = os.wins.filter((w) => w.app === app);
@@ -60,9 +68,9 @@ export function Dock({ onShowApps, overviewOpen }: { onShowApps: () => void; ove
             aria-label={apps[app].name}
             onClick={() => activate(app)}
             onContextMenu={(e) => contextMenu(e, app)}
-            className={`os-dock-item group relative grid shrink-0 place-items-center rounded-xl ${os.mobile ? "h-11 w-11" : "h-12 w-12"} ${focused ? "bg-white/15" : "hover:bg-white/10"}`}
+            className={`os-dock-item group relative grid shrink-0 place-items-center rounded-xl ${os.mobile ? "h-10 w-10 min-[400px]:h-11 min-[400px]:w-11" : "h-12 w-12"} ${focused ? "bg-white/15" : "hover:bg-white/10"}`}
           >
-            <AppIcon app={app} size={os.mobile ? 32 : 38} />
+            <AppIcon app={app} size={os.mobile ? 30 : 38} />
             {running.length ? (
               <span
                 className={`absolute flex gap-0.5 ${os.mobile ? "bottom-0 left-1/2 -translate-x-1/2" : "left-0 top-1/2 -translate-y-1/2 flex-col"}`}
@@ -82,7 +90,7 @@ export function Dock({ onShowApps, overviewOpen }: { onShowApps: () => void; ove
         aria-label="Show Applications"
         title="Show Applications"
         onClick={onShowApps}
-        className={`os-dock-item group relative grid shrink-0 place-items-center rounded-xl text-white ${os.mobile ? "h-11 w-11" : "h-12 w-12"} ${overviewOpen ? "bg-white/15" : "hover:bg-white/10"}`}
+        className={`os-dock-item group relative grid shrink-0 place-items-center rounded-xl text-white ${os.mobile ? "h-10 w-10 min-[400px]:h-11 min-[400px]:w-11" : "h-12 w-12"} ${overviewOpen ? "bg-white/15" : "hover:bg-white/10"}`}
       >
         <Glyph.Grid className="h-6 w-6" />
         {os.mobile ? null : <span className="os-tooltip">Show Applications</span>}

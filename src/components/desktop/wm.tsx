@@ -130,6 +130,8 @@ export type OS = {
   activeId: string | undefined;
   area: Rect;
   mobile: boolean;
+  insets: { top: number; bottom: number };
+  keyboardOpen: boolean;
   open: (app: AppId, props?: Record<string, unknown>) => void;
   openPath: (path: string, opts?: { with?: AppId }) => void;
   openRoute: (route: string) => void;

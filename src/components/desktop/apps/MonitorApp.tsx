@@ -111,7 +111,7 @@ export function MonitorApp() {
   };
 
   return (
-    <div className="flex h-full flex-col bg-[var(--os-surface)] text-[13px]">
+    <div className="@container flex h-full flex-col bg-[var(--os-surface)] text-[13px]">
       <div className="flex h-11 shrink-0 items-center justify-center gap-1 border-b border-[var(--os-border)]">
         {(["processes", "resources"] as const).map((t) => (
           <button
@@ -132,7 +132,7 @@ export function MonitorApp() {
                 <tr className="border-b border-[var(--os-border)]">
                   <th className="px-3 py-2 font-medium">Process</th>
                   <th className="px-3 py-2 font-medium">PID</th>
-                  <th className="hidden px-3 py-2 font-medium md:table-cell">Window</th>
+                  <th className="hidden px-3 py-2 font-medium @xl:table-cell">Window</th>
                   <th className="px-3 py-2 font-medium">State</th>
                   <th className="px-3 py-2 font-medium">Time</th>
                 </tr>
@@ -158,7 +158,7 @@ export function MonitorApp() {
                   >
                     <td className="px-3 py-1.5 text-[var(--os-fg)]">{p.name}</td>
                     <td className="px-3 py-1.5 text-[var(--os-muted)]">{p.pid}</td>
-                    <td className="hidden max-w-[260px] truncate px-3 py-1.5 text-[var(--os-muted)] md:table-cell">{p.title}</td>
+                    <td className="hidden max-w-[260px] truncate px-3 py-1.5 text-[var(--os-muted)] @xl:table-cell">{p.title}</td>
                     <td className="px-3 py-1.5 text-[var(--os-muted)]">{p.state}</td>
                     <td className="px-3 py-1.5 text-[var(--os-muted)]">{fmt(p.time)}</td>
                   </tr>

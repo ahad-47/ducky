@@ -66,10 +66,10 @@ export function ContextMenu({ x, y, items, onClose }: { x: number; y: number; it
               onClose();
               item.onClick();
             }}
-            className={`flex w-full items-center justify-between gap-6 rounded-md px-3 py-1.5 text-left text-[13px] outline-none hover:bg-white/10 focus:bg-white/10 disabled:opacity-40 disabled:hover:bg-transparent ${item.danger ? "text-[#ff8f8f]" : "text-[var(--os-fg)]"}`}
+            className={`flex w-full items-center justify-between gap-6 rounded-md px-3 py-1.5 text-left text-[13px] pointer-coarse:py-3 pointer-coarse:text-[15px] outline-none hover:bg-white/10 focus:bg-white/10 disabled:opacity-40 disabled:hover:bg-transparent ${item.danger ? "text-[#ff8f8f]" : "text-[var(--os-fg)]"}`}
           >
             {item.label}
-            {item.hint ? <span className="text-[11.5px] text-[var(--os-muted)]">{item.hint}</span> : null}
+            {item.hint ? <span className="text-[11.5px] text-[var(--os-muted)] pointer-coarse:hidden">{item.hint}</span> : null}
           </button>
         ),
       )}

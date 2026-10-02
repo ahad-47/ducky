@@ -65,8 +65,12 @@ export function DesktopIcons() {
     return [home, ...files, bin];
   }, [fs]);
 
+  // Phones: icons fill the width evenly, row by row, like a home screen.
+  const cols = mobile
+    ? Math.max(3, Math.floor((area.w - 16) / 84))
+    : Math.max(1, Math.floor((area.w - 16) / CELL_W));
+  const cellW = mobile ? (area.w - 16) / cols : CELL_W;
   const rows = Math.max(1, Math.floor((area.h - 16) / CELL_H));
-  const cols = Math.max(1, Math.floor((area.w - 16) / CELL_W));
 
   // Resolve every item to a cell: saved positions first, then fill gaps in
   // column-major order like a file-manager desktop.
@@ -74,7 +78,8 @@ export function DesktopIcons() {
     const taken = new Set<string>();
     const out = new Map<string, Cell>();
     for (const it of items) {
-      const c = saved[it.key];
+      // Positions dragged on a large screen do not carry over to a phone grid.
+      const c = mobile ? undefined : saved[it.key];
       if (c && c[0] < cols && c[1] < rows && !taken.has(`${c[0]},${c[1]}`)) {
         out.set(it.key, c);
         taken.add(`${c[0]},${c[1]}`);
@@ -92,8 +97,9 @@ export function DesktopIcons() {
           continue;
         }
       }
-      while (taken.has(`${Math.floor(cursor / rows)},${cursor % rows}`)) cursor++;
-      const c: Cell = [Math.floor(cursor / rows), cursor % rows];
+      const cellFor = (n: number): Cell => (mobile ? [n % cols, Math.floor(n / cols)] : [Math.floor(n / rows), n % rows]);
+      while (taken.has(cellFor(cursor).join(","))) cursor++;
+      const c = cellFor(cursor);
       out.set(it.key, c);
       taken.add(`${c[0]},${c[1]}`);
     }
@@ -108,7 +114,7 @@ export function DesktopIcons() {
   }
 
   function cellAt(clientX: number, clientY: number): Cell {
-    const c = Math.round((clientX - area.x - 8 - CELL_W / 2) / CELL_W);
+    const c = Math.round((clientX - area.x - 8 - cellW / 2) / cellW);
     const r = Math.round((clientY - area.y - 8 - CELL_H / 2) / CELL_H);
     return [Math.max(0, Math.min(cols - 1, c)), Math.max(0, Math.min(rows - 1, r))];
   }
@@ -161,7 +167,7 @@ export function DesktopIcons() {
       if (!moved) return;
       const origin = placed.get(it.key)!;
       const dropCell = cellAt(
-        area.x + 8 + origin[0] * CELL_W + CELL_W / 2 + ev.clientX - sx,
+        area.x + 8 + origin[0] * cellW + cellW / 2 + ev.clientX - sx,
         area.y + 8 + origin[1] * CELL_H + CELL_H / 2 + ev.clientY - sy,
       );
       const target = itemAtCell(dropCell);
@@ -213,9 +219,9 @@ export function DesktopIcons() {
       const hit = new Set<string>();
       for (const it of items) {
         const c = placed.get(it.key)!;
-        const ix = area.x + 8 + c[0] * CELL_W;
+        const ix = area.x + 8 + c[0] * cellW;
         const iy = area.y + 8 + c[1] * CELL_H;
-        if (ix + CELL_W - 12 > left && ix + 12 < right && iy + CELL_H - 12 > top && iy + 8 < bottom) hit.add(it.key);
+        if (ix + cellW - 12 > left && ix + 12 < right && iy + CELL_H - 12 > top && iy + 8 < bottom) hit.add(it.key);
       }
       setSelected(hit);
     };
@@ -345,9 +351,9 @@ export function DesktopIcons() {
             data-desktop-icon={it.key}
             className={`os-icon absolute flex flex-col items-center gap-1 rounded-lg px-1 pb-1 pt-2 ${isSel ? "os-icon-selected" : ""} ${offset ? "pointer-events-none opacity-80" : ""}`}
             style={{
-              left: area.x + 8 + c[0] * CELL_W + (offset?.dx ?? 0),
+              left: area.x + 8 + c[0] * cellW + (offset?.dx ?? 0),
               top: area.y + 8 + c[1] * CELL_H + (offset?.dy ?? 0),
-              width: CELL_W - 6,
+              width: cellW - 6,
               zIndex: offset ? 5 : 1,
             }}
             onPointerDown={(e) => onIconPointerDown(e, it)}

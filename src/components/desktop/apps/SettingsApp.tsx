@@ -20,24 +20,24 @@ export function SettingsApp() {
   }, [section, win.id]);
 
   return (
-    <div className="flex h-full bg-[var(--os-surface)] text-[13.5px]">
-      <nav className="w-40 shrink-0 space-y-0.5 border-r border-[var(--os-border)] bg-black/15 p-2 sm:w-48">
+    <div className="@container flex h-full flex-col bg-[var(--os-surface)] text-[13.5px] @xl:flex-row">
+      <nav className="flex shrink-0 gap-1 overflow-x-auto border-b border-[var(--os-border)] bg-black/15 p-2 [scrollbar-width:none] @xl:block @xl:w-48 @xl:space-y-0.5 @xl:border-b-0 @xl:border-r">
         {sections.map((s) => (
           <button
             key={s}
             type="button"
             onClick={() => setSection(s)}
-            className={`block w-full rounded-md px-3 py-2 text-left ${section === s ? "bg-[var(--os-accent-soft)] text-[var(--os-fg)]" : "text-[var(--os-muted)] hover:bg-white/5"}`}
+            className={`shrink-0 whitespace-nowrap rounded-md px-3 py-2 text-left @xl:block @xl:w-full ${section === s ? "bg-[var(--os-accent-soft)] text-[var(--os-fg)]" : "text-[var(--os-muted)] hover:bg-white/5"}`}
           >
             {s}
           </button>
         ))}
       </nav>
-      <div className="min-w-0 flex-1 overflow-y-auto p-6">
+      <div className="min-h-0 min-w-0 flex-1 overflow-y-auto p-4 @xl:p-6">
         {section === "Appearance" ? (
           <>
             <h2 className="os-h">Background</h2>
-            <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 @2xl:grid-cols-3">
               {wallpapers.map((w) => (
                 <button
                   key={w.id}
