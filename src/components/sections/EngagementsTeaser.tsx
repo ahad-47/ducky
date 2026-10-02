@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/SiteLink";
 import { Section } from "@/components/ui/Container";
 import { SecondaryLink } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/PageHeader";
@@ -15,7 +15,7 @@ export function EngagementsTeaser() {
       <ScrollReveal as="ul" className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
         {facts.engagements.map((engagement, i) => (
           <li key={engagement.name}>
-            <Link prefetch={false}
+            <Link
               href={`/engagements#${slugify(engagement.name)}`}
               className="glass group flex h-full flex-col gap-3 rounded-[var(--radius-sm)] p-7 transition-colors duration-[160ms] hover:border-accent/60 hover:bg-white/[0.08]"
             >

@@ -13,7 +13,14 @@ export function proxy(request: NextRequest) {
   headers.delete("x-os-embed");
   if (embed) headers.set("x-os-embed", "1");
 
-  return NextResponse.next({ request: { headers } });
+  const response = NextResponse.next({ request: { headers } });
+  // Pages are rendered per request (desktop or bare page from the same URL).
+  // Next already sends Cache-Control: private, no-store; these say the same
+  // to CDNs that read their own header instead (Hostinger's sits in front).
+  response.headers.set("CDN-Cache-Control", "no-store");
+  response.headers.set("Cloudflare-CDN-Cache-Control", "no-store");
+  response.headers.set("Surrogate-Control", "no-store");
+  return response;
 }
 
 export const config = {

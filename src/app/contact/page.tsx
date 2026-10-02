@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/SiteLink";
 import { Section } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Card } from "@/components/ui/Card";
@@ -47,7 +47,7 @@ export default function ContactPage() {
               <ul>
                 {related.map((r) => (
                   <li key={r.href}>
-                    <Link prefetch={false}
+                    <Link
                       href={r.href}
                       className="group flex items-center gap-3 rounded-[var(--radius-xs)] px-4 py-3 text-[15.5px] text-ink hover:bg-white/5"
                     >

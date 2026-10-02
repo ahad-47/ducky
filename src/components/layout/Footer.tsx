@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/SiteLink";
 import { facts } from "@/content/facts";
 import { Logo } from "@/components/ui/Logo";
 
@@ -54,7 +54,7 @@ export function Footer() {
               <ul className="mt-4 flex flex-col gap-3">
                 {column.links.map((link) => (
                   <li key={link.href}>
-                    <Link prefetch={false}
+                    <Link
                       href={link.href}
                       className="text-[15px] text-ink-soft hover:text-accent-text"
                     >

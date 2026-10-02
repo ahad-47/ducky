@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/SiteLink";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
 const baseClass =
@@ -22,7 +22,7 @@ export function PrimaryButton({
 }: PrimaryButtonProps) {
   if (href) {
     return (
-      <Link prefetch={false} href={href} className={`${primaryClass} ${className}`}>
+      <Link href={href} className={`${primaryClass} ${className}`}>
         {children}
       </Link>
     );
@@ -46,7 +46,7 @@ export function SecondaryLink({
   children,
 }: SecondaryLinkProps) {
   return (
-    <Link prefetch={false} href={href} className={`${secondaryClass} ${className}`}>
+    <Link href={href} className={`${secondaryClass} ${className}`}>
       {children}
     </Link>
   );

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/SiteLink";
 import { Section } from "@/components/ui/Container";
 import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
 import { Badge, Card } from "@/components/ui/Card";
@@ -24,7 +24,6 @@ export default function ScannerPage() {
             {scannerCopy.status}
           </Badge>
           <Link
-            prefetch={false}
             href="/roadmap"
             className="inline-flex items-center gap-2 text-[15px] font-medium text-ink underline decoration-accent underline-offset-4"
           >

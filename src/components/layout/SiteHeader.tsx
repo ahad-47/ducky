@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/ui/SiteLink";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/ui/Logo";
@@ -31,7 +31,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[var(--content-max)] items-center gap-6 px-[var(--side-padding)]">
-        <Link prefetch={false} href="/" className="flex shrink-0 items-center gap-2.5 text-ink" aria-label="SkilledScan home">
+        <Link href="/" className="flex shrink-0 items-center gap-2.5 text-ink" aria-label="SkilledScan home">
           <Logo markClassName="h-7 w-7 text-accent-text" textClassName="text-[18px]" />
         </Link>
 
@@ -39,7 +39,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
           {links.map((link) => {
             const current = pathname === link.href;
             return (
-              <Link prefetch={false}
+              <Link
                 key={link.href}
                 href={link.href}
                 aria-current={current ? "page" : undefined}
@@ -60,7 +60,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
               Client sign in
             </a>
           ) : null}
-          <Link prefetch={false}
+          <Link
             href="/contact"
             className="inline-flex h-9 items-center rounded-[var(--radius-xs)] bg-accent px-4 text-[14px] font-semibold text-accent-ink transition-colors duration-[160ms] hover:bg-accent-hover"
           >
@@ -77,7 +77,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
         {links.map((link) => {
           const current = pathname === link.href;
           return (
-            <Link prefetch={false}
+            <Link
               key={link.href}
               href={link.href}
               aria-current={current ? "page" : undefined}

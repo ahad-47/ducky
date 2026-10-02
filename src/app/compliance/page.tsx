@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "@/components/ui/SiteLink";
 import { Section } from "@/components/ui/Container";
 import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
 import { Badge, Card } from "@/components/ui/Card";
@@ -71,7 +71,7 @@ export default function CompliancePage() {
             <h2 className="mt-4 font-[family-name:var(--font-serif)] text-h3 text-ink">{complianceCopy.roadmap.h2}</h2>
             <p className="mt-2 text-[16.5px] text-ink-soft">{complianceCopy.roadmap.body}</p>
           </div>
-          <Link prefetch={false}
+          <Link
             href="/roadmap"
             className="inline-flex shrink-0 items-center gap-2 font-medium text-ink underline decoration-accent underline-offset-4"
           >
