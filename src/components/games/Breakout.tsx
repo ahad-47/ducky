@@ -1,5 +1,6 @@
 "use client";
 
+import { roundRectPath } from "@/components/games/draw";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { GameHud, Overlay, useBest, useSquareCanvas } from "@/components/games/shared";
 
@@ -71,13 +72,11 @@ export function Breakout() {
     for (const b of s.bricks) {
       if (!b.alive) continue;
       ctx.fillStyle = rowColors[b.row];
-      ctx.beginPath();
-      ctx.roundRect(b.x, b.y, b.w, b.h, 4);
+      roundRectPath(ctx, b.x, b.y, b.w, b.h, 4);
       ctx.fill();
     }
     ctx.fillStyle = "#f4f6fb";
-    ctx.beginPath();
-    ctx.roundRect(s.paddle, WORLD - 24, PADDLE_W, PADDLE_H, 5);
+    roundRectPath(ctx, s.paddle, WORLD - 24, PADDLE_W, PADDLE_H, 5);
     ctx.fill();
     const bx = state === "playing" ? s.ball.x : s.paddle + PADDLE_W / 2;
     const by = state === "playing" ? s.ball.y : WORLD - 24 - BALL_R - 2;

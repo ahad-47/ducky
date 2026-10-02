@@ -48,13 +48,20 @@ const appViews: Record<AppId, () => React.ReactNode> = {
   monitor: () => <MonitorApp />,
 };
 
+// Some mobile browsers (notably in-app webviews) report 0 for the window or
+// visual viewport size during the first moments of loading. Fall back to
+// the document and screen sizes so the shell never renders at zero height.
 function readViewport() {
   const vv = window.visualViewport;
+  const doc = document.documentElement;
+  const w = window.innerWidth || doc.clientWidth || window.screen.width;
+  const layoutH = window.innerHeight || doc.clientHeight || window.screen.height;
+  const h = vv && vv.height > 0 ? vv.height : layoutH;
   return {
-    w: window.innerWidth,
-    h: Math.round(vv?.height ?? window.innerHeight),
-    top: Math.round(vv?.offsetTop ?? 0),
-    layoutH: window.innerHeight,
+    w,
+    h: Math.round(h),
+    top: Math.round(vv && vv.height > 0 ? vv.offsetTop : 0),
+    layoutH,
   };
 }
 
@@ -119,9 +126,18 @@ export function Desktop() {
     const measure = () => setViewport(readViewport());
     const vv = window.visualViewport;
     window.addEventListener("resize", measure);
+    window.addEventListener("orientationchange", measure);
+    window.addEventListener("load", measure);
     vv?.addEventListener("resize", measure);
     vv?.addEventListener("scroll", measure);
+    // Re-measure shortly after mount in case the first reading was not final.
+    const t1 = window.setTimeout(measure, 300);
+    const t2 = window.setTimeout(measure, 1200);
     return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+      window.removeEventListener("orientationchange", measure);
+      window.removeEventListener("load", measure);
       window.removeEventListener("resize", measure);
       vv?.removeEventListener("resize", measure);
       vv?.removeEventListener("scroll", measure);

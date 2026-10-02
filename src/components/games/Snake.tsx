@@ -1,5 +1,6 @@
 "use client";
 
+import { roundRectPath } from "@/components/games/draw";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { DPad, GameHud, Overlay, keyToDir, useBest, useSquareCanvas, useSwipe, type Dir } from "@/components/games/shared";
 
@@ -65,8 +66,7 @@ export function Snake() {
     g.snake.forEach((s, i) => {
       ctx.fillStyle = i === 0 ? "#5eead4" : `rgba(94,234,212,${Math.max(0.35, 0.9 - i * 0.03)})`;
       const pad = i === 0 ? 1 : 2;
-      ctx.beginPath();
-      ctx.roundRect(s.x * c + pad, s.y * c + pad, c - pad * 2, c - pad * 2, c * 0.25);
+      roundRectPath(ctx, s.x * c + pad, s.y * c + pad, c - pad * 2, c - pad * 2, c * 0.25);
       ctx.fill();
     });
   }, [canvasRef, size]);
