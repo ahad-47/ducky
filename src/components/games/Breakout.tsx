@@ -2,7 +2,7 @@
 
 import { roundRectPath } from "@/components/games/draw";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { GameHud, Overlay, useBest, useSquareCanvas } from "@/components/games/shared";
+import { GameHud, Overlay, useBest, useKeyGuard, useSquareCanvas } from "@/components/games/shared";
 
 // All game maths runs in a fixed 400x400 world, scaled to the canvas.
 const WORLD = 400;
@@ -31,6 +31,7 @@ export function Breakout() {
   const [score, setScore] = useState(0);
   const [lives, setLives] = useState(3);
   const [best, submitBest] = useBest("breakout");
+  const keyOk = useKeyGuard();
   const g = useRef({
     paddle: WORLD / 2 - PADDLE_W / 2,
     ball: { x: WORLD / 2, y: WORLD - 40, vx: 0, vy: 0 },
@@ -154,6 +155,7 @@ export function Breakout() {
   useEffect(() => {
     const set = (e: KeyboardEvent, down: boolean) => {
       if (state !== "playing" && state !== "serve") return;
+      if (down && !keyOk(e)) return;
       if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A") g.current.keys.left = down;
       else if (e.key === "ArrowRight" || e.key === "d" || e.key === "D") g.current.keys.right = down;
       else if (down && e.key === " " && state === "serve") serve();
@@ -169,7 +171,7 @@ export function Breakout() {
       window.removeEventListener("keydown", kd);
       window.removeEventListener("keyup", ku);
     };
-  }, [state, serve, draw]);
+  }, [state, serve, draw, keyOk]);
 
   // Mouse or finger moves the paddle directly.
   function pointerMove(e: React.PointerEvent) {

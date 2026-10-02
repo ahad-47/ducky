@@ -2,7 +2,7 @@
 
 import { roundRectPath } from "@/components/games/draw";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { DPad, GameHud, Overlay, keyToDir, useBest, useSquareCanvas, useSwipe, type Dir } from "@/components/games/shared";
+import { DPad, GameHud, Overlay, keyToDir, useBest, useKeyGuard, useSquareCanvas, useSwipe, type Dir } from "@/components/games/shared";
 
 const N = 18;
 const START_MS = 140;
@@ -23,6 +23,7 @@ export function Snake() {
   const [state, setState] = useState<"ready" | "playing" | "paused" | "over">("ready");
   const [score, setScore] = useState(0);
   const [best, submitBest] = useBest("snake");
+  const keyOk = useKeyGuard();
   const game = useRef({ snake: [{ x: 8, y: 9 }, { x: 7, y: 9 }, { x: 6, y: 9 }] as P[], dir: "right" as Dir, queue: [] as Dir[], food: { x: 13, y: 9 } as P, score: 0 });
 
   const reset = useCallback(() => {
@@ -100,6 +101,7 @@ export function Snake() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (!keyOk(e)) return;
       const d = keyToDir[e.key];
       if (d && state === "playing") {
         e.preventDefault();
@@ -111,7 +113,7 @@ export function Snake() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [state, turn]);
+  }, [state, turn, keyOk]);
 
   const swipe = useSwipe(turn);
 

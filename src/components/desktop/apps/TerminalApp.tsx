@@ -46,6 +46,7 @@ const commandHelp: [string, string][] = [
   ["tree [dir]", "show a directory tree"],
   ["ps / kill <pid>", "list / close running windows"],
   ["neofetch", "system information"],
+  ["snake, 2048, minesweeper, memory, breakout", "play a game"],
   ["whoami, hostname, uname, date, uptime", ""],
   ["history, clear, exit", ""],
   ["reboot, poweroff", "power actions"],
@@ -92,6 +93,12 @@ function fmtUptime(ms: number) {
 }
 
 const appCommands: Record<string, AppId> = {
+  snake: "snake",
+  "2048": "game2048",
+  minesweeper: "minesweeper",
+  mines: "minesweeper",
+  memory: "memory",
+  breakout: "breakout",
   browser: "browser",
   firefox: "browser",
   web: "browser",

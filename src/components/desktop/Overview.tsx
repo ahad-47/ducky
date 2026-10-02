@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { apps, type AppId } from "@/components/desktop/apps/registry";
+import { apps, gameApps, type AppId } from "@/components/desktop/apps/registry";
 import { DESKTOP, HOME, getFs, pages, prettyPath, type FsNode } from "@/components/desktop/fs";
 import { AppIcon, FileIcon, Glyph } from "@/components/desktop/icons";
 import { useOS } from "@/components/desktop/wm";
@@ -147,10 +147,21 @@ export function Overview({ onClose }: { onClose: () => void }) {
             </div>
           ) : null}
           <div className="mx-auto grid max-w-4xl grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6" onPointerDown={(e) => e.stopPropagation()}>
-            {appResults.map((r) => (
+            {appResults.filter((r) => !apps[r.key.slice(4) as AppId].game).map((r) => (
               <button key={r.key} type="button" onClick={() => launch(r)} className="os-grid-item">
                 {r.icon}
                 <span>{r.label}</span>
+              </button>
+            ))}
+          </div>
+          <p className="mx-auto mb-3 mt-10 max-w-4xl text-center text-[12px] font-semibold uppercase tracking-wider text-white/50">
+            Games
+          </p>
+          <div className="mx-auto grid max-w-4xl grid-cols-3 gap-2 sm:grid-cols-5" onPointerDown={(e) => e.stopPropagation()}>
+            {gameApps.map((id) => (
+              <button key={id} type="button" onClick={() => launch(appResults.find((r) => r.key === `app:${id}`)!)} className="os-grid-item">
+                <AppIcon app={id} size={56} />
+                <span>{apps[id].name}</span>
               </button>
             ))}
           </div>

@@ -6,6 +6,55 @@ type IconProps = { size?: number; className?: string };
 export function AppIcon({ app, size = 48, className }: IconProps & { app: AppId }) {
   const common = { width: size, height: size, viewBox: "0 0 48 48", className, "aria-hidden": true } as const;
   switch (app) {
+    case "snake":
+      return (
+        <svg {...common}>
+          <rect x="4" y="4" width="40" height="40" rx="10" fill="#0f3d36" />
+          <path d="M12 34h10a5 5 0 0 0 5-5v-6a5 5 0 0 1 5-5h4" fill="none" stroke="#5eead4" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="36" cy="18" r="3.4" fill="#5eead4" />
+          <circle cx="15" cy="15" r="3" fill="#ff6b6b" />
+        </svg>
+      );
+    case "game2048":
+      return (
+        <svg {...common}>
+          <rect x="4" y="4" width="40" height="40" rx="10" fill="#ff9f55" />
+          <text x="24" y="29.5" textAnchor="middle" fontSize="13.5" fontWeight="800" fill="#2b1200" fontFamily="ui-sans-serif, system-ui, sans-serif">
+            2048
+          </text>
+        </svg>
+      );
+    case "minesweeper":
+      return (
+        <svg {...common}>
+          <rect x="4" y="4" width="40" height="40" rx="10" fill="#4b5263" />
+          <g stroke="#1b1f27" strokeWidth="2.6" strokeLinecap="round">
+            <path d="M24 12v24M12 24h24M15.5 15.5l17 17M32.5 15.5l-17 17" />
+          </g>
+          <circle cx="24" cy="24" r="8" fill="#1b1f27" />
+          <circle cx="21.5" cy="21.5" r="2" fill="#f4f6fb" />
+        </svg>
+      );
+    case "memory":
+      return (
+        <svg {...common}>
+          <rect x="4" y="4" width="40" height="40" rx="10" fill="#4c3a8f" />
+          <rect x="10" y="11" width="15" height="21" rx="3" fill="#22305a" stroke="#a78bfa" strokeWidth="1.5" transform="rotate(-8 17.5 21.5)" />
+          <rect x="23" y="15" width="15" height="21" rx="3" fill="#f4f6fb" transform="rotate(8 30.5 25.5)" />
+          <path d="M30.5 20.5l-4 1.5v3c0 2.6 1.7 4.7 4 5.5 2.3-.8 4-2.9 4-5.5v-3z" fill="#5eead4" transform="rotate(8 30.5 25.5)" />
+        </svg>
+      );
+    case "breakout":
+      return (
+        <svg {...common}>
+          <rect x="4" y="4" width="40" height="40" rx="10" fill="#16203a" />
+          {["#ff6b6b", "#ffd166", "#8fa8ff"].map((c, r) =>
+            [0, 1, 2].map((k) => <rect key={`${r}${k}`} x={9.5 + k * 10.3} y={10 + r * 5.5} width="8.6" height="3.6" rx="1" fill={c} />),
+          )}
+          <circle cx="27" cy="31" r="2.6" fill="#5eead4" />
+          <rect x="15" y="36" width="16" height="3" rx="1.5" fill="#f4f6fb" />
+        </svg>
+      );
     case "browser":
       return (
         <svg {...common}>

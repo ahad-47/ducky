@@ -5,6 +5,7 @@ import { BrowserApp } from "@/components/desktop/apps/BrowserApp";
 import { CalculatorApp } from "@/components/desktop/apps/CalculatorApp";
 import { EditorApp } from "@/components/desktop/apps/EditorApp";
 import { FilesApp } from "@/components/desktop/apps/FilesApp";
+import { GameApp } from "@/components/desktop/apps/GameApp";
 import { MonitorApp } from "@/components/desktop/apps/MonitorApp";
 import type { AppId } from "@/components/desktop/apps/registry";
 import { SettingsApp } from "@/components/desktop/apps/SettingsApp";
@@ -46,6 +47,11 @@ const appViews: Record<AppId, () => React.ReactNode> = {
   editor: () => <EditorApp />,
   settings: () => <SettingsApp />,
   monitor: () => <MonitorApp />,
+  snake: () => <GameApp game="snake" />,
+  game2048: () => <GameApp game="game2048" />,
+  minesweeper: () => <GameApp game="minesweeper" />,
+  memory: () => <GameApp game="memory" />,
+  breakout: () => <GameApp game="breakout" />,
 };
 
 // Some mobile browsers (notably in-app webviews) report 0 for the window or
@@ -241,8 +247,10 @@ export function Desktop() {
     setPowerState("on");
     if (!ready.current) {
       ready.current = true;
+      // A plain visit starts on the empty desktop. A direct link to a page
+      // (/method, /contact…) still opens that page so shared links work.
       const route = window.location.pathname + window.location.search;
-      open("browser", { route });
+      if (window.location.pathname !== "/") open("browser", { route });
       try {
         if (!window.localStorage.getItem("skilledscan-os:welcomed")) {
           window.localStorage.setItem("skilledscan-os:welcomed", "1");
@@ -251,8 +259,8 @@ export function Desktop() {
               notify(
                 "Welcome to SkilledScan OS",
                 isTouchDevice()
-                  ? "Every page is an .html file on the desktop. Tap one to open it, long-press for options, and double-tap a text field to type."
-                  : "Every page is an .html file on the desktop. Press Ctrl+Alt+T for a terminal.",
+                  ? "Every page is an .html file on the desktop: tap one to open it. Games are under Show Applications. Long-press for options; double-tap a text field to type."
+                  : "Every page is an .html file on the desktop: double-click one to open it. Games are under Show Applications. Ctrl+Alt+T opens a terminal.",
               ),
             900,
           );
@@ -298,6 +306,15 @@ export function Desktop() {
       window.removeEventListener("message", onMessage);
     };
   }, [open]);
+
+  // With no page open, the address bar goes back to the bare desktop URL,
+  // so a reload starts on the desktop instead of the last page viewed.
+  const hasBrowser = wm.wins.some((w) => w.app === "browser");
+  useEffect(() => {
+    if (!hasBrowser && powerState === "on" && window.location.pathname !== "/") {
+      window.history.replaceState(null, "", "/");
+    }
+  }, [hasBrowser, powerState]);
 
   // Accent colour drives the OS chrome through CSS variables.
   useEffect(() => {

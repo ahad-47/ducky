@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 // Best score per game, kept in this browser only.
 export function useBest(key: string, lowerIsBetter = false) {
@@ -168,5 +168,23 @@ export function DPad({ onDir }: { onDir: (d: Dir) => void }) {
       </button>
       <span />
     </div>
+  );
+}
+
+// Whether this game should react to the keyboard. On the website it always
+// does; on the desktop only while its window is the active one, so arrow
+// keys typed into the terminal or another window are left alone.
+export const GameFocusContext = createContext(true);
+
+export function useKeyGuard() {
+  const active = useContext(GameFocusContext);
+  return useCallback(
+    (e: KeyboardEvent) => {
+      if (!active) return false;
+      const t = e.target as HTMLElement | null;
+      if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return false;
+      return true;
+    },
+    [active],
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { GameHud, Overlay, keyToDir, useBest, useSwipe, type Dir } from "@/components/games/shared";
+import { GameHud, Overlay, keyToDir, useBest, useKeyGuard, useSwipe, type Dir } from "@/components/games/shared";
 
 type Board = number[]; // 16 cells, row-major, 0 = empty
 
@@ -75,6 +75,7 @@ export function Game2048() {
   const [won, setWon] = useState(false);
   const [keepGoing, setKeepGoing] = useState(false);
   const [best, submitBest] = useBest("2048");
+  const keyOk = useKeyGuard();
 
   const restart = useCallback(() => {
     setBoard(fresh());
@@ -104,6 +105,7 @@ export function Game2048() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
+      if (!keyOk(e)) return;
       const d = keyToDir[e.key];
       if (!d) return;
       // Only claim the arrow keys while the board is on screen.
@@ -115,7 +117,7 @@ export function Game2048() {
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [play]);
+  }, [play, keyOk]);
 
   const swipe = useSwipe(play);
 
