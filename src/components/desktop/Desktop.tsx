@@ -357,9 +357,15 @@ export function Desktop() {
         />
         <Panel overviewOpen={overview} onActivities={() => setOverview((v) => !v)} />
 
-        <div className="pointer-events-none absolute left-1/2 top-11 z-[6000] flex w-[min(380px,calc(100vw-32px))] -translate-x-1/2 flex-col gap-2">
+        {/* Notifications never take clicks: they used to sit on top of a
+            maximized window's minimize and close buttons on phones. On phones
+            they also appear at the bottom, above the dock. */}
+        <div
+          className="pointer-events-none absolute left-1/2 z-[6000] flex w-[min(380px,calc(100vw-32px))] -translate-x-1/2 flex-col gap-2"
+          style={mobile ? { bottom: (keyboardOpen ? 0 : DOCK_H + insets.bottom) + 12 } : { top: PANEL_H + insets.top + 12 }}
+        >
           {toasts.map((t) => (
-            <div key={t.id} role="status" className="os-toast pointer-events-auto px-4 py-3">
+            <div key={t.id} role="status" className="os-toast pointer-events-none px-4 py-3">
               <p className="text-[13px] font-semibold text-[var(--os-fg)]">{t.title}</p>
               {t.body ? <p className="mt-0.5 text-[12.5px] text-[var(--os-muted)]">{t.body}</p> : null}
             </div>

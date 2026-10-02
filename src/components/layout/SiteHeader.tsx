@@ -62,9 +62,10 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
           ) : null}
           <Link
             href="/contact"
-            className="inline-flex h-9 items-center rounded-[var(--radius-xs)] bg-accent px-4 text-[14px] font-semibold text-accent-ink transition-colors duration-[160ms] hover:bg-accent-hover"
+            className="inline-flex h-9 shrink-0 items-center whitespace-nowrap rounded-[var(--radius-xs)] bg-accent px-3.5 sm:px-4 text-[14px] font-semibold text-accent-ink transition-colors duration-[160ms] hover:bg-accent-hover"
           >
-            Request early access
+            <span className="sm:hidden">Early access</span>
+            <span className="hidden sm:inline">Request early access</span>
           </Link>
         </div>
       </div>
