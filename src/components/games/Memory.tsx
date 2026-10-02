@@ -89,12 +89,12 @@ export function Memory() {
                 className="relative block h-full w-full transition-transform duration-300 [transform-style:preserve-3d]"
                 style={{ transform: shown ? "rotateY(180deg)" : "none" }}
               >
-                <span className="absolute inset-0 grid place-items-center rounded-xl border border-rule bg-[#1b2540] [backface-visibility:hidden]">
+                <span className="absolute inset-0 grid place-items-center rounded-xl border border-rule bg-[#1c1d21] [backface-visibility:hidden]">
                   <span className="h-3 w-3 rounded-full border-2 border-accent/60" />
                 </span>
                 <span
                   className={`absolute inset-0 grid place-items-center rounded-xl border [backface-visibility:hidden] [transform:rotateY(180deg)] ${
-                    c.matched ? "border-severity-low/50 bg-severity-low/10" : "border-accent/50 bg-[#22305a]"
+                    c.matched ? "border-severity-low/50 bg-severity-low/10" : "border-accent/50 bg-[#2a1c16]"
                   }`}
                   style={{ color: s.color }}
                 >

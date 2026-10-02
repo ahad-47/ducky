@@ -97,7 +97,12 @@ export function Desktop() {
   const [settings, setSettings] = useState<Settings>(() => {
     try {
       const raw = window.localStorage.getItem(SETTINGS_KEY);
-      if (raw) return { ...defaultSettings, ...(JSON.parse(raw) as Partial<Settings>) };
+      if (raw) {
+        const saved = JSON.parse(raw) as Partial<Settings>;
+        // The old default blue accent moves to the new brand orange.
+        if (saved.accent === "#3d5fde") delete saved.accent;
+        return { ...defaultSettings, ...saved };
+      }
     } catch {}
     return defaultSettings;
   });

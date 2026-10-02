@@ -2,32 +2,25 @@ import { Container } from "@/components/ui/Container";
 import { homeCopy } from "@/content/copy/home";
 import { facts } from "@/content/facts";
 
-const stats = [
-  { value: String(facts.signalResult.raw), label: homeCopy.stats.raw },
-  { value: String(facts.signalResult.verified), label: homeCopy.stats.confirmed },
-  { value: String(facts.method.length), label: homeCopy.stats.phases },
-  { value: facts.globalReach.countries, label: homeCopy.stats.countries },
-];
-
+// One editorial figure from a real scan, instead of a row of stat tiles.
 export function ProofLine() {
   return (
     <section className="pb-[var(--section-padding)]">
       <Container>
-        <div className="glass overflow-hidden rounded-[var(--radius-paper)]">
-          <dl className="grid grid-cols-2 divide-white/10 md:grid-cols-4 md:divide-x">
-            {stats.map((s, i) => (
-              <div key={s.label} className={`p-6 sm:p-8 ${i < 2 ? "border-b border-white/10 md:border-b-0" : ""} ${i % 2 === 0 ? "border-r border-white/10 md:border-r-0" : ""}`}>
-                <dt className="sr-only">{s.label}</dt>
-                <dd>
-                  <span className="block font-[family-name:var(--font-serif)] text-[clamp(2.25rem,4vw,3.25rem)] leading-none text-ink">
-                    {s.value}
-                  </span>
-                  <span className="mt-3 block text-[14.5px] leading-snug text-ink-soft">{s.label}</span>
-                </dd>
-              </div>
-            ))}
-          </dl>
-          <p className="border-t border-white/10 px-6 py-5 text-[16px] text-ink-soft sm:px-8">{homeCopy.proofLine}</p>
+        <div className="grid grid-cols-1 items-end gap-8 border-y border-rule py-10 md:grid-cols-[auto_1fr] md:gap-16">
+          <div>
+            <p className="text-[14px] text-ink-soft">{homeCopy.proof.label}</p>
+            <p className="mt-3 flex items-baseline gap-4 font-[family-name:var(--font-serif)] font-medium leading-none tracking-[-0.04em]">
+              <span className="text-[clamp(3rem,7vw,5.5rem)] text-ink-soft/70">{facts.signalResult.raw}</span>
+              <span aria-hidden className="text-[clamp(1.5rem,3vw,2.5rem)] text-ink-soft/50">→</span>
+              <span className="text-[clamp(3rem,7vw,5.5rem)] text-accent">{facts.signalResult.verified}</span>
+            </p>
+            <p className="mt-3 flex gap-10 text-[14px] text-ink-soft">
+              <span>{homeCopy.proof.raw}</span>
+              <span>{homeCopy.proof.confirmed}</span>
+            </p>
+          </div>
+          <p className="measure text-[18px] leading-relaxed text-ink-soft">{homeCopy.proof.body}</p>
         </div>
       </Container>
     </section>

@@ -55,17 +55,17 @@ function canMove(b: Board) {
 }
 
 const tileStyle: Record<number, string> = {
-  2: "bg-[#1f2a44] text-ink",
-  4: "bg-[#25335a] text-ink",
-  8: "bg-[#2d4bb8] text-white",
-  16: "bg-[#3d5fde] text-white",
-  32: "bg-[#567aff] text-white",
-  64: "bg-[#2fa597] text-white",
-  128: "bg-[#38c2b1] text-[#06221e]",
-  256: "bg-[#5eead4] text-[#06221e]",
-  512: "bg-[#ffd166] text-[#2b1e00]",
-  1024: "bg-[#ff9f55] text-[#2b1200]",
-  2048: "bg-[#ff6b6b] text-white",
+  2: "bg-[#1f2023] text-ink",
+  4: "bg-[#2a2b2f] text-ink",
+  8: "bg-[#3d2a20] text-[#ffd2bd]",
+  16: "bg-[#5c2f1b] text-[#ffe1d3]",
+  32: "bg-[#8a3816] text-white",
+  64: "bg-[#c2461a] text-white",
+  128: "bg-[#ff5a1f] text-[#0c0d0f]",
+  256: "bg-[#ff7a45] text-[#0c0d0f]",
+  512: "bg-[#f2c94c] text-[#0c0d0f]",
+  1024: "bg-[#ffdf8a] text-[#0c0d0f]",
+  2048: "bg-[#eeebe5] text-[#0c0d0f]",
 };
 
 export function Game2048() {
@@ -136,14 +136,14 @@ export function Game2048() {
       />
       <div
         id="game-2048"
-        className="relative mx-auto grid aspect-square w-full max-w-[420px] touch-none grid-cols-4 gap-2 rounded-[var(--radius-xs)] bg-[#0e1526] p-2"
+        className="relative mx-auto grid aspect-square w-full max-w-[420px] touch-none grid-cols-4 gap-2 rounded-[var(--radius-xs)] bg-[#111214] p-2"
         {...swipe}
       >
         {board.map((v, i) => (
           <div
             key={i}
             className={`grid place-items-center rounded-lg font-[family-name:var(--font-logo)] font-extrabold transition-colors duration-100 ${
-              v ? tileStyle[v] ?? "bg-[#ff6b6b] text-white" : "bg-white/[0.04]"
+              v ? tileStyle[v] ?? "bg-[#eeebe5] text-[#0c0d0f]" : "bg-white/[0.04]"
             } ${v >= 1024 ? "text-[clamp(16px,5vw,26px)]" : v >= 128 ? "text-[clamp(18px,6vw,30px)]" : "text-[clamp(20px,7vw,34px)]"}`}
           >
             {v || ""}

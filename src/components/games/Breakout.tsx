@@ -11,7 +11,7 @@ const ROWS = 5;
 const PADDLE_W = 70;
 const PADDLE_H = 10;
 const BALL_R = 6;
-const rowColors = ["#ff6b6b", "#ff9f55", "#ffd166", "#5eead4", "#8fa8ff"];
+const rowColors = ["#ff5a1f", "#ff7a45", "#ff9d47", "#f2c94c", "#eeebe5"];
 
 type Brick = { x: number; y: number; w: number; h: number; alive: boolean; row: number };
 
@@ -68,7 +68,7 @@ export function Breakout() {
     const s = g.current;
     ctx.save();
     ctx.scale(k, k);
-    ctx.fillStyle = "#0e1526";
+    ctx.fillStyle = "#111214";
     ctx.fillRect(0, 0, WORLD, WORLD);
     for (const b of s.bricks) {
       if (!b.alive) continue;
@@ -76,12 +76,12 @@ export function Breakout() {
       roundRectPath(ctx, b.x, b.y, b.w, b.h, 4);
       ctx.fill();
     }
-    ctx.fillStyle = "#f4f6fb";
+    ctx.fillStyle = "#eeebe5";
     roundRectPath(ctx, s.paddle, WORLD - 24, PADDLE_W, PADDLE_H, 5);
     ctx.fill();
     const bx = state === "playing" ? s.ball.x : s.paddle + PADDLE_W / 2;
     const by = state === "playing" ? s.ball.y : WORLD - 24 - BALL_R - 2;
-    ctx.fillStyle = "#5eead4";
+    ctx.fillStyle = "#ff5a1f";
     ctx.beginPath();
     ctx.arc(bx, by, BALL_R, 0, Math.PI * 2);
     ctx.fill();

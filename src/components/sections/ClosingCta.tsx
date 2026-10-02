@@ -17,21 +17,12 @@ export function ClosingCta({
   return (
     <section className="py-[var(--section-padding)]">
       <Container>
-        <div className="relative overflow-hidden rounded-[var(--radius-paper)] border border-white/10 bg-paper-raised/60 p-8 sm:p-12">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full opacity-50 blur-[90px]"
-            style={{ background: "radial-gradient(circle, #3d5fde 0%, transparent 70%)" }}
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-28 left-1/3 h-64 w-64 rounded-full opacity-30 blur-[90px]"
-            style={{ background: "radial-gradient(circle, #5eead4 0%, transparent 70%)" }}
-          />
+        <div className="relative overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-8 sm:p-12">
+          <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
           <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div>
               <Eyebrow>Next step</Eyebrow>
-              <h2 className="mt-3 max-w-[20ch] font-[family-name:var(--font-serif)] text-display-l text-ink">{h2}</h2>
+              <h2 className="mt-2 max-w-[20ch] font-[family-name:var(--font-serif)] text-display-l font-medium tracking-[-0.03em] text-ink">{h2}</h2>
               <p className="measure mt-4 text-[17px] text-ink-soft">{body}</p>
             </div>
             <div className="flex shrink-0 flex-wrap items-center gap-6">

@@ -47,7 +47,7 @@ export function Snake() {
     const ctx = canvasRef.current?.getContext("2d");
     if (!ctx) return;
     const c = size / N;
-    ctx.fillStyle = "#0e1526";
+    ctx.fillStyle = "#111214";
     ctx.fillRect(0, 0, size, size);
     ctx.strokeStyle = "rgba(255,255,255,0.035)";
     for (let i = 1; i < N; i++) {
@@ -60,12 +60,12 @@ export function Snake() {
     }
     const g = game.current;
     // Food: a "bug" to catch.
-    ctx.fillStyle = "#ff6b6b";
+    ctx.fillStyle = "#eeebe5";
     ctx.beginPath();
     ctx.arc((g.food.x + 0.5) * c, (g.food.y + 0.5) * c, c * 0.32, 0, Math.PI * 2);
     ctx.fill();
     g.snake.forEach((s, i) => {
-      ctx.fillStyle = i === 0 ? "#5eead4" : `rgba(94,234,212,${Math.max(0.35, 0.9 - i * 0.03)})`;
+      ctx.fillStyle = i === 0 ? "#ff5a1f" : `rgba(255,90,31,${Math.max(0.35, 0.9 - i * 0.03)})`;
       const pad = i === 0 ? 1 : 2;
       roundRectPath(ctx, s.x * c + pad, s.y * c + pad, c - pad * 2, c - pad * 2, c * 0.25);
       ctx.fill();
@@ -130,7 +130,7 @@ export function Snake() {
       <div ref={wrapRef} className="relative mx-auto w-full max-w-[420px] touch-none" {...swipe}>
         <canvas ref={canvasRef} className="block rounded-[var(--radius-xs)]" aria-label="Snake board" role="img" />
         {state === "ready" ? (
-          <Overlay title="Snake" body="Catch the red bugs. Arrow keys or WASD, swipe on touch. Space pauses." action="Start" onAction={reset} />
+          <Overlay title="Snake" body="Catch the white bugs. Arrow keys or WASD, swipe on touch. Space pauses." action="Start" onAction={reset} />
         ) : state === "paused" ? (
           <Overlay title="Paused" action="Resume" onAction={() => setState("playing")} />
         ) : state === "over" ? (

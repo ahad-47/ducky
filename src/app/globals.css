@@ -1,22 +1,24 @@
 @import "tailwindcss";
 
 :root {
-  --paper: #0b1120;
-  --paper-raised: #141b2e;
-  --ink: #f4f6fb;
-  --ink-soft: #9ba8c2;
-  --rule: #243049;
-  --rule-strong: #33415f;
-  --accent: #3d5fde;
-  --accent-text: #8fa8ff;
-  --accent-ink: #ffffff;
-  --accent-hover: #567aff;
+  /* Graphite, bone and a single signal-orange accent. Deliberately not the
+     blue/purple-on-navy palette that reads as generated. */
+  --paper: #0c0d0f;
+  --paper-raised: #141518;
+  --ink: #eeebe5;
+  --ink-soft: #a29f98;
+  --rule: #24262a;
+  --rule-strong: #34363b;
+  --accent: #ff5a1f;
+  --accent-text: #ff8a5c;
+  --accent-ink: #0c0d0f;
+  --accent-hover: #ff7340;
 
-  --severity-critical: #ff6b6b;
-  --severity-high: #ff9f55;
-  --severity-medium: #ffd166;
-  --severity-low: #5eead4;
-  --severity-info: #94a3b8;
+  --severity-critical: #f0524f;
+  --severity-high: #ff9d47;
+  --severity-medium: #f2c94c;
+  --severity-low: #7ad3a8;
+  --severity-info: #9a9790;
 
   --blocked: #ff6b6b;
 
@@ -30,9 +32,10 @@
   --side-padding: clamp(20px, 5vw, 56px);
   --section-padding: clamp(64px, 9vh, 112px);
 
-  --glass-bg: rgba(255, 255, 255, 0.06);
-  --glass-bg-strong: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.12);
+  /* Surfaces are solid with hairline borders, not frosted glass. */
+  --glass-bg: #131417;
+  --glass-bg-strong: #17181c;
+  --glass-border: rgba(255, 255, 255, 0.075);
 }
 
 @theme inline {
@@ -136,15 +139,15 @@ h3 {
   .glass {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
   }
 
   .glass-strong {
     background: var(--glass-bg-strong);
     border: 1px solid var(--glass-border);
-    backdrop-filter: blur(28px);
-    -webkit-backdrop-filter: blur(28px);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.045),
+      0 24px 60px rgba(0, 0, 0, 0.45);
   }
 }
 
@@ -157,18 +160,15 @@ h3 {
   }
 }
 
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
-  50% {
-    transform: translate(4%, -6%) scale(1.08);
-  }
-}
-
-.ambient-blob {
-  animation: drift 18s ease-in-out infinite;
+/* One quiet light source at the top of each page plus a faint grid: depth
+   without the floating colour blobs. */
+.page-backdrop {
+  background:
+    radial-gradient(ellipse 70% 45% at 50% -8%, rgba(255, 138, 92, 0.09), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px) 0 0 / 56px 56px;
+  mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 75%);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 75%);
 }
 
 /* Scanner coming-soon radar. */
@@ -196,12 +196,6 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ambient-blob {
-    animation: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
@@ -216,17 +210,17 @@ h3 {
    In the components layer so Tailwind utilities on the same elements win. */
 @layer components {
   :root {
-    --os-accent: #3d5fde;
-    --os-accent-rgb: 61, 95, 222;
+    --os-accent: #ff5a1f;
+    --os-accent-rgb: 255, 90, 31;
     --os-accent-soft: rgba(var(--os-accent-rgb), 0.32);
     --os-accent-bright: color-mix(in srgb, var(--os-accent) 70%, white);
-    --os-fg: #eef1f7;
-    --os-muted: #9aa4b8;
-    --os-surface: #1c2130;
-    --os-header: #262c3d;
-    --os-header-inactive: #1f2433;
+    --os-fg: #eeebe5;
+    --os-muted: #a29f98;
+    --os-surface: #18191c;
+    --os-header: #222327;
+    --os-header-inactive: #1b1c1f;
     --os-border: rgba(255, 255, 255, 0.08);
-    --os-popover: #232838;
+    --os-popover: #1f2023;
   }
 
   .os-root {
@@ -267,7 +261,7 @@ h3 {
   }
 
   .os-dock {
-    background: rgba(16, 18, 26, 0.78);
+    background: rgba(14, 15, 17, 0.82);
     backdrop-filter: blur(16px);
     border-right: 1px solid rgba(255, 255, 255, 0.06);
   }
@@ -281,7 +275,7 @@ h3 {
     top: 50%;
     transform: translateY(-50%);
     white-space: nowrap;
-    background: rgba(20, 22, 30, 0.95);
+    background: rgba(24, 25, 28, 0.96);
     color: #fff;
     font-size: 12.5px;
     font-weight: 600;
@@ -589,7 +583,7 @@ h3 {
   }
 
   .os-overview {
-    background: rgba(8, 10, 16, 0.72);
+    background: rgba(10, 10, 12, 0.76);
     backdrop-filter: blur(24px);
     animation: os-fade 160ms ease-out;
   }
@@ -623,8 +617,8 @@ h3 {
   }
 
   .os-terminal {
-    background: #12151c;
-    color: #d8dee9;
+    background: #111214;
+    color: #e2dfd8;
     cursor: text;
   }
 

@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useState } from "react";
 
 const loading = () => (
-  <div className="mx-auto grid aspect-square w-full max-w-[420px] place-items-center rounded-[var(--radius-xs)] bg-[#0e1526] text-[14px] text-ink-soft">
+  <div className="mx-auto grid aspect-square w-full max-w-[420px] place-items-center rounded-[var(--radius-xs)] bg-[#111214] text-[14px] text-ink-soft">
     Loading…
   </div>
 );

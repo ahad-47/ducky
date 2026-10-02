@@ -22,7 +22,7 @@ export const viewport: Viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: "cover",
-  themeColor: "#000000",
+  themeColor: "#0c0d0f",
 };
 
 export const metadata: Metadata = {
@@ -103,24 +103,8 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             <SkipLink />
             <div
               aria-hidden
-              className="pointer-events-none fixed inset-0 overflow-hidden"
-            >
-              <div
-                className="ambient-blob absolute -left-[10%] -top-[10%] h-[50vw] w-[50vw] rounded-full opacity-40 blur-[120px]"
-                style={{
-                  background:
-                    "radial-gradient(circle, #3d5fde 0%, transparent 70%)",
-                }}
-              />
-              <div
-                className="ambient-blob absolute -right-[15%] top-[30%] h-[45vw] w-[45vw] rounded-full opacity-30 blur-[120px]"
-                style={{
-                  background:
-                    "radial-gradient(circle, #5eead4 0%, transparent 70%)",
-                  animationDelay: "-9s",
-                }}
-              />
-            </div>
+              className="page-backdrop pointer-events-none absolute inset-x-0 top-0 h-[900px]"
+            />
             <SiteHeader signInUrl={appSignInUrl} />
             <main id="main" className="relative flex-1">
               {children}

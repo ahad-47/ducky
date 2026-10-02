@@ -32,7 +32,6 @@ export default function EngagementsPage() {
                 <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent-text">
                   <Icon name={engagementIcons[i]} className="h-6 w-6" />
                 </span>
-                <span className="font-[family-name:var(--font-mono)] text-[12.5px] text-ink-soft">0{i + 1}</span>
               </div>
               <h2 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{engagement.name}</h2>
               <p className="text-[16.5px] text-ink-soft">{engagement.summary}</p>

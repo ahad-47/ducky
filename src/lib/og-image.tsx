@@ -17,7 +17,7 @@ export async function buildOgImage({ title, showMarks = false }: { title: string
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#0B1120",
+          background: "#0C0D0F",
           padding: 72,
         }}
       >
@@ -26,7 +26,7 @@ export async function buildOgImage({ title, showMarks = false }: { title: string
             display: "flex",
             fontFamily: "Instrument Serif",
             fontSize: 64,
-            color: "#F4F6FB",
+            color: "#EEEBE5",
             maxWidth: 900,
             lineHeight: 1.1,
           }}
@@ -34,8 +34,8 @@ export async function buildOgImage({ title, showMarks = false }: { title: string
           {title}
         </div>
         <div style={{ display: "flex", width: "100%", justifyContent: "space-between", alignItems: "flex-end" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, color: "#F4F6FB" }}>
-            <OgLogoMark size={52} color="#8FA8FF" />
+          <div style={{ display: "flex", alignItems: "center", gap: 16, color: "#EEEBE5" }}>
+            <OgLogoMark size={52} color="#FF5A1F" />
             <div style={{ display: "flex", fontFamily: "Montserrat", fontSize: 36, letterSpacing: 1 }}>
               <span style={{ fontWeight: 800 }}>SKILLED</span>
               <span style={{ fontWeight: 300 }}>SCAN</span>
@@ -50,7 +50,7 @@ export async function buildOgImage({ title, showMarks = false }: { title: string
                     width: 18,
                     height: 18,
                     borderRadius: 9,
-                    background: "#3D5FDE",
+                    background: "#FF5A1F",
                   }}
                 />
               ))}

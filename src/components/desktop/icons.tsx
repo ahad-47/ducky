@@ -164,7 +164,7 @@ export function FileIcon({ node, name, size = 48, className }: IconProps & { nod
         <text x="23.5" y="35.4" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#fff" fontFamily="ui-monospace, monospace">
           HTML
         </text>
-        <path d="M17 15l-4 4 4 4M24 15l4 4-4 4" fill="none" stroke="#3d5fde" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M17 15l-4 4 4 4M24 15l4 4-4 4" fill="none" stroke="#ff5a1f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     );
   }

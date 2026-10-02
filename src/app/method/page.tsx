@@ -92,17 +92,12 @@ export default function MethodPage() {
 
       <Section>
         <SectionHeading eyebrow="Guardrails" title={methodCopy.governance.h2} />
-        <ul className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {facts.system.governance.map((item, i) => (
-            <Card as="li" key={item} className="flex flex-col gap-4">
-              <span className="flex items-center justify-between">
-                <span className="grid h-9 w-9 place-items-center rounded-lg bg-white/5 text-accent-text">
-                  <Icon name={(["shield", "pulse", "lock", "doc", "layers"] as const)[i % 5]} className="h-5 w-5" />
-                </span>
-                <span className="font-[family-name:var(--font-mono)] text-[12px] text-ink-soft">G-0{i + 1}</span>
-              </span>
-              <span className="text-[16.5px] text-ink">{item}</span>
-            </Card>
+        <ul className="mt-10 grid grid-cols-1 gap-x-10 sm:grid-cols-2">
+          {facts.system.governance.map((item) => (
+            <li key={item} className="flex gap-3 border-t border-rule py-5 text-[16.5px] text-ink">
+              <Icon name="shield" className="mt-1 h-4 w-4 shrink-0 text-accent-text" />
+              {item}
+            </li>
           ))}
         </ul>
       </Section>

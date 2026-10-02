@@ -168,7 +168,7 @@ export function Minesweeper() {
         </div>
       </div>
       <div
-        className="relative mx-auto grid aspect-square w-full max-w-[420px] select-none gap-1 rounded-[var(--radius-xs)] bg-[#0e1526] p-1.5 [touch-action:manipulation]"
+        className="relative mx-auto grid aspect-square w-full max-w-[420px] select-none gap-1 rounded-[var(--radius-xs)] bg-[#111214] p-1.5 [touch-action:manipulation]"
         style={{ gridTemplateColumns: `repeat(${W}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${H}, minmax(0, 1fr))` }}
         onContextMenu={(e) => e.preventDefault()}
       >
@@ -207,7 +207,7 @@ export function Minesweeper() {
                     ? "bg-severity-critical/80"
                     : "bg-severity-critical/25"
                   : "bg-white/[0.03]"
-                : "bg-[#24304d] hover:bg-[#2c3a5d] active:bg-[#33446c]"
+                : "bg-[#26282d] hover:bg-[#2e3036] active:bg-[#36383e]"
             }`}
             style={c.open && !c.mine ? { color: numberColor[c.n] } : undefined}
           >

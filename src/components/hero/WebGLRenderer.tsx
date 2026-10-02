@@ -131,7 +131,7 @@ function Baseline() {
             args={[new Float32Array(points.flatMap((p) => [p.x, p.y, p.z])), 3]}
           />
         </bufferGeometry>
-        <lineBasicMaterial color="#33415f" transparent opacity={0.5} />
+        <lineBasicMaterial color="#34363b" transparent opacity={0.5} />
       </line>
       <line>
         <bufferGeometry>
@@ -140,7 +140,7 @@ function Baseline() {
             args={[new Float32Array(vPoints.flatMap((p) => [p.x, p.y, p.z])), 3]}
           />
         </bufferGeometry>
-        <lineBasicMaterial color="#243049" />
+        <lineBasicMaterial color="#24262a" />
       </line>
     </>
   );
@@ -195,14 +195,14 @@ function Scene({
       <Baseline />
       <PointsLayer
         ids={observationIds}
-        color="#9ba8c2"
+        color="#a29f98"
         additive={false}
         frameGetter={() => frameMapRef.current}
         loopAlphaGetter={() => loopAlphaRef.current}
       />
       <PointsLayer
         ids={findingIds}
-        color="#4f7cff"
+        color="#ff5a1f"
         additive
         frameGetter={() => frameMapRef.current}
         loopAlphaGetter={() => loopAlphaRef.current}

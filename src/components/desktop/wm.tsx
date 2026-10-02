@@ -115,7 +115,7 @@ export type Settings = {
 
 export const defaultSettings: Settings = {
   wallpaper: "signal",
-  accent: "#3d5fde",
+  accent: "#ff5a1f",
   brightness: 100,
   volume: 60,
   nightLight: false,
@@ -170,7 +170,7 @@ export const wallpapers: { id: string; name: string; css: string }[] = [
   {
     id: "signal",
     name: "Signal",
-    css: "radial-gradient(ellipse at 18% 22%, rgba(61,95,222,0.55) 0%, transparent 52%), radial-gradient(ellipse at 82% 70%, rgba(94,234,212,0.32) 0%, transparent 50%), radial-gradient(ellipse at 60% 10%, rgba(143,168,255,0.18) 0%, transparent 40%), linear-gradient(160deg, #0b1120 0%, #0d1529 55%, #081019 100%)",
+    css: "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,120,60,0.16) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(255,90,31,0.07) 0%, transparent 60%), linear-gradient(180deg, #111214 0%, #0c0d0f 60%, #09090b 100%)",
   },
   {
     id: "dusk",
@@ -184,8 +184,8 @@ export const wallpapers: { id: string; name: string; css: string }[] = [
   },
   {
     id: "aurora",
-    name: "Aurora",
-    css: "radial-gradient(ellipse at 20% 100%, rgba(94,234,212,0.5) 0%, transparent 50%), radial-gradient(ellipse at 80% 0%, rgba(167,139,250,0.55) 0%, transparent 55%), linear-gradient(180deg, #0a0f24 0%, #111a3a 100%)",
+    name: "Dune",
+    css: "radial-gradient(ellipse 90% 60% at 30% 110%, rgba(214,170,120,0.35) 0%, transparent 60%), linear-gradient(170deg, #1a1714 0%, #12100e 100%)",
   },
   {
     id: "slate",
@@ -199,4 +199,4 @@ export const wallpapers: { id: string; name: string; css: string }[] = [
   },
 ];
 
-export const accents = ["#3d5fde", "#5eead4", "#e95420", "#a78bfa", "#ff6b6b", "#ffd166", "#22c55e"];
+export const accents = ["#ff5a1f", "#eeebe5", "#7ad3a8", "#f2c94c", "#5b8def", "#f0524f", "#c084fc"];

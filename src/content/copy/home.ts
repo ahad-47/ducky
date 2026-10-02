@@ -3,49 +3,40 @@ import { facts } from "@/content/facts";
 export const homeCopy = {
   hero: {
     eyebrow: "Web and API security scanning",
-    h1: "Find the vulnerabilities that matter. Skip the noise.",
+    h1: "A scanner that only reports what it can reproduce.",
     subhead:
-      "SkilledScan maps your attack surface, runs approved security checks under strict limits, and reports only confirmed findings, each with evidence and a fix.",
+      "SkilledScan maps your web applications and APIs, runs approved checks under strict limits, and keeps duplicates and false positives out of your report. Each finding comes with evidence and a fix.",
     primaryCta: "Request early access",
     secondaryCta: "See a sample report",
     caption: `One scan: ${facts.signalResult.raw} raw observations, ${facts.signalResult.verified} confirmed findings reported. Duplicates, non-issues and noise stay in the raw log for audit.`,
   },
-  proofLine: `Most scanners hand you a list of maybes. SkilledScan reproduces each candidate before it reaches your report: one scan took ${facts.signalResult.raw} raw observations down to ${facts.signalResult.verified} confirmed findings.`,
-  stats: {
-    raw: "raw observations surfaced",
-    confirmed: "confirmed findings reported",
-    phases: "stage scanning pipeline",
-    countries: "countries scanned from, all remotely",
+  proof: {
+    label: "From one real scan",
+    raw: "raw observations",
+    confirmed: "confirmed findings",
+    body: `Every candidate is reproduced before it reaches the report. On this scan that removed ${facts.signalResult.raw - facts.signalResult.verified} duplicates, non-issues and noise. They stay in the raw log, so your auditor can still see them.`,
   },
   problem: {
     eyebrow: "Why SkilledScan",
-    h2: "Signal, not a spreadsheet of maybes.",
-    items: [
-      {
-        lead: "Noise wastes engineering time.",
-        body: "Raw scanner output is full of duplicates and false positives that someone has to triage.",
-      },
-      {
-        lead: "Confirmed findings only.",
-        body: "Every candidate is reproduced before it is reported. Unconfirmed items stay in the raw log.",
-      },
-      {
-        lead: "Reports your team can act on.",
-        body: "Prioritized findings with evidence and a specific fix for the developer who owns it.",
-      },
+    h2: "Raw scanner output is where the work starts, not where it ends.",
+    columns: ["", "Raw scanner output", "A SkilledScan report"],
+    rows: [
+      ["Candidates", "Hundreds of possibilities, none confirmed", "Each one reproduced before it is reported"],
+      ["Duplicates and noise", "Mixed in with real issues", "Kept in the raw log, out of the report"],
+      ["What to do next", "Your team triages the list", "Prioritized findings with evidence and a fix"],
+      ["Audit trail", "Rarely kept", "Every proposed, allowed and blocked action logged"],
     ],
-    closing: "Scan wide. Report what is real.",
   },
   features: {
     eyebrow: "Platform",
-    h2: "Built for safe, thorough scanning",
+    h2: "What runs on every scan",
     items: [
-      { icon: "search", title: "Attack surface discovery", body: "Maps subdomains, exposed services, technologies, routes and parameters before testing." },
-      { icon: "layers", title: "Approved check registry", body: "Checks are chosen to fit the target from a fixed registry, never improvised." },
-      { icon: "shield", title: "Sandboxed and rate-limited", body: "Checks run in isolated sandboxes, non-destructive, within the agreed scope." },
-      { icon: "check", title: "Confirmed findings", body: "Raw observations are kept apart from findings that were reproduced and confirmed." },
-      { icon: "doc", title: "Audit log", body: "Every proposed, allowed and blocked action is recorded for your auditor." },
-      { icon: "pulse", title: "HTML and PDF reports", body: "Executive summary, risk breakdown, evidence, fixes and coverage in one report." },
+      { title: "Attack surface discovery", body: "Maps subdomains, exposed services, technologies, routes and parameters before testing." },
+      { title: "Approved check registry", body: "Checks are chosen to fit the target from a fixed registry, never improvised." },
+      { title: "Sandboxed and rate-limited", body: "Checks run in isolated sandboxes, non-destructive, within the agreed scope." },
+      { title: "Confirmed findings", body: "Raw observations are kept apart from findings that were reproduced and confirmed." },
+      { title: "Audit log", body: "Every proposed, allowed and blocked action is recorded for your auditor." },
+      { title: "HTML and PDF reports", body: "Executive summary, risk breakdown, evidence, fixes and coverage in one report." },
     ],
   },
   howItWorks: {

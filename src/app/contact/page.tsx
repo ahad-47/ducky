@@ -27,11 +27,6 @@ export default function ContactPage() {
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="flex flex-col gap-5 lg:col-span-7">
             <Card pad="p-6 sm:p-8" className="relative overflow-hidden">
-              <div
-                aria-hidden
-                className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full opacity-40 blur-[80px]"
-                style={{ background: "radial-gradient(circle, #3d5fde 0%, transparent 70%)" }}
-              />
               <div className="relative">
                 <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent/15 text-accent-text">
                   <Icon name="mail" className="h-6 w-6" />
