@@ -15,7 +15,7 @@ const columns = [
   {
     heading: "Company",
     links: [
-      { href: "/about", label: "About" },
+      { href: "/about", label: "Who built SkilledScan" },
       { href: "/compliance", label: "Compliance" },
       { href: "/roadmap", label: "Roadmap" },
       { href: "/faq", label: "FAQ" },

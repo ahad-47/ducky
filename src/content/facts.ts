@@ -10,20 +10,28 @@ export const facts = {
     email: "contact@skilledscan.com",
   },
 
-  // Founder track record. Figures are from his client project history
-  // (completed projects, reviews and client countries) as of the date
-  // below. Update the date with the numbers.
+  // Founder profile. Project and country totals are the founder's own
+  // figures; the rating counts his reviewed client projects. Client names
+  // are withheld throughout.
   founder: {
     name: "Ahad Ansari",
-    role: "Founder",
+    role: "Founder of SkilledScan",
+    headline: "Cybersecurity consultant and penetration tester",
     location: "India",
-    checkedOn: "October 2026",
+    email: "ahad@skilledscan.com",
+    linkedin: "https://www.linkedin.com/in/ahad47/",
+    photo: "/ahad-ansari.jpg",
     since: 2017,
+    bio: [
+      "Ahad Ansari is a cybersecurity consultant and penetration tester from India, and the founder of SkilledScan. Since 2017 he has completed more than 500 security projects for businesses in over 70 countries: web application and API penetration tests, vulnerability assessments, malware cleanups, digital forensics and incident response.",
+      "He holds the Certified Ethical Hacker (CEH) certification and is listed in the Hall of Fame of India's National Critical Information Infrastructure Protection Centre (NCIIPC) for responsibly disclosing a vulnerability. Across 110 reviewed client projects he holds an average rating of 4.9 out of 5.",
+      "His clients range from single-site owners to agencies and security teams, in finance, healthcare, retail and e-commerce. He built SkilledScan to offer that testing as a product: governed scans that report only confirmed findings, each with evidence and a fix.",
+    ],
     stats: [
-      { value: "135", label: "client projects completed since 2017" },
-      { value: "34", label: "countries clients came from" },
-      { value: "4.9/5", label: "average rating from 110 client reviews" },
-      { value: "97%", label: "of projects delivered on budget, 94% on time" },
+      { value: "500+", label: "security projects completed" },
+      { value: "70+", label: "countries served" },
+      { value: "4.9/5", label: "average rating across 110 client reviews" },
+      { value: "2017", label: "year of the first client project" },
     ],
     credentials: [
       {
@@ -35,47 +43,133 @@ export const facts = {
         detail:
           "Recognized by India's National Critical Information Infrastructure Protection Centre for responsibly disclosing a vulnerability (ID 6901790).",
       },
-      { title: "CCNA v7 and Cisco CyberSecurity", detail: "Cisco networking and security certifications." },
+      { title: "CCNA v7", detail: "Cisco certification in networking." },
+      { title: "Cisco CyberSecurity", detail: "Cisco certification in security fundamentals." },
       { title: "OSINT certification", detail: "Open-source intelligence gathering." },
-      { title: "Cybercrime intervention officer", detail: "Certification." },
+      { title: "Cybercrime intervention officer", detail: "Certification in responding to cybercrime." },
+    ],
+    // Grouped from the titles of his client projects.
+    expertise: [
+      {
+        area: "Penetration testing",
+        items: [
+          "Web application penetration testing",
+          "API security testing",
+          "Server and network penetration testing",
+          "Virtual machine and cloud server testing",
+          "Security review of PHP software and React builds",
+          "E-commerce and CMS security (Shopify, WordPress)",
+        ],
+      },
+      {
+        area: "Vulnerability assessment",
+        items: [
+          "Vulnerability scanning and reporting",
+          "Scanning programs across many websites",
+          "Security headers and server configuration",
+          "Firewall testing on servers and workstations",
+        ],
+      },
+      {
+        area: "Incident response and forensics",
+        items: [
+          "Malware analysis and cleanup",
+          "Ransomware infection analysis",
+          "Digital forensics, including for litigation",
+          "Compromised website recovery",
+          "Blocklist and malicious-flag removal",
+          "Keylogger and intrusion checks on Windows",
+        ],
+      },
+      {
+        area: "Hardening and defense",
+        items: [
+          "DDoS mitigation",
+          "WordPress and server hardening",
+          "Intrusion detection rules (Snort)",
+          "Network traffic analysis (Wireshark)",
+          "Secure remote access and VPN setup",
+        ],
+      },
+      {
+        area: "Governance and compliance",
+        items: [
+          "Security audits and audit documentation",
+          "ISMS reporting",
+          "Compliance assessments for GDPR, HIPAA and PCI DSS",
+          "Risk assessment and data protection",
+        ],
+      },
+      {
+        area: "Intelligence and research",
+        items: ["OSINT and reconnaissance", "Security research", "Responsible vulnerability disclosure"],
+      },
+    ],
+    // Every skill listed on his public freelance profile.
+    skills: [
+      "Penetration Testing",
+      "Web Security",
+      "Computer Security",
+      "Network Security",
+      "Internet Security",
+      "Security",
+      "Digital Forensics",
+      "Risk Assessment",
+      "Risk Management",
+      "Data Protection",
+      "Compliance",
+      "Website Testing",
+      "Testing / QA",
+      "Usability Testing",
+      "Linux",
+      "Windows Desktop",
+      "VMware",
+      "Virtual Machines",
+      "Web Hosting",
+      "cPanel",
+      "Troubleshooting",
+      "PHP",
+      "HTML",
+      "MySQL",
+      "phpMyAdmin",
+      "Database Management",
+      "Web Development",
+      "eCommerce",
+      "Data Processing",
+      "Research",
+      "Internet Research",
+      "Account Management",
+      "Social Networking",
+      "Growth Hacking",
+      "Content Writing",
+      "Blog Writing",
+      "Creative Writing",
+    ],
+    tools: [
+      "Burp Suite Professional",
+      "Kali Linux",
+      "Acunetix",
+      "HCL AppScan",
+      "Postman",
+      "Wireshark",
+      "Snort",
+      "Shodan",
+      "theHarvester",
+      "VMware",
     ],
     sectors: ["Finance", "Healthcare", "Retail", "E-commerce"],
-    // Client countries with the number of reviewed projects from each.
-    countries: [
-      { name: "United States", projects: 28 },
-      { name: "Australia", projects: 12 },
-      { name: "United Kingdom", projects: 9 },
-      { name: "Israel", projects: 6 },
-      { name: "Italy", projects: 5 },
-      { name: "Canada", projects: 5 },
-      { name: "United Arab Emirates", projects: 4 },
-      { name: "Germany", projects: 4 },
-      { name: "Netherlands", projects: 3 },
-      { name: "Norway", projects: 3 },
-      { name: "Saudi Arabia", projects: 3 },
-      { name: "Sweden", projects: 2 },
-      { name: "Sri Lanka", projects: 2 },
-      { name: "Portugal", projects: 2 },
-      { name: "India", projects: 2 },
-      { name: "Lithuania", projects: 2 },
-      { name: "Thailand", projects: 2 },
-      { name: "France", projects: 2 },
-      { name: "Singapore", projects: 1 },
-      { name: "Chile", projects: 1 },
-      { name: "South Korea", projects: 1 },
-      { name: "Spain", projects: 1 },
-      { name: "Jordan", projects: 1 },
-      { name: "Indonesia", projects: 1 },
-      { name: "Malaysia", projects: 1 },
-      { name: "Qatar", projects: 1 },
-      { name: "Mexico", projects: 1 },
-      { name: "Japan", projects: 1 },
-      { name: "North Macedonia", projects: 1 },
-      { name: "Ireland", projects: 1 },
-      { name: "Nigeria", projects: 1 },
-      { name: "Tunisia", projects: 1 },
-      { name: "Peru", projects: 1 },
-      { name: "Colombia", projects: 1 },
+    // A selection of client countries, by region.
+    regions: [
+      { region: "Americas", countries: ["United States", "Canada", "Mexico", "Colombia", "Peru", "Chile"] },
+      {
+        region: "Europe",
+        countries: ["United Kingdom", "Ireland", "Germany", "France", "Italy", "Spain", "Portugal", "Netherlands", "Norway", "Sweden", "Lithuania", "North Macedonia"],
+      },
+      { region: "Middle East and Africa", countries: ["United Arab Emirates", "Saudi Arabia", "Qatar", "Jordan", "Nigeria", "Tunisia"] },
+      {
+        region: "Asia-Pacific",
+        countries: ["India", "Sri Lanka", "Singapore", "Malaysia", "Indonesia", "Thailand", "Japan", "South Korea", "Australia"],
+      },
     ],
     // Selected projects, described generically. Client names withheld.
     work: [
@@ -109,8 +203,8 @@ export const facts = {
   },
 
   globalReach: {
-    countries: "60+",
-    note: "Scans delivered for teams in 60+ countries, all run remotely under the same governed process.",
+    countries: "70+",
+    note: "Security work delivered for teams in 70+ countries, all run remotely under the same governed process.",
   },
 
   // The honest headline result from one authorized scan.

@@ -1,9 +1,9 @@
+import Image from "next/image";
 import { headers } from "next/headers";
 import { Section } from "@/components/ui/Container";
 import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
 import { Badge, Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
-import { ClosingCta } from "@/components/sections/ClosingCta";
 import { aboutCopy } from "@/content/copy/about";
 import { facts } from "@/content/facts";
 import { buildMetadata } from "@/lib/seo";
@@ -11,20 +11,58 @@ import { buildMetadata } from "@/lib/seo";
 const f = facts.founder;
 
 export const metadata = buildMetadata({
-  title: "About | SkilledScan",
-  description: `SkilledScan is built by ${f.name}: CEH, NCIIPC Hall of Fame, ${f.stats[0].value} client security projects for clients in ${f.countries.length} countries since ${f.since}.`,
+  title: `${f.name} | Cybersecurity Consultant, Penetration Tester and Founder of SkilledScan`,
+  description: `${f.name} is a CEH-certified penetration tester from India, listed in the NCIIPC Hall of Fame, with 500+ security projects for clients in 70+ countries since ${f.since}. Founder of SkilledScan.`,
   path: "/about",
 });
 
+function ContactButtons() {
+  return (
+    <div className="flex flex-wrap gap-3">
+      <a
+        href={`mailto:${f.email}`}
+        className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-xs)] bg-accent px-5 text-[15px] font-semibold text-accent-ink hover:bg-accent-hover"
+      >
+        <Icon name="mail" className="h-4 w-4" />
+        {f.email}
+      </a>
+      <a
+        href={f.linkedin}
+        target="_blank"
+        rel="noopener noreferrer me"
+        className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-xs)] border border-rule-strong px-5 text-[15px] font-semibold text-ink hover:bg-white/5"
+      >
+        <Icon name="arrow" className="h-4 w-4" />
+        {aboutCopy.linkedinLabel}
+      </a>
+    </div>
+  );
+}
+
 export default async function AboutPage() {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const url = `${facts.brand.url}/about`;
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Person",
-    name: f.name,
-    jobTitle: f.role,
-    worksFor: { "@id": `${facts.brand.url}/#organization` },
-    hasCredential: f.credentials.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.title })),
+    "@type": "ProfilePage",
+    url,
+    name: `${f.name}, founder of SkilledScan`,
+    mainEntity: {
+      "@type": "Person",
+      "@id": `${url}#person`,
+      name: f.name,
+      url,
+      image: `${facts.brand.url}${f.photo}`,
+      email: `mailto:${f.email}`,
+      jobTitle: f.headline,
+      description: f.bio[0],
+      homeLocation: { "@type": "Country", name: f.location },
+      worksFor: { "@id": `${facts.brand.url}/#organization` },
+      sameAs: [f.linkedin],
+      award: "NCIIPC Hall of Fame",
+      hasCredential: f.credentials.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.title })),
+      knowsAbout: [...f.expertise.flatMap((e) => e.items), ...f.skills],
+    },
   };
 
   return (
@@ -35,10 +73,40 @@ export default async function AboutPage() {
         // Built only from facts via JSON.stringify.
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <PageHeader eyebrow={aboutCopy.eyebrow} title={aboutCopy.h1} intro={aboutCopy.intro} />
+      <PageHeader eyebrow={aboutCopy.eyebrow} title={aboutCopy.h1} />
 
       <Section className="pt-0">
-        <dl className="grid grid-cols-2 border-y border-rule lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-[320px_1fr] lg:gap-14">
+          <div>
+            <Image
+              src={f.photo}
+              alt={aboutCopy.photoAlt}
+              width={400}
+              height={400}
+              priority
+              className="aspect-square w-full max-w-[320px] rounded-[var(--radius-sm)] border border-rule object-cover"
+            />
+          </div>
+          <div>
+            <h2 className="font-[family-name:var(--font-serif)] text-display-l font-medium tracking-[-0.03em] text-ink">{f.name}</h2>
+            <p className="mt-2 text-[17px] text-accent-text">
+              {f.headline} · {f.role}
+            </p>
+            <p className="mt-1 text-[15px] text-ink-soft">{f.location}</p>
+            <div className="mt-6 flex flex-col gap-4">
+              {f.bio.map((p) => (
+                <p key={p.slice(0, 24)} className="measure text-[17px] leading-relaxed text-ink-soft">
+                  {p}
+                </p>
+              ))}
+            </div>
+            <div className="mt-8">
+              <ContactButtons />
+            </div>
+          </div>
+        </div>
+
+        <dl className="mt-16 grid grid-cols-2 border-y border-rule lg:grid-cols-4">
           {f.stats.map((s, i) => (
             <div key={s.label} className={`py-8 pr-6 ${i > 0 ? "lg:border-l lg:border-rule lg:pl-8" : ""} ${i % 2 ? "border-l border-rule pl-6 lg:pl-8" : ""}`}>
               <dt className="sr-only">{s.label}</dt>
@@ -51,7 +119,6 @@ export default async function AboutPage() {
             </div>
           ))}
         </dl>
-        <p className="mt-4 text-[13.5px] text-ink-soft">{aboutCopy.statsNote}</p>
       </Section>
 
       <Section>
@@ -67,28 +134,60 @@ export default async function AboutPage() {
             </Card>
           ))}
         </div>
-        <div className="mt-8 flex flex-wrap items-center gap-2">
-          <span className="mr-2 text-[14.5px] text-ink-soft">{aboutCopy.sectors}</span>
-          {f.sectors.map((s) => (
-            <Badge key={s} tone="neutral">
-              {s}
-            </Badge>
+      </Section>
+
+      <Section>
+        <SectionHeading eyebrow={aboutCopy.expertise.eyebrow} title={aboutCopy.expertise.h2} intro={aboutCopy.expertise.intro} />
+        <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {f.expertise.map((e) => (
+            <div key={e.area}>
+              <h3 className="border-b border-rule pb-3 text-[17px] font-semibold text-ink">{e.area}</h3>
+              <ul className="mt-4 flex flex-col gap-2.5">
+                {e.items.map((item) => (
+                  <li key={item} className="flex gap-3 text-[15.5px] text-ink-soft">
+                    <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-accent-text" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-14 flex flex-col gap-8">
+          {[
+            { label: aboutCopy.skills.h3, items: f.skills },
+            { label: aboutCopy.skills.tools, items: f.tools },
+            { label: aboutCopy.skills.sectors, items: f.sectors },
+          ].map((group) => (
+            <div key={group.label}>
+              <h3 className="text-[15px] font-semibold text-ink">{group.label}</h3>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <li key={item}>
+                    <Badge tone="neutral">{item}</Badge>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
         </div>
       </Section>
 
       <Section>
         <SectionHeading eyebrow={aboutCopy.countries.eyebrow} title={aboutCopy.countries.h2} intro={aboutCopy.countries.intro} />
-        <ul className="mt-10 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
-          {f.countries.map((c) => (
-            <li key={c.name} className="flex items-baseline justify-between gap-4 border-b border-rule py-3 text-[15.5px]">
-              <span className="text-ink">{c.name}</span>
-              <span className="font-[family-name:var(--font-mono)] text-[13px] tabular-nums text-ink-soft">
-                {c.projects} {c.projects === 1 ? "project" : "projects"}
-              </span>
-            </li>
+        <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {f.regions.map((r) => (
+            <div key={r.region}>
+              <h3 className="border-b border-rule pb-3 text-[15px] font-semibold text-ink">{r.region}</h3>
+              <ul className="mt-3 flex flex-col gap-2 text-[15.5px] text-ink-soft">
+                {r.countries.map((c) => (
+                  <li key={c}>{c}</li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </Section>
 
       <Section>
@@ -118,7 +217,18 @@ export default async function AboutPage() {
         </div>
       </Section>
 
-      <ClosingCta />
+      <Section>
+        <div className="relative overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-8 sm:p-12">
+          <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
+          <h2 className="max-w-[20ch] font-[family-name:var(--font-serif)] text-display-l font-medium tracking-[-0.03em] text-ink">
+            {aboutCopy.contact.h2}
+          </h2>
+          <p className="measure mt-4 text-[17px] text-ink-soft">{aboutCopy.contact.body}</p>
+          <div className="mt-8">
+            <ContactButtons />
+          </div>
+        </div>
+      </Section>
     </>
   );
 }
