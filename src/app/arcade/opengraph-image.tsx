@@ -4,5 +4,5 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function Image() {
-  return buildOgImage({ title: "Take a break." });
+  return buildOgImage({ title: "Five small browser games." });
 }

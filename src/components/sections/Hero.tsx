@@ -22,7 +22,7 @@ export function Hero() {
               <SecondaryLink href="/report-sample">{homeCopy.hero.secondaryCta}</SecondaryLink>
             </div>
           </div>
-          <div className="glass rounded-[var(--radius-sm)] p-5 shadow-[0_24px_60px_rgba(0,0,0,0.35)]">
+          <div className="glass-strong rounded-[var(--radius-paper)] p-5">
             <WindowChrome title="scan.live" />
             <HeroSignal />
             <p className="mt-4 text-[15px] text-ink-soft">{homeCopy.hero.caption}</p>

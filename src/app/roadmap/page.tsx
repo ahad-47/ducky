@@ -35,9 +35,7 @@ export default function RoadmapPage() {
             <ul className="divide-y divide-rule">
               {live.map((item) => (
                 <li key={item} className="flex gap-4 px-6 py-4 text-[16.5px] text-ink">
-                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-severity-low/15 text-severity-low">
-                    <Icon name="check" className="h-3.5 w-3.5" />
-                  </span>
+                  <Icon name="check" className="mt-0.5 shrink-0 text-accent h-4 w-4" />
                   {item}
                 </li>
               ))}

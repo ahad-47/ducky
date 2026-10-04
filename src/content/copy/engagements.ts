@@ -2,7 +2,7 @@ export const engagementsCopy = {
   eyebrow: "Scan types",
   h1: "Choose what to scan",
   intro:
-    "Three scan types, one standard of output: a report with evidence, a fix for every finding, and a record of what was covered.",
+    "Every scan type ends in the same kind of report: evidence and a fix for each finding, plus a record of what was covered.",
   coverage: {
     h2: "What every scan covers",
     note: "Depth depends on the scan type and on what the target runs. Each report's coverage section states what was scanned and what was not.",

@@ -53,15 +53,12 @@ export default function MethodPage() {
         <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
           <Card>
             <h3 className="flex items-center gap-3 font-[family-name:var(--font-serif)] text-h3 text-ink">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-severity-low/15 text-severity-low">
-                <Icon name="check" className="h-5 w-5" />
-              </span>
               {methodCopy.system.doesLabel}
             </h3>
             <ul className="mt-6 flex flex-col gap-4">
               {facts.system.does.map((item) => (
                 <li key={item} className="flex gap-3 text-[16.5px] text-ink-soft">
-                  <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-severity-low" />
+                  <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-accent" />
                   {item}
                 </li>
               ))}
@@ -69,9 +66,6 @@ export default function MethodPage() {
           </Card>
           <Card>
             <h3 className="flex items-center gap-3 font-[family-name:var(--font-serif)] text-h3 text-ink">
-              <span className="grid h-9 w-9 place-items-center rounded-full bg-severity-critical/15 text-severity-critical">
-                <Icon name="x" className="h-5 w-5" />
-              </span>
               {methodCopy.system.doesNotLabel}
             </h3>
             <ul className="mt-6 flex flex-col gap-4">
@@ -84,7 +78,7 @@ export default function MethodPage() {
             </ul>
           </Card>
         </div>
-        <p className="mt-6 flex items-start gap-3 rounded-[var(--radius-sm)] border border-accent/30 bg-accent/10 px-5 py-4 text-[16px] text-ink">
+        <p className="mt-6 flex items-start gap-3 rounded-[var(--radius-sm)] border border-accent/20 bg-accent-tint px-5 py-4 text-[16px] text-ink">
           <Icon name="shield" className="mt-0.5 h-5 w-5 shrink-0 text-accent-text" />
           {facts.system.note}
         </p>
@@ -120,7 +114,7 @@ export default function MethodPage() {
                 <p className="mt-2 text-[14px] text-ink-soft">reported findings</p>
               </div>
             </div>
-            <div className="mt-8 h-2 overflow-hidden rounded-full bg-white/10" aria-hidden>
+            <div className="mt-8 h-2 overflow-hidden rounded-full bg-ink/[0.07]" aria-hidden>
               <div className="h-full rounded-full bg-accent" style={{ width: `${Math.max(2, (reported / raw) * 100)}%` }} />
             </div>
             <p className="mt-3 text-[14px] text-ink-soft">
@@ -133,9 +127,6 @@ export default function MethodPage() {
       <Section>
         <Card pad="p-8 sm:p-10" className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex gap-5">
-            <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-accent/15 text-accent-text">
-              <Icon name="lock" className="h-6 w-6" />
-            </span>
             <div>
               <h2 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{methodCopy.authorization.h2}</h2>
               <p className="mt-2 text-[17px] text-ink-soft">{methodCopy.authorization.body}</p>

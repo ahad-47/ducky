@@ -75,14 +75,14 @@ export function Canvas2DRenderer({
 
       const points = getFrame(t);
 
-      ctx.strokeStyle = `rgba(51, 65, 95, ${0.5 * loopAlpha})`;
+      ctx.strokeStyle = `rgba(10, 19, 36, ${0.12 * loopAlpha})`;
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(w * 0.5, h * 0.05);
       ctx.lineTo(w * 0.5, h * 0.95);
       ctx.stroke();
 
-      ctx.strokeStyle = `rgba(36, 48, 73, ${loopAlpha})`;
+      ctx.strokeStyle = `rgba(10, 19, 36, ${0.18 * loopAlpha})`;
       ctx.beginPath();
       ctx.moveTo(w * 0.02, h * 0.92);
       ctx.lineTo(w * 0.8, h * 0.92);
@@ -92,8 +92,8 @@ export function Canvas2DRenderer({
         ctx.beginPath();
         ctx.fillStyle =
           point.kind === "finding"
-            ? `rgba(79, 124, 255, ${point.alpha * loopAlpha})`
-            : `rgba(155, 168, 194, ${point.alpha * loopAlpha})`;
+            ? `rgba(36, 83, 230, ${point.alpha * loopAlpha})`
+            : `rgba(100, 116, 139, ${0.75 * point.alpha * loopAlpha})`;
         ctx.arc(point.x * w, point.y * h, point.radius * (w / 600), 0, Math.PI * 2);
         ctx.fill();
       }

@@ -1,22 +1,20 @@
 import localFont from "next/font/local";
 
 // Self-hosted (latin subset) so builds never depend on reaching Google
-// Fonts: a failed fetch there used to fail the whole build. All three are
-// SIL Open Font License 1.1; see LICENSE.txt.
-export const dmSans = localFont({
-  src: "./dm-sans-400-800.woff2",
-  weight: "400 800",
-  variable: "--font-dm-sans",
+// Fonts: a failed fetch there used to fail the whole build. All are SIL
+// Open Font License 1.1; see LICENSE.txt.
+export const geistSans = localFont({
+  src: "./geist-sans-variable.woff2",
+  weight: "100 900",
+  variable: "--font-geist-sans",
   display: "swap",
   preload: true,
 });
 
-export const ibmPlexMono = localFont({
-  src: [
-    { path: "./ibm-plex-mono-400.woff2", weight: "400", style: "normal" },
-    { path: "./ibm-plex-mono-500.woff2", weight: "500", style: "normal" },
-  ],
-  variable: "--font-ibm-plex-mono",
+export const geistMono = localFont({
+  src: "./geist-mono-variable.woff2",
+  weight: "100 900",
+  variable: "--font-geist-mono",
   display: "swap",
   preload: false,
 });

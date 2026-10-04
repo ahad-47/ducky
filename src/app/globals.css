@@ -1,28 +1,31 @@
 @import "tailwindcss";
 
 :root {
-  /* Graphite, bone and a single signal-orange accent. Deliberately not the
-     blue/purple-on-navy palette that reads as generated. */
-  --paper: #0c0d0f;
-  --paper-raised: #141518;
-  --ink: #eeebe5;
-  --ink-soft: #a29f98;
-  --rule: #24262a;
-  --rule-strong: #34363b;
-  --accent: #ff5a1f;
-  --accent-text: #ff8a5c;
-  --accent-ink: #0c0d0f;
-  --accent-hover: #ff7340;
+  /* Cool paper white, deep navy ink and one cobalt accent. Gradients stay
+     faint: light from above, never floating colour blobs. */
+  --paper: #f6f8fc;
+  --paper-raised: #ffffff;
+  --ink: #0a1324;
+  --ink-soft: #505c71;
+  --rule: #e3e8f0;
+  --rule-strong: #cdd5e2;
+  --accent: #2453e6;
+  --accent-text: #1d45c8;
+  --accent-ink: #ffffff;
+  --accent-hover: #1c46cc;
+  --accent-tint: #ecf1ff;
 
-  --severity-critical: #f0524f;
-  --severity-high: #ff9d47;
-  --severity-medium: #f2c94c;
-  --severity-low: #7ad3a8;
-  --severity-info: #9a9790;
+  --severity-critical: #c8322b;
+  --severity-high: #c2560c;
+  --severity-medium: #a16207;
+  --severity-low: #0f7b55;
+  --severity-info: #64748b;
 
-  --blocked: #ff6b6b;
+  --blocked: #c8322b;
 
   --ease-report: cubic-bezier(0.22, 1, 0.36, 1);
+  /* Long, soft deceleration for reveals and hovers. */
+  --ease-lux: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-gate: cubic-bezier(0.65, 0, 0.35, 1);
   --duration-micro: 160ms;
   --duration-ui: 280ms;
@@ -32,10 +35,12 @@
   --side-padding: clamp(20px, 5vw, 56px);
   --section-padding: clamp(64px, 9vh, 112px);
 
-  /* Surfaces are solid with hairline borders, not frosted glass. */
-  --glass-bg: #131417;
-  --glass-bg-strong: #17181c;
-  --glass-border: rgba(255, 255, 255, 0.075);
+  /* Surfaces are solid white with hairline borders and a soft shadow. */
+  --glass-bg: #ffffff;
+  --glass-bg-strong: #ffffff;
+  --glass-border: rgba(10, 19, 36, 0.08);
+  --shadow-soft: 0 1px 2px rgba(10, 19, 36, 0.04), 0 12px 32px -16px rgba(16, 38, 96, 0.18);
+  --shadow-lift: 0 1px 2px rgba(10, 19, 36, 0.05), 0 24px 48px -20px rgba(16, 38, 96, 0.28);
 }
 
 @theme inline {
@@ -49,6 +54,7 @@
   --color-accent-text: var(--accent-text);
   --color-accent-ink: var(--accent-ink);
   --color-accent-hover: var(--accent-hover);
+  --color-accent-tint: var(--accent-tint);
 
   --color-severity-critical: var(--severity-critical);
   --color-severity-high: var(--severity-high);
@@ -58,18 +64,18 @@
 
   --color-blocked: var(--blocked);
 
-  --font-serif: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono:
-    var(--font-ibm-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+    var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  --text-display-xl: clamp(2.5rem, 4.4vw, 3.75rem);
-  --text-display-xl--line-height: 1.02;
-  --text-display-l: clamp(2rem, 4.2vw, 3.25rem);
+  --text-display-xl: clamp(2.5rem, 4.6vw, 4rem);
+  --text-display-xl--line-height: 1.03;
+  --text-display-l: clamp(2rem, 3.8vw, 3rem);
   --text-display-l--line-height: 1.08;
   --text-h3: clamp(1.25rem, 2vw, 1.5rem);
   --text-h3--line-height: 1.25;
-  --text-body: 1.125rem;
+  --text-body: 1.0625rem;
   --text-body--line-height: 1.65;
   --text-small: 0.9375rem;
   --text-small--line-height: 1.5;
@@ -89,7 +95,7 @@
 
 html {
   background: var(--paper);
-  color-scheme: dark;
+  color-scheme: light;
   /* Smooth jumps for in-page links (legal tables of contents). */
   scroll-behavior: smooth;
 }
@@ -101,6 +107,19 @@ body {
   font-size: var(--text-body);
   line-height: var(--text-body--line-height);
   -webkit-font-smoothing: antialiased;
+  font-feature-settings: "ss01", "cv11";
+  text-rendering: optimizeLegibility;
+}
+
+/* Display type: tight tracking and balanced lines, the way it is set in
+   print rather than left to the browser. */
+h1,
+h2 {
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+p {
+  text-wrap: pretty;
 }
 
 /* Safety net: a long word at a fluid display size should never be able to
@@ -139,15 +158,29 @@ h3 {
   .glass {
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    box-shadow: var(--shadow-soft);
+  }
+
+  /* Cards that link somewhere rise a touch and pick up the accent edge. */
+  .lift {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-soft);
+    transition:
+      transform 420ms var(--ease-lux),
+      box-shadow 420ms var(--ease-lux),
+      border-color 420ms var(--ease-lux);
+  }
+  .lift:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+    border-color: rgba(36, 83, 230, 0.28);
   }
 
   .glass-strong {
     background: var(--glass-bg-strong);
     border: 1px solid var(--glass-border);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.045),
-      0 24px 60px rgba(0, 0, 0, 0.45);
+    box-shadow: var(--shadow-lift);
   }
 }
 
@@ -164,9 +197,11 @@ h3 {
    without the floating colour blobs. */
 .page-backdrop {
   background:
-    radial-gradient(ellipse 70% 45% at 50% -8%, rgba(255, 138, 92, 0.09), transparent 70%),
-    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px) 0 0 / 56px 56px,
-    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px) 0 0 / 56px 56px;
+    radial-gradient(ellipse 60% 55% at 50% -12%, rgba(36, 83, 230, 0.13), transparent 70%),
+    radial-gradient(ellipse 35% 40% at 92% -4%, rgba(120, 170, 255, 0.2), transparent 70%),
+    radial-gradient(ellipse 30% 35% at 6% 0%, rgba(160, 200, 255, 0.18), transparent 70%),
+    linear-gradient(rgba(10, 19, 36, 0.035) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, rgba(10, 19, 36, 0.035) 1px, transparent 1px) 0 0 / 56px 56px;
   mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 75%);
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 35%, transparent 75%);
 }
@@ -210,8 +245,8 @@ h3 {
    In the components layer so Tailwind utilities on the same elements win. */
 @layer components {
   :root {
-    --os-accent: #ff5a1f;
-    --os-accent-rgb: 255, 90, 31;
+    --os-accent: #2453e6;
+    --os-accent-rgb: 36, 83, 230;
     --os-accent-soft: rgba(var(--os-accent-rgb), 0.32);
     --os-accent-bright: color-mix(in srgb, var(--os-accent) 70%, white);
     --os-fg: #eeebe5;

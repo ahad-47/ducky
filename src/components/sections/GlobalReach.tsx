@@ -29,12 +29,12 @@ const markers: [number, number][] = [
 export function GlobalReach() {
   return (
     <Section>
-      <SectionHeading eyebrow="Reach" title="Built for a global audience" intro={facts.globalReach.note} />
+      <SectionHeading eyebrow="Reach" title={`Clients in ${facts.globalReach.countries} countries`} intro={facts.globalReach.note} />
 
       <div className="relative mt-10 overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-4 sm:p-8">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(255,138,92,0.07),transparent_60%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(36,83,230,0.07),transparent_60%)]"
         />
         <ComposableMap
           projectionConfig={{ scale: 148 }}
@@ -48,8 +48,8 @@ export function GlobalReach() {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill="#1d1e22"
-                  stroke="#2c2e33"
+                  fill="#e4eaf4"
+                  stroke="#ffffff"
                   strokeWidth={0.5}
                   style={{ outline: "none" }}
                 />
@@ -58,8 +58,8 @@ export function GlobalReach() {
           </Geographies>
           {markers.map(([lng, lat], i) => (
             <Marker key={i} coordinates={[lng, lat]}>
-              <circle r={2.6} fill="#ff5a1f" opacity={0.95} />
-              <circle r={6} fill="#ff5a1f" opacity={0.14} />
+              <circle r={2.6} fill="#2453e6" opacity={0.95} />
+              <circle r={6} fill="#2453e6" opacity={0.14} />
             </Marker>
           ))}
         </ComposableMap>

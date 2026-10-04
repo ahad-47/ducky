@@ -96,7 +96,7 @@ export function AppIcon({ app, size = 48, className }: IconProps & { app: AppId 
                 width="6.5"
                 height="5.5"
                 rx="1.5"
-                fill={c === 2 && r === 2 ? "#e95420" : "#6b7385"}
+                fill={c === 2 && r === 2 ? "#2453e6" : "#6b7385"}
               />
             )),
           )}
@@ -160,11 +160,11 @@ export function FileIcon({ node, name, size = 48, className }: IconProps & { nod
       <svg {...common}>
         <path d="M10 3h20l9 9v31a2 2 0 0 1-2 2H10a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z" fill="#eef1f7" />
         <path d="M30 3v9h9" fill="#c7cedc" />
-        <rect x="8" y="27" width="31" height="11" fill="#e95420" />
+        <rect x="8" y="27" width="31" height="11" fill="#2453e6" />
         <text x="23.5" y="35.4" textAnchor="middle" fontSize="7.5" fontWeight="700" fill="#fff" fontFamily="ui-monospace, monospace">
           HTML
         </text>
-        <path d="M17 15l-4 4 4 4M24 15l4 4-4 4" fill="none" stroke="#ff5a1f" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M17 15l-4 4 4 4M24 15l4 4-4 4" fill="none" stroke="#2453e6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     );
   }

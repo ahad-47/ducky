@@ -47,9 +47,9 @@ export function Snake() {
     const ctx = canvasRef.current?.getContext("2d");
     if (!ctx) return;
     const c = size / N;
-    ctx.fillStyle = "#111214";
+    ctx.fillStyle = "#0d1a36";
     ctx.fillRect(0, 0, size, size);
-    ctx.strokeStyle = "rgba(255,255,255,0.035)";
+    ctx.strokeStyle = "rgba(255,255,255,0.05)";
     for (let i = 1; i < N; i++) {
       ctx.beginPath();
       ctx.moveTo(i * c, 0);
@@ -60,12 +60,12 @@ export function Snake() {
     }
     const g = game.current;
     // Food: a "bug" to catch.
-    ctx.fillStyle = "#eeebe5";
+    ctx.fillStyle = "#ffffff";
     ctx.beginPath();
     ctx.arc((g.food.x + 0.5) * c, (g.food.y + 0.5) * c, c * 0.32, 0, Math.PI * 2);
     ctx.fill();
     g.snake.forEach((s, i) => {
-      ctx.fillStyle = i === 0 ? "#ff5a1f" : `rgba(255,90,31,${Math.max(0.35, 0.9 - i * 0.03)})`;
+      ctx.fillStyle = i === 0 ? "#7da2ff" : `rgba(91,140,255,${Math.max(0.35, 0.9 - i * 0.03)})`;
       const pad = i === 0 ? 1 : 2;
       roundRectPath(ctx, s.x * c + pad, s.y * c + pad, c - pad * 2, c - pad * 2, c * 0.25);
       ctx.fill();

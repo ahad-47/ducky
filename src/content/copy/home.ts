@@ -5,7 +5,7 @@ export const homeCopy = {
     eyebrow: "Web and API security scanning",
     h1: "A scanner that only reports what it can reproduce.",
     subhead:
-      "SkilledScan maps your web applications and APIs, runs approved checks under strict limits, and keeps duplicates and false positives out of your report. Each finding comes with evidence and a fix.",
+      "SkilledScan tests your web apps and APIs inside the scope you approve. Anything it can't reproduce stays out of the report, and every finding that makes it in comes with the evidence and a fix.",
     primaryCta: "Request early access",
     secondaryCta: "See a sample report",
     caption: `One scan: ${facts.signalResult.raw} raw observations, ${facts.signalResult.verified} confirmed findings reported. Duplicates, non-issues and noise stay in the raw log for audit.`,
@@ -18,7 +18,7 @@ export const homeCopy = {
   },
   problem: {
     eyebrow: "Why SkilledScan",
-    h2: "Raw scanner output is where the work starts, not where it ends.",
+    h2: "Most scanners hand you a list. Someone still has to work out which items are real.",
     columns: ["", "Raw scanner output", "A SkilledScan report"],
     rows: [
       ["Candidates", "Hundreds of possibilities, none confirmed", "Each one reproduced before it is reported"],
@@ -32,7 +32,7 @@ export const homeCopy = {
     h2: "What runs on every scan",
     items: [
       { title: "Attack surface discovery", body: "Maps subdomains, exposed services, technologies, routes and parameters before testing." },
-      { title: "Approved check registry", body: "Checks are chosen to fit the target from a fixed registry, never improvised." },
+      { title: "Approved check registry", body: "Checks come from a fixed, approved registry and are picked to match the target." },
       { title: "Sandboxed and rate-limited", body: "Checks run in isolated sandboxes, non-destructive, within the agreed scope." },
       { title: "Confirmed findings", body: "Raw observations are kept apart from findings that were reproduced and confirmed." },
       { title: "Audit log", body: "Every proposed, allowed and blocked action is recorded for your auditor." },
@@ -41,24 +41,24 @@ export const homeCopy = {
   },
   howItWorks: {
     h2: "How a scan runs",
-    intro: "Six stages, from discovery to the final report. Only confirmed findings make it to the end.",
+    intro: "Six stages, from mapping the target to writing the report. A candidate that fails reproduction in stage five never reaches stage six.",
     link: {
       label: "Explore the scanning engine",
       href: "/method",
     },
   },
   reportTeaser: {
-    h2: "One report for engineering and leadership.",
-    body: "Leadership gets the summary and the risk picture. Developers get the evidence and the fix. Both get a record of what was scanned and what was not.",
+    h2: "What the report looks like",
+    body: "It opens with a summary and the overall risk. Each finding then has its evidence and a specific fix, and a coverage section records what was scanned and what was not.",
     caption: `Severity mix from one delivered scan: ${facts.reportSample.summaryCounts.medium} medium, ${facts.reportSample.summaryCounts.low} low, ${facts.reportSample.summaryCounts.info} info.`,
     link: { label: "Read a sample report", href: "/report-sample" },
   },
   engagementsTeaser: {
-    h2: "Scan what you ship",
+    h2: "Three ways to scan",
     link: { label: "Compare scan types", href: "/engagements" },
   },
   closing: {
-    h2: "Start with one target.",
+    h2: "Send one URL to get started.",
     body: `Email ${facts.brand.email} with the application or API you want scanned. Written authorization is confirmed before any scan runs.`,
     primaryCta: "Request early access",
   },

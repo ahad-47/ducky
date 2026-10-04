@@ -4,5 +4,5 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function Image() {
-  return buildOgImage({ title: "Find the vulnerabilities that matter. Skip the noise.", showMarks: true });
+  return buildOgImage({ title: "A scanner that only reports what it can reproduce.", showMarks: true });
 }

@@ -2,9 +2,11 @@
 
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { gsap, SplitText, registerGsap, durations } from "@/motion/gsap";
+import { gsap, registerGsap } from "@/motion/gsap";
 import { useReducedMotion } from "@/motion/useReducedMotion";
 
+// The page title comes into focus as one block: a slow fade, a short rise
+// and a blur that clears. No per-word stagger, nothing that can clip text.
 export function RevealHeading({
   as: Tag = "h1",
   className,
@@ -21,30 +23,11 @@ export function RevealHeading({
     () => {
       if (reducedMotion || !ref.current) return;
       registerGsap();
-
-      let split: SplitText | null = null;
-
-      // Split by words, not lines, and animate opacity/transform only: no
-      // element here ever gets `overflow: clip`. A line-mask reveal clips
-      // each line to a box sized at split time, which silently cuts off
-      // real text if that measurement races a webfont swap or a later
-      // resize (confirmed happening intermittently with `type: "lines"` +
-      // `mask: "lines"`). Word-level fade-and-rise reads almost the same
-      // but can never hide content if the measurement is ever stale.
-      split = SplitText.create(ref.current, {
-        type: "words",
-        wordsClass: "inline-block",
-      });
-
-      gsap.from(split.words, {
-        opacity: 0,
-        y: 16,
-        duration: durations.reveal,
-        stagger: 0.025,
-        ease: "report",
-      });
-
-      return () => split?.revert();
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, y: 14, filter: "blur(10px)" },
+        { opacity: 1, y: 0, filter: "blur(0px)", duration: 1.2, ease: "lux", clearProps: "filter,transform" },
+      );
     },
     { scope: ref, dependencies: [reducedMotion] },
   );

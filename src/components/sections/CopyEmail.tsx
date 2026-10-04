@@ -16,7 +16,7 @@ export function CopyEmail({ email }: { email: string }) {
           // Clipboard blocked (e.g. insecure context): the address is visible to copy by hand.
         }
       }}
-      className="inline-flex h-11 items-center rounded-[var(--radius-xs)] border border-rule-strong px-5 text-[15px] font-semibold text-ink hover:bg-white/5"
+      className="inline-flex h-11 items-center rounded-[var(--radius-xs)] border border-rule-strong px-5 text-[15px] font-semibold text-ink hover:bg-accent-tint"
     >
       {copied ? "Copied" : "Copy address"}
     </button>

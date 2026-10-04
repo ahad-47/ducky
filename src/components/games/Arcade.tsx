@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useStaticRender } from "@/components/ui/EmbedContext";
 
 const loading = () => (
-  <div className="mx-auto grid aspect-square w-full max-w-[420px] place-items-center rounded-[var(--radius-xs)] bg-[#111214] text-[14px] text-ink-soft">
+  <div className="mx-auto grid aspect-square w-full max-w-[420px] place-items-center rounded-[var(--radius-xs)] bg-[#e4eaf4] text-[14px] text-ink-soft">
     Loading…
   </div>
 );
@@ -38,7 +38,7 @@ export function Arcade() {
             aria-controls="arcade-panel"
             onClick={() => setActive(g.id)}
             className={`flex shrink-0 items-center gap-3 rounded-[var(--radius-sm)] border px-4 py-3 text-left transition-colors duration-[160ms] ${
-              g.id === active ? "border-accent bg-accent/15" : "border-rule bg-white/[0.03] hover:bg-white/[0.06]"
+              g.id === active ? "border-accent/40 bg-accent-tint" : "border-rule bg-paper-raised hover:border-accent/25"
             }`}
           >
             <span className="font-[family-name:var(--font-mono)] text-[12px] text-accent-text">0{i + 1}</span>

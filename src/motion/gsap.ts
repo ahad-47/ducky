@@ -18,6 +18,7 @@ export function registerGsap() {
 
   CustomEase.create("report", "0.22, 1, 0.36, 1");
   CustomEase.create("gate", "0.65, 0, 0.35, 1");
+  CustomEase.create("lux", "0.16, 1, 0.3, 1");
 
   gsap.ticker.lagSmoothing(0);
 }
@@ -25,7 +26,7 @@ export function registerGsap() {
 export const durations = {
   micro: 0.16,
   ui: 0.28,
-  reveal: 0.7,
+  reveal: 1.1,
 } as const;
 
 export { gsap, ScrollTrigger, SplitText, DrawSVGPlugin, MotionPathPlugin, CustomEase };

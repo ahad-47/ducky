@@ -2,7 +2,7 @@ import { Section } from "@/components/ui/Container";
 import { SecondaryLink } from "@/components/ui/Button";
 import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
 import { Badge, Card } from "@/components/ui/Card";
-import { Icon, type IconName } from "@/components/ui/Icon";
+import { Icon } from "@/components/ui/Icon";
 import { ClosingCta } from "@/components/sections/ClosingCta";
 import { engagementsCopy } from "@/content/copy/engagements";
 import { facts } from "@/content/facts";
@@ -16,8 +16,6 @@ export const metadata = buildMetadata({
   path: "/engagements",
 });
 
-const engagementIcons: IconName[] = ["globe", "layers", "check"];
-const coverageIcons: IconName[] = ["search", "bug", "lock", "shield", "doc"];
 
 export default function EngagementsPage() {
   return (
@@ -28,11 +26,7 @@ export default function EngagementsPage() {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
           {facts.engagements.map((engagement, i) => (
             <Card as="article" key={engagement.name} id={slugify(engagement.name)} pad="p-8" className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent-text">
-                  <Icon name={engagementIcons[i]} className="h-6 w-6" />
-                </span>
-              </div>
+              <p className="font-[family-name:var(--font-mono)] text-[12.5px] text-accent-text">{String(i + 1).padStart(2, "0")}</p>
               <h2 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{engagement.name}</h2>
               <p className="text-[16.5px] text-ink-soft">{engagement.summary}</p>
               <p className="mt-auto flex items-start gap-2 border-t border-rule pt-4 text-[14.5px] text-ink-soft">
@@ -49,8 +43,8 @@ export default function EngagementsPage() {
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {facts.coverage.map((group, i) => (
             <Card key={group.area}>
-              <h3 className="flex items-center gap-3 text-[18px] font-semibold text-ink">
-                <Icon name={coverageIcons[i % coverageIcons.length]} className="h-5 w-5 text-accent-text" />
+              <h3 className="flex items-baseline gap-3 text-[18px] font-semibold text-ink">
+                <span className="font-[family-name:var(--font-mono)] text-[12.5px] font-normal text-accent-text">{String(i + 1).padStart(2, "0")}</span>
                 {group.area}
               </h3>
               <ul className="mt-4 flex flex-col gap-2.5">

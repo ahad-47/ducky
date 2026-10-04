@@ -95,7 +95,7 @@ export function HeroSignal() {
           ) : (
             <Canvas2DRenderer playing={playing} resetSignal={resetSignal} onProgress={handleProgress} />
           )}
-          <div className="pointer-events-none absolute bottom-0 left-0 flex flex-col">
+          <div className="pointer-events-none absolute bottom-0 left-0 flex flex-col rounded-tr-[var(--radius-xs)] bg-paper-raised pr-4 pt-1">
             <span className="font-[family-name:var(--font-serif)] text-display-l tabular-nums text-ink">
               {counter}
             </span>

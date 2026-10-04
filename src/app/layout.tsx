@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { headers } from "next/headers";
-import { dmSans, ibmPlexMono, montserrat } from "@/fonts";
+import { geistMono, geistSans, montserrat } from "@/fonts";
 import { SkipLink } from "@/components/layout/SkipLink";
 import { DesktopClient } from "@/components/desktop/DesktopClient";
 import { EmbedBridge } from "@/components/desktop/EmbedBridge";
@@ -102,7 +102,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     return (
       <html
         lang="en"
-        className={`${dmSans.variable} ${ibmPlexMono.variable} ${montserrat.variable} h-full`}
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} h-full`}
       >
         <body className="h-full overflow-hidden bg-black text-ink">
           {emailOff}
@@ -133,7 +133,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${dmSans.variable} ${ibmPlexMono.variable} ${montserrat.variable} h-full`}
+      className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-paper text-ink">
         {emailOff}

@@ -99,8 +99,10 @@ export function Desktop() {
       const raw = window.localStorage.getItem(SETTINGS_KEY);
       if (raw) {
         const saved = JSON.parse(raw) as Partial<Settings>;
-        // The old default blue accent moves to the new brand orange.
-        if (saved.accent === "#3d5fde") delete saved.accent;
+        // Earlier defaults (orange accent, graphite wallpaper) move to the
+        // current cobalt look; a choice the visitor made themselves stays.
+        if (saved.accent === "#3d5fde" || saved.accent === "#ff5a1f") delete saved.accent;
+        if (saved.wallpaper === "signal") delete saved.wallpaper;
         return { ...defaultSettings, ...saved };
       }
     } catch {}

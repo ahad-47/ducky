@@ -101,7 +101,7 @@ export default function ReportSamplePage() {
             </div>
           </section>
 
-          <p className="mt-12 rounded-[var(--radius-xs)] border border-rule bg-black/20 px-5 py-4 text-[15px] text-ink-soft">
+          <p className="mt-12 rounded-[var(--radius-xs)] border border-rule bg-accent-tint px-5 py-4 text-[15px] text-ink-soft">
             {facts.reportSample.note}
           </p>
         </ReportPaper>

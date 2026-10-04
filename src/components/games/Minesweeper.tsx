@@ -55,7 +55,7 @@ function flood(grid: Cell[], start: number): Cell[] {
   return next;
 }
 
-const numberColor = ["", "#8fa8ff", "#5eead4", "#ff9f55", "#c4b5fd", "#ff6b6b", "#38c2b1", "#f4f6fb", "#9ba8c2"];
+const numberColor = ["", "#2453e6", "#0f7b55", "#c8322b", "#5b21b6", "#9a3412", "#0e7490", "#0a1324", "#64748b"];
 
 export function Minesweeper() {
   const [grid, setGrid] = useState<Cell[]>(emptyGrid);
@@ -168,7 +168,7 @@ export function Minesweeper() {
         </div>
       </div>
       <div
-        className="relative mx-auto grid aspect-square w-full max-w-[420px] select-none gap-1 rounded-[var(--radius-xs)] bg-[#111214] p-1.5 [touch-action:manipulation]"
+        className="relative mx-auto grid aspect-square w-full max-w-[420px] select-none gap-1 rounded-[var(--radius-xs)] bg-[#dfe6f2] p-1.5 [touch-action:manipulation]"
         style={{ gridTemplateColumns: `repeat(${W}, minmax(0, 1fr))`, gridTemplateRows: `repeat(${H}, minmax(0, 1fr))` }}
         onContextMenu={(e) => e.preventDefault()}
       >
@@ -206,8 +206,8 @@ export function Minesweeper() {
                   ? c.n === -1
                     ? "bg-severity-critical/80"
                     : "bg-severity-critical/25"
-                  : "bg-white/[0.03]"
-                : "bg-[#26282d] hover:bg-[#2e3036] active:bg-[#36383e]"
+                  : "bg-[#eef2f9]"
+                : "bg-white shadow-[0_1px_2px_rgba(10,19,36,0.1)] hover:bg-[#f3f6fd] active:bg-[#e8eefb]"
             }`}
             style={c.open && !c.mine ? { color: numberColor[c.n] } : undefined}
           >

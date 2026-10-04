@@ -17,7 +17,7 @@ export function EngagementsTeaser() {
           <li key={engagement.name}>
             <Link
               href={`/engagements#${slugify(engagement.name)}`}
-              className="glass group flex h-full flex-col gap-3 rounded-[var(--radius-sm)] p-7 transition-colors duration-[160ms] hover:border-accent/60 hover:bg-white/[0.08]"
+              className="glass group flex h-full flex-col gap-3 rounded-[var(--radius-sm)] p-7 lift"
             >
               <h3 className="font-[family-name:var(--font-serif)] text-h3 text-ink">{engagement.name}</h3>
               <p className="text-[16px] text-ink-soft">{engagement.summary}</p>

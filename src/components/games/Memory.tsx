@@ -5,14 +5,14 @@ import { GameHud, Overlay, useBest } from "@/components/games/shared";
 import { Icon, type IconName } from "@/components/ui/Icon";
 
 const symbols: { name: IconName; color: string }[] = [
-  { name: "shield", color: "#5eead4" },
-  { name: "lock", color: "#8fa8ff" },
-  { name: "bug", color: "#ff6b6b" },
-  { name: "globe", color: "#ffd166" },
-  { name: "doc", color: "#c4b5fd" },
-  { name: "layers", color: "#ff9f55" },
-  { name: "search", color: "#38c2b1" },
-  { name: "mail", color: "#f4f6fb" },
+  { name: "shield", color: "#0f7b55" },
+  { name: "lock", color: "#2453e6" },
+  { name: "bug", color: "#c8322b" },
+  { name: "globe", color: "#a16207" },
+  { name: "doc", color: "#5b21b6" },
+  { name: "layers", color: "#c2560c" },
+  { name: "search", color: "#0e7490" },
+  { name: "mail", color: "#0a1324" },
 ];
 
 type Card = { id: number; sym: number; matched: boolean };
@@ -89,12 +89,12 @@ export function Memory() {
                 className="relative block h-full w-full transition-transform duration-300 [transform-style:preserve-3d]"
                 style={{ transform: shown ? "rotateY(180deg)" : "none" }}
               >
-                <span className="absolute inset-0 grid place-items-center rounded-xl border border-rule bg-[#1c1d21] [backface-visibility:hidden]">
-                  <span className="h-3 w-3 rounded-full border-2 border-accent/60" />
+                <span className="absolute inset-0 grid place-items-center rounded-xl border border-[#1a3fb8] bg-accent [backface-visibility:hidden]">
+                  <span className="h-3 w-3 rounded-full border-2 border-white/70" />
                 </span>
                 <span
                   className={`absolute inset-0 grid place-items-center rounded-xl border [backface-visibility:hidden] [transform:rotateY(180deg)] ${
-                    c.matched ? "border-severity-low/50 bg-severity-low/10" : "border-accent/50 bg-[#2a1c16]"
+                    c.matched ? "border-severity-low/50 bg-severity-low/10" : "border-accent/40 bg-white"
                   }`}
                   style={{ color: s.color }}
                 >

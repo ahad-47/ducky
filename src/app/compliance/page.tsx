@@ -27,9 +27,6 @@ export default function CompliancePage() {
       <Section className="pt-0">
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
           <Card pad="p-8">
-            <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent-text">
-              <Icon name="globe" className="h-6 w-6" />
-            </span>
             <h2 className="mt-5 font-[family-name:var(--font-serif)] text-h3 text-ink">{complianceCopy.frameworks.h2}</h2>
             <p className="mt-3 text-[16.5px] text-ink-soft">{complianceCopy.frameworks.body}</p>
             <ul className="mt-6 flex flex-wrap gap-2" aria-label="Frameworks mentioned">
@@ -41,9 +38,6 @@ export default function CompliancePage() {
             </ul>
           </Card>
           <Card pad="p-8">
-            <span className="grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent-text">
-              <Icon name="bank" className="h-6 w-6" />
-            </span>
             <h2 className="mt-5 font-[family-name:var(--font-serif)] text-h3 text-ink">{complianceCopy.regulated.h2}</h2>
             <p className="mt-3 text-[16.5px] text-ink-soft">{complianceCopy.regulated.body}</p>
           </Card>
@@ -55,9 +49,7 @@ export default function CompliancePage() {
         <ul className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {complianceCopy.record.items.map((item) => (
             <li key={item} className="glass flex items-center gap-4 rounded-[var(--radius-sm)] px-5 py-4 text-[16.5px] text-ink">
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-severity-low/15 text-severity-low">
-                <Icon name="check" className="h-4 w-4" />
-              </span>
+              <Icon name="check" className="mt-0.5 shrink-0 text-accent h-4 w-4" />
               {item}
             </li>
           ))}

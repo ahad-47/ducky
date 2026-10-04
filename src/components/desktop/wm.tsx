@@ -114,8 +114,8 @@ export type Settings = {
 };
 
 export const defaultSettings: Settings = {
-  wallpaper: "signal",
-  accent: "#ff5a1f",
+  wallpaper: "cobalt",
+  accent: "#2453e6",
   brightness: 100,
   volume: 60,
   nightLight: false,
@@ -168,6 +168,16 @@ export function useWin(): Win {
 
 export const wallpapers: { id: string; name: string; css: string }[] = [
   {
+    id: "cobalt",
+    name: "Cobalt",
+    css: "radial-gradient(ellipse 70% 55% at 18% 0%, rgba(173,205,255,0.85) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 95% 15%, rgba(120,165,255,0.6) 0%, transparent 60%), radial-gradient(ellipse 90% 70% at 50% 115%, rgba(10,30,110,0.9) 0%, transparent 65%), linear-gradient(165deg, #5b8cff 0%, #2f5ff0 38%, #1a3fb8 72%, #0f2577 100%)",
+  },
+  {
+    id: "mist",
+    name: "Mist",
+    css: "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,255,255,0.9) 0%, transparent 60%), linear-gradient(180deg, #c9d9f7 0%, #9fb9ec 55%, #7d9de0 100%)",
+  },
+  {
     id: "signal",
     name: "Signal",
     css: "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(255,120,60,0.16) 0%, transparent 60%), radial-gradient(ellipse 60% 50% at 100% 100%, rgba(255,90,31,0.07) 0%, transparent 60%), linear-gradient(180deg, #111214 0%, #0c0d0f 60%, #09090b 100%)",
@@ -199,4 +209,4 @@ export const wallpapers: { id: string; name: string; css: string }[] = [
   },
 ];
 
-export const accents = ["#ff5a1f", "#eeebe5", "#7ad3a8", "#f2c94c", "#5b8def", "#f0524f", "#c084fc"];
+export const accents = ["#2453e6", "#5b8def", "#0ea5b7", "#0f7b55", "#ff5a1f", "#f0524f", "#c084fc"];

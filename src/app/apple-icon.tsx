@@ -14,11 +14,11 @@ export default function AppleIcon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0C0D0F",
+          background: "#2453E6",
           borderRadius: 36,
         }}
       >
-        <OgLogoMark size={124} color="#FF5A1F" />
+        <OgLogoMark size={124} color="#FFFFFF" />
       </div>
     ),
     size,

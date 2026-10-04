@@ -7,7 +7,7 @@ export function ArcadeSection() {
     <Section id="arcade">
       <SectionHeading
         eyebrow="Arcade"
-        title="Take a break."
+        title="Games"
         intro="Five small games that run right here, with a keyboard, a mouse, or a touch screen. Best scores stay in this browser."
       />
       <div className="mt-10">

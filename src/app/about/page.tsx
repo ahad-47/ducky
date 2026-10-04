@@ -30,9 +30,9 @@ function ContactButtons() {
         href={f.linkedin}
         target="_blank"
         rel="noopener noreferrer me"
-        className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-xs)] border border-rule-strong px-5 text-[15px] font-semibold text-ink hover:bg-white/5"
+        className="inline-flex h-11 items-center gap-2 rounded-[var(--radius-xs)] border border-rule-strong px-5 text-[15px] font-semibold text-ink hover:bg-accent-tint"
       >
-        <Icon name="arrow" className="h-4 w-4" />
+        <Icon name="external" className="h-4 w-4" />
         {aboutCopy.linkedinLabel}
       </a>
     </div>
@@ -126,9 +126,6 @@ export default async function AboutPage() {
         <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {f.credentials.map((c) => (
             <Card key={c.title} pad="p-7" className="flex flex-col gap-3">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-accent/15 text-accent-text">
-                <Icon name="shield" className="h-5 w-5" />
-              </span>
               <h3 className="text-[18px] font-semibold text-ink">{c.title}</h3>
               <p className="text-[15.5px] text-ink-soft">{c.detail}</p>
             </Card>
@@ -194,7 +191,7 @@ export default async function AboutPage() {
         <SectionHeading eyebrow={aboutCopy.work.eyebrow} title={aboutCopy.work.h2} intro={aboutCopy.work.intro} />
         <div className="mt-10 overflow-hidden rounded-[var(--radius-sm)] border border-rule">
           <table className="w-full text-left text-[15px]">
-            <thead className="bg-white/[0.03] text-[13px] text-ink-soft">
+            <thead className="bg-accent-tint/60 text-[13px] text-ink-soft">
               <tr>
                 <th scope="col" className="px-5 py-3 font-medium">Year</th>
                 <th scope="col" className="px-5 py-3 font-medium">Project</th>

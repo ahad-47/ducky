@@ -6,15 +6,15 @@ import { gsap, ScrollTrigger, registerGsap, durations } from "@/motion/gsap";
 import { useReducedMotion } from "@/motion/useReducedMotion";
 
 /**
- * Wraps a group of direct children and staggers them in (fade + rise) as the
- * group scrolls into view. Pass `selector` to target descendants instead of
+ * Wraps a group of direct children and brings them into focus (fade, a
+ * short rise and a blur that clears) as the group scrolls into view. Pass `selector` to target descendants instead of
  * direct children (e.g. list items inside a <ul>).
  */
 export function ScrollReveal({
   children,
   className = "",
   selector,
-  stagger = 0.08,
+  stagger = 0.07,
   as: Tag = "div",
 }: {
   children: React.ReactNode;
@@ -34,7 +34,7 @@ export function ScrollReveal({
       const targets = selector ? ref.current.querySelectorAll(selector) : Array.from(ref.current.children);
       if (targets.length === 0) return;
 
-      gsap.set(targets, { opacity: 0, y: 24 });
+      gsap.set(targets, { opacity: 0, y: 12, filter: "blur(6px)" });
 
       const trigger = ScrollTrigger.create({
         trigger: ref.current,
@@ -44,9 +44,11 @@ export function ScrollReveal({
           gsap.to(targets, {
             opacity: 1,
             y: 0,
+            filter: "blur(0px)",
             duration: durations.reveal,
-            ease: "report",
+            ease: "lux",
             stagger,
+            clearProps: "filter,transform",
           });
         },
       });

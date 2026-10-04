@@ -28,9 +28,6 @@ export default function ContactPage() {
           <div className="flex flex-col gap-5 lg:col-span-7">
             <Card pad="p-6 sm:p-8" className="relative overflow-hidden">
               <div className="relative">
-                <span className="grid h-12 w-12 place-items-center rounded-xl bg-accent/15 text-accent-text">
-                  <Icon name="mail" className="h-6 w-6" />
-                </span>
                 <p className="mt-5 font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-wide text-ink-soft">
                   {contactCopy.emailLabel}
                 </p>
@@ -56,7 +53,7 @@ export default function ContactPage() {
               <ul className="mt-5 flex flex-col gap-3">
                 {contactCopy.include.items.map((item) => (
                   <li key={item} className="flex gap-3 text-[16px] text-ink-soft">
-                    <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-severity-low" />
+                    <Icon name="check" className="mt-1 h-4 w-4 shrink-0 text-accent" />
                     {item}
                   </li>
                 ))}
@@ -83,7 +80,7 @@ export default function ContactPage() {
                   <li key={r.href}>
                     <Link
                       href={r.href}
-                      className="group flex items-center gap-3 rounded-[var(--radius-xs)] px-4 py-3 text-[15.5px] text-ink hover:bg-white/5"
+                      className="group flex items-center gap-3 rounded-[var(--radius-xs)] px-4 py-3 text-[15.5px] text-ink hover:bg-accent-tint"
                     >
                       <Icon name={r.icon} className="h-5 w-5 text-accent-text" />
                       {r.label}

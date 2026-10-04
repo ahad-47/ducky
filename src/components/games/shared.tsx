@@ -108,7 +108,7 @@ export function GameHud({
   return (
     <div className="mb-4 flex flex-wrap items-center gap-2">
       {items.map((it) => (
-        <div key={it.label} className="rounded-[var(--radius-xs)] border border-rule bg-black/20 px-3 py-1.5">
+        <div key={it.label} className="rounded-[var(--radius-xs)] border border-rule bg-paper-raised px-3 py-1.5">
           <p className="font-[family-name:var(--font-mono)] text-[10.5px] uppercase tracking-wide text-ink-soft">{it.label}</p>
           <p className="font-[family-name:var(--font-mono)] text-[16px] leading-tight text-ink">{it.value}</p>
         </div>
@@ -126,23 +126,27 @@ export function GameHud({
 
 export function Overlay({ title, body, action, onAction }: { title: string; body?: string; action: string; onAction: () => void }) {
   return (
-    <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-3 rounded-[var(--radius-xs)] bg-paper/80 p-6 text-center backdrop-blur-sm">
-      <p className="font-[family-name:var(--font-serif)] text-[24px] text-ink">{title}</p>
-      {body ? <p className="max-w-[28ch] text-[14.5px] text-ink-soft">{body}</p> : null}
-      <button
-        type="button"
-        onClick={onAction}
-        className="mt-1 h-11 rounded-[var(--radius-xs)] bg-accent px-5 text-[15px] font-semibold text-accent-ink hover:bg-accent-hover"
-      >
-        {action}
-      </button>
+    // A white card over a light veil reads on both the dark canvas boards
+    // and the light tile boards.
+    <div className="absolute inset-0 z-10 grid place-items-center rounded-[var(--radius-xs)] bg-[#0a1324]/25 p-5 backdrop-blur-[2px]">
+      <div className="flex max-w-[300px] flex-col items-center gap-3 rounded-[var(--radius-sm)] bg-paper-raised px-6 py-6 text-center shadow-[var(--shadow-lift)]">
+        <p className="text-[22px] font-semibold tracking-[-0.02em] text-ink">{title}</p>
+        {body ? <p className="text-[14.5px] text-ink-soft">{body}</p> : null}
+        <button
+          type="button"
+          onClick={onAction}
+          className="mt-1 h-11 rounded-[var(--radius-xs)] bg-accent px-5 text-[15px] font-medium text-accent-ink hover:bg-accent-hover"
+        >
+          {action}
+        </button>
+      </div>
     </div>
   );
 }
 
 export function DPad({ onDir }: { onDir: (d: Dir) => void }) {
   const btn =
-    "grid h-12 w-12 place-items-center rounded-xl border border-rule bg-white/5 text-ink active:bg-accent/30 select-none";
+    "grid h-12 w-12 place-items-center rounded-xl border border-rule bg-paper-raised text-ink active:bg-accent-tint select-none";
   const arrow = (rot: number) => (
     <svg viewBox="0 0 24 24" className="h-5 w-5" style={{ transform: `rotate(${rot}deg)` }} aria-hidden>
       <path d="M12 6l6 8H6z" fill="currentColor" />

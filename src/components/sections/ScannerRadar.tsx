@@ -5,7 +5,7 @@ import { LogoMark } from "@/components/ui/Logo";
 export function ScannerRadar({ label }: { label: string }) {
   return (
     <div aria-hidden className="relative mx-auto aspect-square w-full max-w-[420px]">
-      <div className="absolute inset-0 rounded-full border border-accent/30 bg-[radial-gradient(circle,rgba(255,90,31,0.10)_0%,transparent_70%)]" />
+      <div className="absolute inset-0 rounded-full border border-accent/30 bg-[radial-gradient(circle,rgba(36,83,230,0.08)_0%,transparent_70%)]" />
       {[0.75, 0.5, 0.25].map((s) => (
         <div
           key={s}
@@ -17,7 +17,7 @@ export function ScannerRadar({ label }: { label: string }) {
       <div className="absolute inset-y-0 left-1/2 w-px bg-accent/15" />
       <div
         className="scanner-sweep absolute inset-0 rounded-full"
-        style={{ background: "conic-gradient(from 0deg, rgba(255,138,92,0.30), transparent 22%)" }}
+        style={{ background: "conic-gradient(from 0deg, rgba(36,83,230,0.22), transparent 22%)" }}
       />
       {[
         [28, 34],
@@ -33,7 +33,7 @@ export function ScannerRadar({ label }: { label: string }) {
         />
       ))}
       <div className="absolute inset-0 grid place-items-center">
-        <div className="flex flex-col items-center gap-3 rounded-2xl border border-white/10 bg-paper px-6 py-5 text-accent-text">
+        <div className="flex flex-col items-center gap-3 rounded-2xl border border-rule bg-paper-raised shadow-[var(--shadow-soft)] px-6 py-5 text-accent-text">
           <LogoMark className="h-12 w-12" />
           <span className="font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-[0.2em] text-ink-soft">{label}</span>
         </div>

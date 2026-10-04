@@ -270,7 +270,7 @@ export const facts = {
   // What the scanning engine does and never does. Honest, no overclaim.
   system: {
     summary:
-      "The SkilledScan engine does the repeatable work of a security assessment at machine speed: discovery, check selection, and execution, all under policy.",
+      "The engine automates the repeatable parts of a security assessment: mapping the target, choosing checks and running them, all within policy.",
     does: [
       "Maps the target's technology and attack surface.",
       "Proposes checks that fit what it found, from a fixed registry of approved checks.",
@@ -296,7 +296,7 @@ export const facts = {
     {
       name: "Web application scanning",
       summary:
-        "Full coverage of a web application: authentication, access control, injection, configuration, and business logic, with confirmed findings in the report.",
+        "Testing across a web application's authentication, access control, injection points, configuration and business logic. Only confirmed findings go in the report.",
       scopeNote: "Scope and depth agreed before testing starts.",
     },
     {

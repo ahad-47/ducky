@@ -27,7 +27,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
   return (
     <header
       className={`sticky top-0 z-40 border-b transition-colors duration-[280ms] ${
-        scrolled ? "border-white/10 bg-paper/80 backdrop-blur-xl" : "border-transparent bg-transparent"
+        scrolled ? "border-rule bg-paper/80 backdrop-blur-xl backdrop-saturate-150" : "border-transparent bg-transparent"
       }`}
     >
       <div className="mx-auto flex h-16 max-w-[var(--content-max)] items-center gap-6 px-[var(--side-padding)]">
@@ -44,7 +44,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
                 href={link.href}
                 aria-current={current ? "page" : undefined}
                 className={`whitespace-nowrap rounded-full px-3 py-1.5 text-[14.5px] font-medium transition-colors duration-[160ms] ${
-                  current ? "bg-white/10 text-ink" : "text-ink-soft hover:bg-white/5 hover:text-ink"
+                  current ? "bg-ink/[0.06] text-ink" : "text-ink-soft hover:bg-ink/[0.04] hover:text-ink"
                 }`}
               >
                 {link.label}

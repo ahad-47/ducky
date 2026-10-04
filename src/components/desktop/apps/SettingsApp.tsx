@@ -160,7 +160,7 @@ function About() {
               try {
                 window.localStorage.removeItem("skilledscan-os:icons:v1");
               } catch {}
-              os.updateSettings({ wallpaper: "signal", accent: "#ff5a1f", brightness: 100, nightLight: false });
+              os.updateSettings({ wallpaper: "cobalt", accent: "#2453e6", brightness: 100, nightLight: false });
               os.notify("Desktop reset", "Default files and settings restored.");
               setConfirm(false);
             }}

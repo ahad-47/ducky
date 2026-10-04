@@ -4,5 +4,5 @@ export const size = ogSize;
 export const contentType = ogContentType;
 
 export default async function Image() {
-  return buildOgImage({ title: "Evidence for the rules you answer to." });
+  return buildOgImage({ title: "Scan evidence for your auditor." });
 }
