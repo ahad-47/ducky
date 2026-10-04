@@ -733,3 +733,15 @@ h3 {
     }
   }
 }
+
+/* iOS Safari zooms into any focused field under 16px. Pinch zoom stays on
+   (WCAG 1.4.4), so touch screens get 16px fields instead. Unlayered on
+   purpose: it has to beat the size utilities on the address bar, editor
+   and terminal input. */
+@media (pointer: coarse) {
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}

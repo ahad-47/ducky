@@ -11,7 +11,7 @@ export const homeCopy = {
     caption: `One scan: ${facts.signalResult.raw} raw observations, ${facts.signalResult.verified} confirmed findings reported. Duplicates, non-issues and noise stay in the raw log for audit.`,
   },
   proof: {
-    label: "From one real scan",
+    label: "Real result: one authorized client scan, client details withheld",
     raw: "raw observations",
     confirmed: "confirmed findings",
     body: `Every candidate is reproduced before it reaches the report. On this scan that removed ${facts.signalResult.raw - facts.signalResult.verified} duplicates, non-issues and noise. They stay in the raw log, so your auditor can still see them.`,

@@ -7,7 +7,6 @@ import { ReportTeaser } from "@/components/sections/ReportTeaser";
 import { EngagementsTeaser } from "@/components/sections/EngagementsTeaser";
 import { GlobalReach } from "@/components/sections/GlobalReachLazy";
 import { ClosingCta } from "@/components/sections/ClosingCta";
-import { ArcadeSection } from "@/components/sections/ArcadeSection";
 import { homeCopy } from "@/content/copy/home";
 import { buildMetadata } from "@/lib/seo";
 
@@ -29,7 +28,6 @@ export default function Home() {
       <ReportTeaser />
       <EngagementsTeaser />
       <GlobalReach />
-      <ArcadeSection />
       <ClosingCta
         h2={homeCopy.closing.h2}
         body={homeCopy.closing.body}

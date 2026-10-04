@@ -13,6 +13,7 @@ const paths = {
   mail: "M4 6h16v12H4zm0 0 8 7 8-7",
   clock: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-13v4.5l3 2",
   search: "M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-4.3-4.3",
+  chevron: "m6 9 6 6 6-6",
   layers: "m12 3 9 5-9 5-9-5zm-9 9 9 5 9-5m-18 4 9 5 9-5",
 } as const;
 

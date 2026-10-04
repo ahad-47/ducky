@@ -13,7 +13,7 @@ export const methodCopy = {
     eyebrow: "The engine",
     h2: "Powerful by default, safe by design",
     intro: facts.system.summary,
-    body: "AI plans which checks fit the target. The checks themselves come from a fixed registry and run only when the policy gate approves them.",
+    body: "The engine proposes checks that fit what it found. The checks themselves come from a fixed registry and run only when the policy gate approves them.",
     doesLabel: "What it does",
     doesNotLabel: "What it will never do",
   },
@@ -23,7 +23,7 @@ export const methodCopy = {
   verification: {
     h2: "Confirmed findings, not guesses.",
     body: `A candidate only becomes a finding once it is reproduced. On one scan that turned ${facts.verificationResult.raw} raw observations into ${facts.verificationResult.reported} reported findings.`,
-    figureLabel: "One scan",
+    figureLabel: "Real result: one authorized client scan, client details withheld",
     survived: "of raw observations were confirmed and reported.",
   },
   authorization: {

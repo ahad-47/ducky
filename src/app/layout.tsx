@@ -13,14 +13,12 @@ import { facts } from "@/content/facts";
 import { appSignInUrl, env } from "@/lib/env";
 import "./globals.css";
 
-// The desktop is an app surface, not a document: no pinch or double-tap
-// zoom (which also stops iOS zooming into focused inputs), and draw under
-// the notch and home indicator, which the shell pads for itself.
+// Zoom stays available (WCAG 1.4.4). iOS zooming into focused inputs is
+// avoided with 16px inputs on touch screens instead (globals.css). The
+// shell draws under the notch and home indicator and pads for itself.
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
   viewportFit: "cover",
   themeColor: "#0c0d0f",
 };
@@ -42,13 +40,47 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   // (iframes, flagged by src/proxy.ts) render as plain pages.
   const embedded = requestHeaders.get("x-os-embed") === "1";
 
+  const path = requestHeaders.get("x-os-path") ?? "/";
+  const page = pages.find((p) => p.route === path);
+
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: facts.brand.name,
-    url: facts.brand.url,
-    description: facts.brand.oneLiner,
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${facts.brand.url}/#organization`,
+        name: facts.brand.name,
+        url: facts.brand.url,
+        logo: `${facts.brand.url}/apple-icon`,
+        email: facts.brand.email,
+        description: facts.brand.oneLiner,
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${facts.brand.url}/#website`,
+        name: facts.brand.name,
+        url: facts.brand.url,
+        publisher: { "@id": `${facts.brand.url}/#organization` },
+      },
+      ...(page && page.route !== "/"
+        ? [
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: facts.brand.url },
+                { "@type": "ListItem", position: 2, name: page.title, item: `${facts.brand.url}${page.route}` },
+              ],
+            },
+          ]
+        : []),
+    ],
   };
+
+  // Cloudflare's email obfuscation rewrites addresses into
+  // /cdn-cgi/l/email-protection links that crawlers cannot read. These
+  // documented markers switch it off for everything between them.
+  const emailOff = <span hidden dangerouslySetInnerHTML={{ __html: "<!--email_off-->" }} />;
+  const emailOn = <span hidden dangerouslySetInnerHTML={{ __html: "<!--/email_off-->" }} />;
 
   const structuredData = (
     <script
@@ -66,25 +98,26 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         className={`${dmSans.variable} ${ibmPlexMono.variable} ${montserrat.variable} h-full`}
       >
         <body className="h-full overflow-hidden bg-black text-ink">
+          {emailOff}
           {structuredData}
+          {/* The page itself, rendered on the server for crawlers and for
+              browsers without JavaScript. With scripts on it stays hidden
+              under the desktop, which opens the same page in a window. */}
           <noscript>
-            <div className="p-8">
-              <p className="mb-4">
-                SkilledScan OS needs JavaScript. The pages are available
-                directly:
-              </p>
-              <ul className="list-disc pl-6">
-                {pages.map((p) => (
-                  <li key={p.route}>
-                    <a className="underline" href={`${p.route}?embed=1`}>
-                      {p.title}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <style>{`.ssr-page{display:block}.desktop-boot{display:none}body{height:auto;overflow:auto;background:var(--paper)}`}</style>
           </noscript>
+          <EmbedProvider embedded={false} staticRender>
+            <div className="ssr-page relative hidden min-h-full flex-col bg-paper">
+              <SkipLink />
+              <SiteHeader signInUrl={appSignInUrl} />
+              <main id="main" className="relative flex-1">
+                {children}
+              </main>
+              <Footer />
+            </div>
+          </EmbedProvider>
           <DesktopClient />
+          {emailOn}
         </body>
       </html>
     );
@@ -96,6 +129,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${dmSans.variable} ${ibmPlexMono.variable} ${montserrat.variable} h-full`}
     >
       <body className="flex min-h-full flex-col bg-paper text-ink">
+        {emailOff}
         {structuredData}
         <EmbedBridge />
         <EmbedProvider embedded>
@@ -114,6 +148,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             </div>
           </SmoothScroll>
         </EmbedProvider>
+        {emailOn}
       </body>
     </html>
   );

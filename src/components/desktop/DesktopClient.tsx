@@ -8,7 +8,7 @@ import { pages } from "@/components/desktop/pages";
 // render, so it renders on the client only.
 const Desktop = dynamic(() => import("@/components/desktop/Desktop").then((m) => m.Desktop), {
   ssr: false,
-  loading: () => <div className="fixed inset-0 bg-black" />,
+  loading: () => <div className="desktop-boot fixed inset-0 bg-black" />,
 });
 
 // If the desktop's code fails to download (flaky mobile network, a CDN

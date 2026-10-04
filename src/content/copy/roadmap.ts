@@ -3,4 +3,5 @@ export const roadmapCopy = {
   intro: "Items move to Live only when they ship.",
   liveLabel: "Live",
   nextLabel: "Building",
+  nextNote: "No ship dates are published until a date is firm. Ask by email if one item matters to you.",
 } as const;

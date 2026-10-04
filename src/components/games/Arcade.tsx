@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { useStaticRender } from "@/components/ui/EmbedContext";
 
 const loading = () => (
   <div className="mx-auto grid aspect-square w-full max-w-[420px] place-items-center rounded-[var(--radius-xs)] bg-[#111214] text-[14px] text-ink-soft">
@@ -21,6 +22,8 @@ const games = [
 export function Arcade() {
   const [active, setActive] = useState(games[0].id);
   const game = games.find((g) => g.id === active)!;
+  // The hidden static copy of a page must not start a game or take keys.
+  const staticRender = useStaticRender();
 
   return (
     <div className="grid grid-cols-1 gap-6 lg:grid-cols-[240px_1fr] lg:gap-10">
@@ -47,7 +50,7 @@ export function Arcade() {
         ))}
       </div>
       <div id="arcade-panel" role="tabpanel" aria-labelledby={`tab-${game.id}`} className="glass rounded-[var(--radius-sm)] p-4 sm:p-6">
-        <game.Component key={game.id} />
+        {staticRender ? loading() : <game.Component key={game.id} />}
       </div>
     </div>
   );

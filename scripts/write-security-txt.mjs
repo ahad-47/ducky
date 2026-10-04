@@ -7,7 +7,8 @@ const outPath = join(__dirname, "..", "public", ".well-known", "security.txt");
 
 const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString();
 
-const content = `Contact: https://skilledscan.com/security
+const content = `Contact: mailto:contact@skilledscan.com
+Contact: https://skilledscan.com/security
 Expires: ${expires}
 Preferred-Languages: en
 Canonical: https://skilledscan.com/.well-known/security.txt

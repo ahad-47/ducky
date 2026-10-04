@@ -94,6 +94,7 @@ export function CalculatorApp() {
         <input
           ref={inputRef}
           data-autofocus
+          data-keep-size
           value={expr}
           aria-label="Expression"
           onChange={(e) => {

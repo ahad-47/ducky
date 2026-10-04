@@ -7,6 +7,7 @@ import { StaticFrame } from "@/components/hero/StaticFrame";
 import { Canvas2DRenderer } from "@/components/hero/Canvas2DRenderer";
 import { getCounterValue, TOTAL_POINTS, FINDING_COUNT } from "@/components/hero/choreography";
 import { useReducedMotion } from "@/motion/useReducedMotion";
+import { useStaticRender } from "@/components/ui/EmbedContext";
 import { gsap, registerGsap, durations } from "@/motion/gsap";
 
 const WebGLRenderer = dynamic(
@@ -29,6 +30,7 @@ function detectCanvas2DOnly(): boolean {
 
 export function HeroSignal() {
   const reducedMotion = useReducedMotion();
+  const staticRender = useStaticRender();
   const [renderer, setRenderer] = useState<RendererKind>("static");
   const [ready, setReady] = useState(false);
   const [playing, setPlaying] = useState(true);
@@ -39,7 +41,7 @@ export function HeroSignal() {
   const dynamicRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || staticRender) return;
 
     const idle = (window as typeof window & { requestIdleCallback?: (cb: () => void) => number })
       .requestIdleCallback;
@@ -50,7 +52,7 @@ export function HeroSignal() {
       setRenderer(canvas2DOnly ? "canvas2d" : "webgl");
       setReady(true);
     });
-  }, [reducedMotion]);
+  }, [reducedMotion, staticRender]);
 
   useGSAP(
     () => {

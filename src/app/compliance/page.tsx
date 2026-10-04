@@ -10,12 +10,12 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Compliance | SkilledScan",
   description:
-    "Testing evidence for global compliance frameworks and regulated industries: scope, method, findings, and remediation in one report.",
+    "Vulnerability scan evidence for SOC 2, ISO 27001 and data protection reviews: scope, method, confirmed findings and remediation in one report.",
   path: "/compliance",
 });
 
 // Named in the frameworks copy below; shown as chips for scanning.
-const frameworks = ["GDPR", "SOC 2 readiness", "ISO 27001 alignment", "Regional data protection laws"];
+const frameworks = ["SOC 2", "ISO 27001", "GDPR", "Regional data protection laws"];
 
 export default function CompliancePage() {
   return (

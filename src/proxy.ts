@@ -12,8 +12,13 @@ export function proxy(request: NextRequest) {
   const headers = new Headers(request.headers);
   headers.delete("x-os-embed");
   if (embed) headers.set("x-os-embed", "1");
+  // The layout builds breadcrumbs from it.
+  headers.set("x-os-path", request.nextUrl.pathname);
 
   const response = NextResponse.next({ request: { headers } });
+  // The bare in-window copy duplicates the canonical page; keep it out of
+  // search indexes. Links on it are still followed.
+  if (embed) response.headers.set("X-Robots-Tag", "noindex, follow");
   // Pages are rendered per request (desktop or bare page from the same URL).
   // Next already sends Cache-Control: private, no-store; these say the same
   // to CDNs that read their own header instead (Hostinger's sits in front).

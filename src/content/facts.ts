@@ -57,7 +57,7 @@ export const facts = {
       name: "Active testing",
       short: "Test the candidates under strict limits.",
       detail:
-        "Checks run against approved targets only, rate-limited, non-destructive, and logged. No brute force by default.",
+        "Checks run against approved targets only, rate-limited, non-destructive, and logged.",
     },
     {
       step: 5,
@@ -89,12 +89,11 @@ export const facts = {
       "Test anything outside the approved scope.",
       "Run a check the policy gate has not approved.",
       "Remove rate limits or run destructive checks.",
-      "Brute-force credentials by default.",
     ],
     governance: [
       "Only approved, in-scope targets are tested.",
       "Every check is rate-limited and non-destructive.",
-      "No brute force by default.",
+      "Credential brute forcing stays off unless the agreed scope includes it.",
       "Every proposed, allowed, and blocked action is written to an audit log.",
       "If the planning model is unavailable, scanning continues on a fixed plan.",
     ],
