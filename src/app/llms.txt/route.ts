@@ -10,6 +10,7 @@ const summaries: Record<string, string> = {
   "/report-sample": "A redacted sample report with one finding written out in full.",
   "/compliance": "How a report serves as vulnerability scan evidence for SOC 2, ISO 27001 and data protection reviews.",
   "/roadmap": "What is live today and what is being built.",
+  "/about": `Founder: ${facts.founder.name}. ${facts.founder.credentials.map((c) => c.title).join("; ")}. ${facts.founder.stats.map((s) => `${s.value} ${s.label}`).join("; ")}.`,
   "/faq": "Authorization, scope, production safety, deliverables, rescans and compliance.",
   "/scanner": "The self-serve console, in development.",
   "/contact": `How to request a scan: email ${facts.brand.email}.`,

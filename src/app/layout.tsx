@@ -54,6 +54,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         logo: `${facts.brand.url}/apple-icon`,
         email: facts.brand.email,
         description: facts.brand.oneLiner,
+        founder: { "@type": "Person", name: facts.founder.name },
       },
       {
         "@type": "WebSite",

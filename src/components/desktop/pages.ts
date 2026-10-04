@@ -7,6 +7,7 @@ export const pages: { route: string; file: string; title: string }[] = [
   { route: "/compliance", file: "compliance.html", title: "Compliance" },
   { route: "/roadmap", file: "roadmap.html", title: "Roadmap" },
   { route: "/security", file: "security.html", title: "Security" },
+  { route: "/about", file: "about.html", title: "About" },
   { route: "/faq", file: "faq.html", title: "FAQ" },
   { route: "/contact", file: "contact.html", title: "Contact" },
   { route: "/scanner", file: "scanner.html", title: "Self-serve console (coming soon)" },

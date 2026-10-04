@@ -9,6 +9,7 @@ const routes = [
   "/compliance",
   "/roadmap",
   "/scanner",
+  "/about",
   "/faq",
   "/contact",
   "/security",
