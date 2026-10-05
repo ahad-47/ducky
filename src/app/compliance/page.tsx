@@ -8,7 +8,7 @@ import { complianceCopy } from "@/content/copy/compliance";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Compliance | SkilledScan",
+  title: "SOC 2 & ISO 27001 Vulnerability Scan Evidence | SkilledScan",
   description:
     "Vulnerability scan evidence for SOC 2, ISO 27001 and data protection reviews: scope, method, confirmed findings and remediation in one report.",
   path: "/compliance",

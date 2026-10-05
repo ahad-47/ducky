@@ -9,8 +9,9 @@ import { scannerCopy } from "@/content/copy/scanner";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Self-serve console (coming soon) | SkilledScan",
-  description: "The self-serve SkilledScan console is in development. Request early access by email.",
+  title: "Self-Serve Scanning Console, Coming Soon | SkilledScan",
+  description:
+    "The self-serve SkilledScan console for starting scans, tracking findings and downloading reports is in development. Request early access by email.",
   path: "/scanner",
 });
 

@@ -5,9 +5,13 @@ import { facts } from "@/content/facts";
 // periods, turnaround times) are left out until they have one.
 export const faqCopy = {
   eyebrow: "FAQ",
-  h1: "Questions before a scan",
-  intro: "Short answers about authorization, scope, safety and what you receive.",
+  h1: "Security scanning FAQ",
+  intro: "Short answers about authorization, scope, production safety, reports, rescans and how scanning differs from a penetration test.",
   items: [
+    {
+      q: "What is the difference between a vulnerability scan and a penetration test?",
+      a: "A vulnerability scan runs automated checks against an application to find known weaknesses. A penetration test has a tester try to exploit weaknesses and chain them together. SkilledScan is a scanner, but it reproduces each candidate before reporting it, so the report holds confirmed findings rather than a raw list of possibilities.",
+    },
     {
       q: "Do you need permission to scan my application?",
       a: "Yes. SkilledScan only scans targets you own or have written permission to test, and written authorization is confirmed before any scan runs.",
@@ -21,6 +25,14 @@ export const faqCopy = {
       a: "Checks are rate-limited and non-destructive, and credential brute forcing stays off unless the agreed scope includes it. You can ask for staging instead of production and state any timing constraints when you set up the scan.",
     },
     {
+      q: "Do you test REST and GraphQL APIs?",
+      a: "Yes. API scanning covers REST and GraphQL APIs for broken authorization, injection and data exposure. You can provide an OpenAPI file or a Postman collection, or the routes are mapped first.",
+    },
+    {
+      q: "Do you need our source code?",
+      a: "No. Scans are black-box: the running application or API is tested from the outside, the way an attacker would see it.",
+    },
+    {
       q: "What do I receive?",
       a: `A report in HTML and PDF with ${facts.reportSample.sections.length} sections, including an executive summary, scope, methodology, findings with evidence and a fix, a remediation summary, and a statement of what was and was not covered.`,
     },
@@ -31,6 +43,10 @@ export const faqCopy = {
     {
       q: "Do you scan again after we fix the findings?",
       a: "Yes. A rescan covers the findings from a prior scan, and a closeout states what was resolved.",
+    },
+    {
+      q: "Which tools are used?",
+      a: `The report's appendix lists them so your auditor can see the method. They include ${facts.toolsAppendix.categories.flatMap((c) => c.items).join(", ")}.`,
     },
     {
       q: "Does a report make us compliant with SOC 2 or ISO 27001?",

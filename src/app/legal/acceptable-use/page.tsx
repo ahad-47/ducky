@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Acceptable use policy | SkilledScan",
-  description: "Authorized targets only, and what is not allowed.",
+  description: "SkilledScan acceptable use policy: scan only targets you own or have written permission to test, what is not allowed, and how misuse is handled.",
   path: "/legal/acceptable-use",
 });
 

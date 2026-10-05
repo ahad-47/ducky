@@ -8,8 +8,8 @@ import { contactCopy } from "@/content/copy/contact";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Contact | SkilledScan",
-  description: `Request early access or set up a scan. Email ${contactCopy.email}.`,
+  title: "Request a Security Scan | Contact SkilledScan",
+  description: `Request a web application or API security scan, ask about early access, or ask a question. Email ${contactCopy.email}.`,
   path: "/contact",
 });
 

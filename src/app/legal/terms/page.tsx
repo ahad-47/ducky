@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Terms of use | SkilledScan",
-  description: "Terms for using skilledscan.com.",
+  description: "Terms for using skilledscan.com: content, intellectual property, liability, how scans are governed, and governing law.",
   path: "/legal/terms",
 });
 

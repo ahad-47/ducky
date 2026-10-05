@@ -4,7 +4,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Privacy policy | SkilledScan",
-  description: "What skilledscan.com collects and why.",
+  description: "What skilledscan.com collects, why, how long it is kept, and your rights under India's Digital Personal Data Protection Act, 2023.",
   path: "/legal/privacy",
 });
 

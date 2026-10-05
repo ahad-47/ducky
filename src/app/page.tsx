@@ -11,9 +11,9 @@ import { homeCopy } from "@/content/copy/home";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "SkilledScan | Web and API security scanning",
+  title: "Web Application & API Security Scanner | SkilledScan",
   description:
-    "SkilledScan maps your attack surface, runs approved security checks under strict limits, and reports only confirmed findings, with evidence and a fix for each.",
+    "SkilledScan is a web application and API security scanner that reproduces every finding before it is reported. Each one comes with evidence and a fix.",
   path: "/",
 });
 

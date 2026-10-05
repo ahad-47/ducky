@@ -29,6 +29,7 @@ const columns = [
       { href: "/legal/privacy", label: "Privacy policy" },
       { href: "/legal/terms", label: "Terms of use" },
       { href: "/legal/acceptable-use", label: "Acceptable use" },
+      { href: "/site-map", label: "Site map" },
     ],
   },
 ];

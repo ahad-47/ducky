@@ -10,9 +10,9 @@ import { facts } from "@/content/facts";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Platform | SkilledScan",
+  title: "How Our Vulnerability Scanner Works | SkilledScan",
   description:
-    "The SkilledScan engine: six stages from discovery to report, policy-gated checks, sandboxed execution, and a full audit log.",
+    "Six stages from recon to report: attack surface mapping, enumeration, vulnerability analysis, policy-gated testing, verification and reporting.",
   path: "/method",
 });
 

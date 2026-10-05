@@ -2,8 +2,8 @@ import { facts } from "@/content/facts";
 
 export const homeCopy = {
   hero: {
-    eyebrow: "Web and API security scanning",
-    h1: "A scanner that only reports what it can reproduce.",
+    eyebrow: "Black-box testing for web apps and APIs",
+    h1: "Web and API security scanning that reports only what it can reproduce.",
     subhead:
       "SkilledScan tests your web apps and APIs inside the scope you approve. Anything it can't reproduce stays out of the report, and every finding that makes it in comes with the evidence and a fix.",
     primaryCta: "Request early access",

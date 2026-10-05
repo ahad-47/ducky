@@ -2,7 +2,7 @@ import { facts } from "@/content/facts";
 
 export const contactCopy = {
   eyebrow: "Contact",
-  h1: "Get in touch",
+  h1: "Request a security scan",
   intro: "Ask a question, request early access or set up a scan. One inbox handles all of it.",
   email: facts.brand.email,
   emailLabel: "Email us",

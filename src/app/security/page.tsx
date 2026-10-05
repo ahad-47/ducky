@@ -7,8 +7,9 @@ import { securityCopy } from "@/content/copy/security";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Security and disclosure | SkilledScan",
-  description: "How to report a vulnerability in SkilledScan.",
+  title: "Vulnerability Disclosure Policy | SkilledScan",
+  description:
+    "How to report a vulnerability in SkilledScan: testing guidelines, good-faith safe harbour, what to include, and our machine-readable security.txt.",
   path: "/security",
 });
 

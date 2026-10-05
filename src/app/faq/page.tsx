@@ -7,7 +7,7 @@ import { faqCopy } from "@/content/copy/faq";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "FAQ | SkilledScan",
+  title: "Security Scanning FAQ | SkilledScan",
   description:
     "Answers on authorization, scope, production safety, report contents, rescans and compliance evidence for SkilledScan web and API scans.",
   path: "/faq",

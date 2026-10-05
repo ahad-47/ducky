@@ -11,8 +11,8 @@ import { buildMetadata } from "@/lib/seo";
 const f = facts.founder;
 
 export const metadata = buildMetadata({
-  title: `${f.name} | Cybersecurity Consultant, Penetration Tester and Founder of SkilledScan`,
-  description: `${f.name} is a CEH-certified penetration tester from India, listed in the NCIIPC Hall of Fame, with 500+ security projects for clients in 70+ countries since ${f.since}. Founder of SkilledScan.`,
+  title: `${f.name}: Penetration Tester, Founder of SkilledScan`,
+  description: `${f.name} is a CEH-certified penetration tester from India in the NCIIPC Hall of Fame, with 500+ security projects in 70+ countries. Founder of SkilledScan.`,
   path: "/about",
 });
 

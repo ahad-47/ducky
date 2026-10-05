@@ -1,5 +1,5 @@
 export const reportSampleCopy = {
-  h1: "A sample report",
+  h1: "Sample vulnerability scan report",
   intro:
     "A redacted SkilledScan report. One finding is written out in full so you can see the level of detail in each entry.",
   atAGlance: "At a glance",

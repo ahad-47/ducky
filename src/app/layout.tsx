@@ -7,7 +7,7 @@ import { EmbedBridge } from "@/components/desktop/EmbedBridge";
 import { Footer } from "@/components/layout/Footer";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { EmbedProvider } from "@/components/ui/EmbedContext";
-import { pages } from "@/components/desktop/pages";
+import { siteMap } from "@/content/site-map";
 import { SmoothScroll } from "@/motion/SmoothScroll";
 import { facts } from "@/content/facts";
 import { appSignInUrl, env } from "@/lib/env";
@@ -26,7 +26,7 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
-    default: "SkilledScan | Web and API security scanning",
+    default: "Web Application & API Security Scanner | SkilledScan",
     template: "%s",
   },
   description:
@@ -41,7 +41,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   const embedded = requestHeaders.get("x-os-embed") === "1";
 
   const path = requestHeaders.get("x-os-path") ?? "/";
-  const page = pages.find((p) => p.route === path);
+  const page = siteMap.flatMap((g) => g.pages).find((p) => p.path === path);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -69,13 +69,13 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         url: facts.brand.url,
         publisher: { "@id": `${facts.brand.url}/#organization` },
       },
-      ...(page && page.route !== "/"
+      ...(page && page.path !== "/"
         ? [
             {
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Home", item: facts.brand.url },
-                { "@type": "ListItem", position: 2, name: page.title, item: `${facts.brand.url}${page.route}` },
+                { "@type": "ListItem", position: 2, name: page.title, item: `${facts.brand.url}${page.path}` },
               ],
             },
           ]

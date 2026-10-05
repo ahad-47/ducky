@@ -5,6 +5,7 @@ export const metadata = buildMetadata({
   title: "Arcade | SkilledScan",
   description: "Five small browser games from the SkilledScan desktop: Snake, 2048, Minesweeper, Memory and Breakout.",
   path: "/arcade",
+  noindex: true,
 });
 
 export default function ArcadePage() {

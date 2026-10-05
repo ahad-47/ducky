@@ -1,5 +1,5 @@
 export const complianceCopy = {
-  h1: "Scan evidence for your auditor",
+  h1: "Vulnerability scan evidence for your auditor",
   intro:
     "SkilledScan does not certify compliance. A SkilledScan report is one input to your evidence set: the vulnerability scan evidence, with scope, method, confirmed findings and remediation, in a form your auditor can read.",
   frameworks: {

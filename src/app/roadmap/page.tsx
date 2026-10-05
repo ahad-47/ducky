@@ -8,8 +8,9 @@ import { facts } from "@/content/facts";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Roadmap | SkilledScan",
-  description: "What SkilledScan delivers today and what is next.",
+  title: "Product Roadmap | SkilledScan",
+  description:
+    "Live today: web app and API scanning, policy-gated checks, verified findings, HTML and PDF reports, rescans. Next: authenticated testing and scheduled scans.",
   path: "/roadmap",
 });
 

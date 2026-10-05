@@ -6,10 +6,12 @@ export function buildMetadata({
   title,
   description,
   path,
+  noindex = false,
 }: {
   title: string;
   description: string;
   path: string;
+  noindex?: boolean;
 }): Metadata {
   const url = `${env.NEXT_PUBLIC_SITE_URL}${path}`;
 
@@ -17,6 +19,7 @@ export function buildMetadata({
     title,
     description,
     alternates: { canonical: url },
+    ...(noindex ? { robots: { index: false, follow: true } } : {}),
     openGraph: {
       title,
       description,

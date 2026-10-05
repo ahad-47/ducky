@@ -12,9 +12,9 @@ import { facts } from "@/content/facts";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Sample report | SkilledScan",
+  title: "Sample Vulnerability Scan Report | SkilledScan",
   description:
-    "A redacted sample, styled exactly like the report you receive, with one finding shown in full.",
+    "A redacted SkilledScan vulnerability report: executive summary, risk breakdown, scope, methodology, findings with evidence and fixes, and coverage.",
   path: "/report-sample",
 });
 

@@ -2,7 +2,7 @@ import { facts } from "@/content/facts";
 
 export const methodCopy = {
   eyebrow: "Platform",
-  h1: "How the scanner works",
+  h1: "How the SkilledScan vulnerability scanner works",
   intro:
     "Discovery, check selection and testing are automated and run under a policy you can read. Every action is logged, and a candidate has to be reproduced before it can become a finding.",
   badges: [`${facts.method.length}-stage pipeline`, "Policy-gated checks", "Full audit log"],

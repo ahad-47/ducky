@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import { Section } from "@/components/ui/Container";
 import { SecondaryLink } from "@/components/ui/Button";
 import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
@@ -10,16 +11,35 @@ import { buildMetadata } from "@/lib/seo";
 import { slugify } from "@/lib/slug";
 
 export const metadata = buildMetadata({
-  title: "Scan types | SkilledScan",
+  title: "Web App & API Security Scanning Services | SkilledScan",
   description:
-    "Web application scanning, API scanning, and rescan with sign-off. Each ends in a report with evidence and a fix for every finding.",
+    "Web application scanning, REST and GraphQL API security testing, and rescans after fixes. Each scan ends in a report with evidence and a fix per finding.",
   path: "/engagements",
 });
 
+export default async function EngagementsPage() {
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": facts.engagements.map((e) => ({
+      "@type": "Service",
+      name: e.name,
+      serviceType: e.name,
+      description: e.summary,
+      url: `${facts.brand.url}/engagements#${slugify(e.name)}`,
+      provider: { "@id": `${facts.brand.url}/#organization` },
+      areaServed: "Worldwide",
+    })),
+  };
 
-export default function EngagementsPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        nonce={nonce}
+        // Built only from facts via JSON.stringify.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <PageHeader eyebrow={engagementsCopy.eyebrow} title={engagementsCopy.h1} intro={engagementsCopy.intro} />
 
       <Section className="pt-0">

@@ -1,5 +1,5 @@
 export const securityCopy = {
-  h1: "Security and disclosure",
+  h1: "Security and vulnerability disclosure",
   intro:
     "Found a vulnerability in SkilledScan? Report it through the form on this page.",
   guidelines: {
