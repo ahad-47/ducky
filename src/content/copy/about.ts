@@ -13,7 +13,7 @@ export const aboutCopy = {
     h2: "What Ahad Ansari works on",
     intro: "Drawn from the client projects he has delivered since 2017.",
   },
-  skills: { h3: "Skills", tools: "Tools", sectors: "Sectors" },
+  skills: { h3: "Skills", sectors: "Sectors" },
   countries: {
     eyebrow: "Reach",
     h2: `Clients in ${facts.globalReach.countries} countries`,

@@ -140,7 +140,6 @@ export default async function AboutPage() {
         <div className="mt-14 flex flex-col gap-8">
           {[
             { label: aboutCopy.skills.h3, items: f.skills },
-            { label: aboutCopy.skills.tools, items: f.tools },
             { label: aboutCopy.skills.sectors, items: f.sectors },
           ].map((group) => (
             <div key={group.label}>

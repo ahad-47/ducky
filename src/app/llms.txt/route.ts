@@ -46,8 +46,6 @@ ${f.expertise.map((e) => `- ${e.area}: ${e.items.join("; ")}`).join("\n")}
 ### Skills
 ${f.skills.join(", ")}
 
-### Tools
-${f.tools.join(", ")}
 
 ### Client countries (selection)
 ${f.regions.map((r) => `- ${r.region}: ${r.countries.join(", ")}`).join("\n")}
