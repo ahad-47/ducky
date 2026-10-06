@@ -2,7 +2,7 @@ import Image from "next/image";
 import { headers } from "next/headers";
 import { Section } from "@/components/ui/Container";
 import { PageHeader, SectionHeading } from "@/components/ui/PageHeader";
-import { Badge, Card } from "@/components/ui/Card";
+import { Badge } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
 import { aboutCopy } from "@/content/copy/about";
 import { facts } from "@/content/facts";
@@ -12,7 +12,7 @@ const f = facts.founder;
 
 export const metadata = buildMetadata({
   title: `${f.name}: Penetration Tester, Founder of SkilledScan`,
-  description: `${f.name} is a CEH-certified penetration tester from India in the NCIIPC Hall of Fame, with 500+ security projects in 70+ countries. Founder of SkilledScan.`,
+  description: `${f.name} is a penetration tester and security consultant from India with 500+ security projects for clients in 70+ countries since ${f.since}. Founder of SkilledScan.`,
   path: "/about",
 });
 
@@ -59,8 +59,6 @@ export default async function AboutPage() {
       homeLocation: { "@type": "Country", name: f.location },
       worksFor: { "@id": `${facts.brand.url}/#organization` },
       sameAs: [f.linkedin],
-      award: "NCIIPC Hall of Fame",
-      hasCredential: f.credentials.map((c) => ({ "@type": "EducationalOccupationalCredential", name: c.title })),
       knowsAbout: [...f.expertise.flatMap((e) => e.items), ...f.skills],
     },
   };
@@ -122,18 +120,6 @@ export default async function AboutPage() {
       </Section>
 
       <Section>
-        <SectionHeading eyebrow={aboutCopy.credentials.eyebrow} title={aboutCopy.credentials.h2} />
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {f.credentials.map((c) => (
-            <Card key={c.title} pad="p-7" className="flex flex-col gap-3">
-              <h3 className="text-[18px] font-semibold text-ink">{c.title}</h3>
-              <p className="text-[15.5px] text-ink-soft">{c.detail}</p>
-            </Card>
-          ))}
-        </div>
-      </Section>
-
-      <Section>
         <SectionHeading eyebrow={aboutCopy.expertise.eyebrow} title={aboutCopy.expertise.h2} intro={aboutCopy.expertise.intro} />
         <div className="mt-10 grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {f.expertise.map((e) => (
@@ -184,33 +170,6 @@ export default async function AboutPage() {
               </ul>
             </div>
           ))}
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeading eyebrow={aboutCopy.work.eyebrow} title={aboutCopy.work.h2} intro={aboutCopy.work.intro} />
-        <div className="mt-10 overflow-hidden rounded-[var(--radius-sm)] border border-rule">
-          <table className="w-full text-left text-[15px]">
-            <thead className="bg-accent-tint/60 text-[13px] text-ink-soft">
-              <tr>
-                <th scope="col" className="px-5 py-3 font-medium">Year</th>
-                <th scope="col" className="px-5 py-3 font-medium">Project</th>
-                <th scope="col" className="hidden px-5 py-3 font-medium sm:table-cell">Client country</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-rule">
-              {f.work.map((w) => (
-                <tr key={`${w.year}-${w.title}`}>
-                  <td className="whitespace-nowrap px-5 py-3.5 align-top font-[family-name:var(--font-mono)] text-[13px] text-ink-soft">{w.year}</td>
-                  <td className="px-5 py-3.5 text-ink">
-                    {w.title}
-                    <span className="mt-0.5 block text-[13.5px] text-ink-soft sm:hidden">{w.country}</span>
-                  </td>
-                  <td className="hidden px-5 py-3.5 text-ink-soft sm:table-cell">{w.country}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
         </div>
       </Section>
 

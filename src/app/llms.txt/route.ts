@@ -39,8 +39,6 @@ ${f.bio.join("\n\n")}
 - Profile: ${base}/about
 ${f.stats.map((s) => `- ${s.value} ${s.label}`).join("\n")}
 
-### Certifications and recognition
-${f.credentials.map((c) => `- ${c.title}: ${c.detail}`).join("\n")}
 
 ### Expertise
 ${f.expertise.map((e) => `- ${e.area}: ${e.items.join("; ")}`).join("\n")}

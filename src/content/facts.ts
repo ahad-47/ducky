@@ -24,7 +24,7 @@ export const facts = {
     since: 2017,
     bio: [
       "Ahad Ansari is a cybersecurity consultant and penetration tester from India, and the founder of SkilledScan. Since 2017 he has completed more than 500 security projects for businesses in over 70 countries: web application and API penetration tests, vulnerability assessments, malware cleanups, digital forensics and incident response.",
-      "He holds the Certified Ethical Hacker (CEH) certification and is listed in the Hall of Fame of India's National Critical Information Infrastructure Protection Centre (NCIIPC) for responsibly disclosing a vulnerability. Across 110 reviewed client projects he holds an average rating of 4.9 out of 5.",
+      "Across 110 reviewed client projects he holds an average rating of 4.9 out of 5.",
       "His clients range from single-site owners to agencies and security teams, in finance, healthcare, retail and e-commerce. He built SkilledScan to offer that testing as a product: governed scans that report only confirmed findings, each with evidence and a fix.",
     ],
     stats: [
@@ -32,21 +32,6 @@ export const facts = {
       { value: "70+", label: "countries served" },
       { value: "4.9/5", label: "average rating across 110 client reviews" },
       { value: "2017", label: "year of the first client project" },
-    ],
-    credentials: [
-      {
-        title: "Certified Ethical Hacker (CEH)",
-        detail: "EC-Council certification in offensive security testing.",
-      },
-      {
-        title: "NCIIPC Hall of Fame",
-        detail:
-          "Recognized by India's National Critical Information Infrastructure Protection Centre for responsibly disclosing a vulnerability (ID 6901790).",
-      },
-      { title: "CCNA v7", detail: "Cisco certification in networking." },
-      { title: "Cisco CyberSecurity", detail: "Cisco certification in security fundamentals." },
-      { title: "OSINT certification", detail: "Open-source intelligence gathering." },
-      { title: "Cybercrime intervention officer", detail: "Certification in responding to cybercrime." },
     ],
     // Grouped from the titles of his client projects.
     expertise: [
@@ -170,35 +155,6 @@ export const facts = {
         region: "Asia-Pacific",
         countries: ["India", "Sri Lanka", "Singapore", "Malaysia", "Indonesia", "Thailand", "Japan", "South Korea", "Australia"],
       },
-    ],
-    // Selected projects, described generically. Client names withheld.
-    work: [
-      { year: 2026, country: "Australia", title: "Web application penetration test" },
-      { year: 2026, country: "Singapore", title: "Ransomware infection analysis on VMware infrastructure" },
-      { year: 2025, country: "United Arab Emirates", title: "Web application penetration test with recommendations and an action list" },
-      { year: 2025, country: "Netherlands", title: "Vulnerability scans across seven websites" },
-      { year: 2025, country: "Sweden", title: "Penetration testing of servers and web pages" },
-      { year: 2025, country: "Canada", title: "Comprehensive penetration test" },
-      { year: 2025, country: "Sri Lanka", title: "Security hardening of a cloud-hosted Windows server" },
-      { year: 2025, country: "United Kingdom", title: "Virtual machine penetration test" },
-      { year: 2024, country: "United Arab Emirates", title: "Two-stage penetration test" },
-      { year: 2024, country: "Chile", title: "Website penetration test" },
-      { year: 2024, country: "Canada", title: "Malware cleanup of an e-commerce site" },
-      { year: 2023, country: "United Kingdom", title: "ISMS report" },
-      { year: 2023, country: "United Kingdom", title: "Digital forensic analysis" },
-      { year: 2023, country: "United States", title: "Malware analysis and secure environment setup" },
-      { year: 2022, country: "United States", title: "Digital forensic analysis for a lawsuit" },
-      { year: 2022, country: "United States", title: "Security audit documentation" },
-      { year: 2021, country: "Germany", title: "Web application and domain penetration test" },
-      { year: 2021, country: "Germany", title: "DDoS protection for a WordPress site and server" },
-      { year: 2021, country: "Indonesia", title: "External security review of a React build" },
-      { year: 2021, country: "Italy", title: "Penetration test of a new website and CRM" },
-      { year: 2020, country: "United Kingdom", title: "Acunetix vulnerability scan and report" },
-      { year: 2020, country: "Malaysia", title: "DDoS attack mitigation" },
-      { year: 2020, country: "United States", title: "Snort intrusion detection rules" },
-      { year: 2018, country: "Colombia", title: "Shopify store security test" },
-      { year: 2018, country: "Portugal", title: "Website penetration test" },
-      { year: 2017, country: "Saudi Arabia", title: "Penetration test of PHP software" },
     ],
   },
 

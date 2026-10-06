@@ -26,7 +26,7 @@ export const siteMap: { group: string; pages: SitePage[] }[] = [
   {
     group: "Company",
     pages: [
-      { path: "/about", title: "Ahad Ansari, founder", summary: "Who built SkilledScan: credentials, expertise and track record.", updated: "2026-10-05", priority: 0.8, changeFrequency: "monthly" },
+      { path: "/about", title: "Ahad Ansari, founder", summary: "Who built SkilledScan: expertise, skills and the work delivered for clients.", updated: "2026-10-05", priority: 0.8, changeFrequency: "monthly" },
       { path: "/faq", title: "Security scanning FAQ", summary: "Authorization, scope, production safety, reports, rescans and compliance.", updated: "2026-10-05", priority: 0.7, changeFrequency: "monthly" },
       { path: "/contact", title: "Request a security scan", summary: "How to set up a scan or ask a question.", updated: "2026-10-05", priority: 0.7, changeFrequency: "yearly" },
     ],
