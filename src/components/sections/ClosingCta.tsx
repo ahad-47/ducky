@@ -17,7 +17,7 @@ export function ClosingCta({
   return (
     <section className="py-[var(--section-padding)]">
       <Container>
-        <div className="relative overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-8 sm:p-12">
+        <div data-motion="cta" className="relative overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-8 shadow-[var(--shadow-soft)] sm:p-12">
           <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
           <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div>

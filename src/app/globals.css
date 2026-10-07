@@ -780,3 +780,19 @@ h3 {
     font-size: 16px;
   }
 }
+
+/* ---------- Motion (src/motion/PageMotion.tsx) ---------- */
+/* Hidden for the moment between first paint and GSAP setting its starting
+   states. The pre-paint script removes the class after 2.5s regardless. */
+html.motion-wait #main,
+html.motion-wait [data-motion="header"],
+html.motion-wait footer {
+  visibility: hidden;
+}
+
+/* Masked line reveals: give each mask room for descenders (g, p, y) so the
+   finished line is never clipped. */
+.split-line-mask {
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}

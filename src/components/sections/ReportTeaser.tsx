@@ -24,7 +24,8 @@ export function ReportTeaser() {
             At a glance
           </p>
           <p className="mt-2 font-[family-name:var(--font-serif)] text-[clamp(2rem,3.5vw,2.75rem)] leading-none text-ink">
-            {counts.total} <span className="text-[18px] text-ink-soft">findings, by severity</span>
+            <span data-count className="tabular-nums">{counts.total}</span>{" "}
+            <span className="text-[18px] text-ink-soft">findings, by severity</span>
           </p>
           <div className="mt-6">
             <SeverityBar

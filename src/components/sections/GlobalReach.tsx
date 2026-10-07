@@ -1,11 +1,14 @@
 "use client";
 
+import { useRef } from "react";
+import { useGSAP } from "@gsap/react";
 import type { GeoJsonObject } from "geojson";
 import { ComposableMap, Geographies, Geography, Marker } from "react-simple-maps";
 import countriesTopology from "world-atlas/countries-110m.json";
 import { Section } from "@/components/ui/Container";
 import { facts } from "@/content/facts";
 import { SectionHeading } from "@/components/ui/PageHeader";
+import { gsap, registerGsap } from "@/motion/gsap";
 
 const countries = countriesTopology as unknown as GeoJsonObject;
 
@@ -27,11 +30,70 @@ const markers: [number, number][] = [
 ];
 
 export function GlobalReach() {
-  return (
-    <Section>
-      <SectionHeading eyebrow="Reach" title={`Clients in ${facts.globalReach.countries} countries`} intro={facts.globalReach.note} />
+  const ref = useRef<HTMLDivElement>(null);
 
-      <div className="relative mt-10 overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-4 sm:p-8">
+  // This section loads after the page's own motion has run, so it animates
+  // itself: the heading rises in, the map settles, the markers light up one
+  // by one and keep a slow pulse.
+  useGSAP(
+    () => {
+      registerGsap();
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const root = ref.current;
+        if (!root) return;
+        const st = { trigger: root, start: "top 85%", once: true };
+        gsap.from(root.querySelectorAll("[data-reach-head] > *"), {
+          y: 28,
+          opacity: 0,
+          duration: 1.1,
+          stagger: 0.1,
+          ease: "expo.out",
+          scrollTrigger: st,
+        });
+        gsap.from(root.querySelector("[data-reach-map]"), {
+          y: 40,
+          opacity: 0,
+          scale: 0.98,
+          duration: 1.4,
+          ease: "expo.out",
+          scrollTrigger: st,
+        });
+        gsap.from(root.querySelectorAll("[data-dot]"), {
+          scale: 0,
+          transformOrigin: "50% 50%",
+          duration: 0.6,
+          ease: "back.out(3)",
+          stagger: { amount: 1.6, from: "random" },
+          delay: 0.5,
+          scrollTrigger: st,
+        });
+        gsap.fromTo(
+          root.querySelectorAll("[data-halo]"),
+          { scale: 0.6, opacity: 0.35, transformOrigin: "50% 50%" },
+          {
+            scale: 2.2,
+            opacity: 0,
+            duration: 2.4,
+            ease: "sine.out",
+            stagger: { each: 0.18, from: "random", repeat: -1 },
+          },
+        );
+      });
+      return () => mm.revert();
+    },
+    { scope: ref },
+  );
+
+  return (
+    // Skipped by PageMotion: this section runs its own timeline.
+    <div ref={ref} data-motion-skip>
+    <Section>
+      <div data-reach-head>
+        <SectionHeading eyebrow="Reach" title={`Clients in ${facts.globalReach.countries} countries`} intro={facts.globalReach.note} />
+      </div>
+
+      <div data-reach-map className="relative mt-10 overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-4 sm:p-8">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(36,83,230,0.07),transparent_60%)]"
@@ -58,12 +120,13 @@ export function GlobalReach() {
           </Geographies>
           {markers.map(([lng, lat], i) => (
             <Marker key={i} coordinates={[lng, lat]}>
-              <circle r={2.6} fill="#2453e6" opacity={0.95} />
-              <circle r={6} fill="#2453e6" opacity={0.14} />
+              <circle data-halo r={6} fill="#2453e6" opacity={0.14} />
+              <circle data-dot r={2.6} fill="#2453e6" opacity={0.95} />
             </Marker>
           ))}
         </ComposableMap>
       </div>
     </Section>
+    </div>
   );
 }

@@ -109,7 +109,10 @@ export default async function AboutPage() {
             <div key={s.label} className={`py-8 pr-6 ${i > 0 ? "lg:border-l lg:border-rule lg:pl-8" : ""} ${i % 2 ? "border-l border-rule pl-6 lg:pl-8" : ""}`}>
               <dt className="sr-only">{s.label}</dt>
               <dd>
-                <span className="block font-[family-name:var(--font-serif)] text-[clamp(2.25rem,5vw,3.5rem)] font-medium leading-none tracking-[-0.04em] text-ink">
+                <span
+                  {...(s.value === "2017" ? {} : { "data-count": "" })}
+                  className="block font-[family-name:var(--font-serif)] text-[clamp(2.25rem,5vw,3.5rem)] font-medium leading-none tracking-[-0.04em] text-ink tabular-nums"
+                >
                   {s.value}
                 </span>
                 <span className="mt-3 block text-[14.5px] text-ink-soft">{s.label}</span>
@@ -173,7 +176,7 @@ export default async function AboutPage() {
       </Section>
 
       <Section>
-        <div className="relative overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-8 sm:p-12">
+        <div data-motion="cta" className="relative overflow-hidden rounded-[var(--radius-paper)] border border-rule bg-paper-raised p-8 shadow-[var(--shadow-soft)] sm:p-12">
           <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent/70 to-transparent" />
           <h2 className="max-w-[20ch] font-[family-name:var(--font-serif)] text-display-l font-medium tracking-[-0.03em] text-ink">
             {aboutCopy.contact.h2}

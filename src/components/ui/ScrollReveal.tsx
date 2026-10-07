@@ -1,20 +1,8 @@
-"use client";
-
-import { useRef } from "react";
-import { useGSAP } from "@gsap/react";
-import { gsap, ScrollTrigger, registerGsap, durations } from "@/motion/gsap";
-import { useReducedMotion } from "@/motion/useReducedMotion";
-
-/**
- * Wraps a group of direct children and brings them into focus (fade, a
- * short rise and a blur that clears) as the group scrolls into view. Pass `selector` to target descendants instead of
- * direct children (e.g. list items inside a <ul>).
- */
+// Kept as a plain wrapper: PageMotion reveals the children of every section
+// as they scroll in, so this no longer animates on its own.
 export function ScrollReveal({
   children,
   className = "",
-  selector,
-  stagger = 0.07,
   as: Tag = "div",
 }: {
   children: React.ReactNode;
@@ -23,44 +11,5 @@ export function ScrollReveal({
   stagger?: number;
   as?: "div" | "ul" | "ol";
 }) {
-  const ref = useRef<HTMLDivElement & HTMLUListElement & HTMLOListElement>(null);
-  const reducedMotion = useReducedMotion();
-
-  useGSAP(
-    () => {
-      if (reducedMotion || !ref.current) return;
-      registerGsap();
-
-      const targets = selector ? ref.current.querySelectorAll(selector) : Array.from(ref.current.children);
-      if (targets.length === 0) return;
-
-      gsap.set(targets, { opacity: 0, y: 12, filter: "blur(6px)" });
-
-      const trigger = ScrollTrigger.create({
-        trigger: ref.current,
-        start: "top 85%",
-        once: true,
-        onEnter: () => {
-          gsap.to(targets, {
-            opacity: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: durations.reveal,
-            ease: "lux",
-            stagger,
-            clearProps: "filter,transform",
-          });
-        },
-      });
-
-      return () => trigger.kill();
-    },
-    { scope: ref, dependencies: [reducedMotion, selector, stagger] },
-  );
-
-  return (
-    <Tag ref={ref} className={className}>
-      {children}
-    </Tag>
-  );
+  return <Tag className={className}>{children}</Tag>;
 }

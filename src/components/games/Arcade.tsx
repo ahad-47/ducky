@@ -49,7 +49,7 @@ export function Arcade() {
           </button>
         ))}
       </div>
-      <div id="arcade-panel" role="tabpanel" aria-labelledby={`tab-${game.id}`} className="glass rounded-[var(--radius-sm)] p-4 sm:p-6">
+      <div id="arcade-panel" data-motion-skip role="tabpanel" aria-labelledby={`tab-${game.id}`} className="glass rounded-[var(--radius-sm)] p-4 sm:p-6">
         {staticRender ? loading() : <game.Component key={game.id} />}
       </div>
     </div>

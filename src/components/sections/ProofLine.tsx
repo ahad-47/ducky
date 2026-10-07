@@ -11,9 +11,9 @@ export function ProofLine() {
           <div>
             <p className="text-[14px] text-ink-soft">{homeCopy.proof.label}</p>
             <p className="mt-3 flex items-baseline gap-4 font-[family-name:var(--font-serif)] font-medium leading-none tracking-[-0.04em]">
-              <span className="text-[clamp(3rem,7vw,5.5rem)] text-ink-soft/70">{facts.signalResult.raw}</span>
+              <span data-count className="tabular-nums text-[clamp(3rem,7vw,5.5rem)] text-ink-soft/70">{facts.signalResult.raw}</span>
               <span aria-hidden className="text-[clamp(1.5rem,3vw,2.5rem)] text-ink-soft/50">→</span>
-              <span className="text-[clamp(3rem,7vw,5.5rem)] text-accent">{facts.signalResult.verified}</span>
+              <span data-count className="tabular-nums text-[clamp(3rem,7vw,5.5rem)] text-accent">{facts.signalResult.verified}</span>
             </p>
             <p className="mt-3 flex gap-10 text-[14px] text-ink-soft">
               <span>{homeCopy.proof.raw}</span>

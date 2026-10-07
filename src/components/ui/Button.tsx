@@ -24,7 +24,7 @@ export function PrimaryButton({
 }: PrimaryButtonProps) {
   if (href) {
     return (
-      <Link href={href} className={`${primaryClass} ${className}`}>
+      <Link href={href} data-magnetic className={`${primaryClass} ${className}`}>
         {children}
       </Link>
     );

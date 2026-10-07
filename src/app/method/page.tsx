@@ -105,12 +105,12 @@ export default function MethodPage() {
             </p>
             <div className="mt-6 flex items-end gap-4">
               <div>
-                <p className="font-[family-name:var(--font-serif)] text-[clamp(2.75rem,5vw,4rem)] leading-none text-ink-soft">{raw}</p>
+                <p className="font-[family-name:var(--font-serif)] text-[clamp(2.75rem,5vw,4rem)] leading-none text-ink-soft tabular-nums" data-count>{raw}</p>
                 <p className="mt-2 text-[14px] text-ink-soft">raw observations</p>
               </div>
               <Icon name="arrow" className="mb-8 h-7 w-7 shrink-0 text-accent-text" />
               <div>
-                <p className="font-[family-name:var(--font-serif)] text-[clamp(2.75rem,5vw,4rem)] leading-none text-ink">{reported}</p>
+                <p className="font-[family-name:var(--font-serif)] text-[clamp(2.75rem,5vw,4rem)] leading-none text-ink tabular-nums" data-count>{reported}</p>
                 <p className="mt-2 text-[14px] text-ink-soft">reported findings</p>
               </div>
             </div>

@@ -26,6 +26,7 @@ export function SiteHeader({ signInUrl }: { signInUrl: string | null }) {
 
   return (
     <header
+      data-motion="header"
       className={`sticky top-0 z-40 border-b transition-colors duration-[280ms] ${
         scrolled ? "border-rule bg-paper/80 backdrop-blur-xl backdrop-saturate-150" : "border-transparent bg-transparent"
       }`}

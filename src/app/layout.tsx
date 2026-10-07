@@ -9,6 +9,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { EmbedProvider } from "@/components/ui/EmbedContext";
 import { siteMap } from "@/content/site-map";
 import { SmoothScroll } from "@/motion/SmoothScroll";
+import { PageMotion } from "@/motion/PageMotion";
 import { facts } from "@/content/facts";
 import { appSignInUrl, env } from "@/lib/env";
 import "./globals.css";
@@ -22,6 +23,8 @@ export const viewport: Viewport = {
   viewportFit: "cover",
   themeColor: "#0c0d0f",
 };
+
+const motionWaitScript = `(function(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;var d=document.documentElement;d.classList.add("motion-wait");setTimeout(function(){d.classList.remove("motion-wait")},2500)}catch(e){}})();`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
@@ -134,11 +137,27 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} h-full`}
+      // The pre-paint script below adds motion classes before hydration.
+      suppressHydrationWarning
     >
+      <head>
+        <script
+          nonce={nonce}
+          // Hides the page for the moment PageMotion needs to set starting
+          // states, so nothing flashes; a timer shows it regardless.
+          dangerouslySetInnerHTML={{ __html: motionWaitScript }}
+        />
+      </head>
       <body className="flex min-h-full flex-col bg-paper text-ink">
         {emailOff}
         {structuredData}
         <EmbedBridge />
+        <PageMotion />
+        <div
+          aria-hidden
+          data-motion="progress"
+          className="pointer-events-none fixed inset-x-0 top-0 z-50 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-accent to-[#7da2ff]"
+        />
         <EmbedProvider embedded>
           <SmoothScroll>
             <SkipLink />

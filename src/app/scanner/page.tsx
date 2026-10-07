@@ -32,7 +32,7 @@ export default function ScannerPage() {
             <Icon name="arrow" className="h-4 w-4" />
           </Link>
         </PageHeader>
-        <div className="px-[var(--side-padding)] pb-12 lg:pb-0 lg:pr-[var(--side-padding)]">
+        <div data-motion="hero-visual" className="px-[var(--side-padding)] pb-12 lg:pb-0 lg:pr-[var(--side-padding)]">
           <ScannerRadar label={scannerCopy.status} />
         </div>
       </div>
