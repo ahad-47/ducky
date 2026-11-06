@@ -5,6 +5,25 @@ import { NextResponse, type NextRequest } from "next/server";
 // window (an iframe) the same route renders as a bare page. The iframe asks
 // for `?embed=1`; Sec-Fetch-Dest covers reloads and plain links inside it.
 export function proxy(request: NextRequest) {
+  // One canonical host: www serves the same pages, so send it to the apex.
+  const host =
+    request.headers.get("x-forwarded-host") ??
+    request.headers.get("host") ??
+    "";
+  // The target host comes from config, never from the request's Host header.
+  const site = process.env.NEXT_PUBLIC_SITE_URL ?? "https://skilledscan.com";
+  // Skipped when the configured site is itself on www, which would loop.
+  if (
+    host.toLowerCase().startsWith("www.") &&
+    !new URL(site).hostname.startsWith("www.")
+  ) {
+    const target = new URL(
+      request.nextUrl.pathname + request.nextUrl.search,
+      site,
+    );
+    return NextResponse.redirect(target, 308);
+  }
+
   const embed =
     request.nextUrl.searchParams.get("embed") === "1" ||
     request.headers.get("sec-fetch-dest") === "iframe";

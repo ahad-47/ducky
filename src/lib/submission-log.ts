@@ -1,4 +1,4 @@
-import { appendFile, mkdir } from "node:fs/promises";
+import { appendFile, mkdir, stat } from "node:fs/promises";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
 import { env } from "@/lib/env";
@@ -9,18 +9,26 @@ import { env } from "@/lib/env";
 // volume that survives redeploys.
 
 export type SubmissionOutcome =
-  | "received"
-  | "validation_failed"
-  | "spam_honeypot"
-  | "spam_too_fast"
-  | "rate_limited";
+  "received" | "validation_failed" | "spam_honeypot" | "spam_too_fast";
 
 export type SubmissionEntry = {
   outcome: SubmissionOutcome;
   ip: string;
+  forwardedFor: string;
   userAgent: string;
   payload: unknown;
 };
+
+// Past this size new entries go to stdout only, so the disk cannot fill.
+const MAX_LOG_BYTES = 100 * 1024 * 1024;
+
+async function sizeOf(file: string): Promise<number> {
+  try {
+    return (await stat(file)).size;
+  } catch {
+    return 0;
+  }
+}
 
 function logFilePath(): string {
   const dir = env.CONTACT_LOG_DIR ?? path.join(process.cwd(), "data");
@@ -39,6 +47,12 @@ export async function logSubmission(
 
   try {
     const file = logFilePath();
+    if ((await sizeOf(file)) > MAX_LOG_BYTES) {
+      console.error(
+        "[contact] submission log is full; entry kept in stdout only",
+      );
+      return { id, stored: false };
+    }
     await mkdir(path.dirname(file), { recursive: true, mode: 0o700 });
     await appendFile(file, `${line}\n`, { encoding: "utf8", mode: 0o600 });
     return { id, stored: true };
