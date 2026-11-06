@@ -3,6 +3,7 @@ import { contactRequestSchema } from "@/lib/validation";
 import { sendContactMail } from "@/lib/mail";
 import { isRateLimited } from "@/lib/rate-limit";
 import { env } from "@/lib/env";
+import { logSubmission, type SubmissionOutcome } from "@/lib/submission-log";
 
 const MAX_BODY_BYTES = 32 * 1024;
 const MIN_SUBMIT_MS = 3000;
@@ -50,8 +51,14 @@ export async function POST(req: NextRequest) {
     );
   }
 
+  const ip = getClientIp(req);
+  const userAgent = req.headers.get("user-agent") ?? "unknown";
+  const log = (outcome: SubmissionOutcome) =>
+    logSubmission({ outcome, ip, userAgent, payload: json });
+
   const parsed = contactRequestSchema.safeParse(json);
   if (!parsed.success) {
+    await log("validation_failed");
     return NextResponse.json(
       { ok: false, error: "validation_failed", issues: parsed.error.issues },
       { status: 400 },
@@ -61,21 +68,31 @@ export async function POST(req: NextRequest) {
   const data = parsed.data;
 
   // Anti-spam: silently succeed without sending anything.
-  const isHoneypotFilled = Boolean(data.website);
-  const submittedTooFast = Date.now() - data.startedAt < MIN_SUBMIT_MS;
-  if (isHoneypotFilled || submittedTooFast) {
+  if (data.website) {
+    await log("spam_honeypot");
+    return NextResponse.json({ ok: true });
+  }
+  if (Date.now() - data.startedAt < MIN_SUBMIT_MS) {
+    await log("spam_too_fast");
     return NextResponse.json({ ok: true });
   }
 
-  const ip = getClientIp(req);
   if (isRateLimited(ip)) {
+    await log("rate_limited");
     return NextResponse.json(
       { ok: false, error: "rate_limited" },
       { status: 429 },
     );
   }
 
+  const { stored } = await log("received");
   const result = await sendContactMail(data);
+
+  // A stored entry is not lost, so the sender sees success even if mail fails.
+  if (stored && result.status !== "sent" && result.status !== "logged") {
+    console.error(`[contact] mail ${result.status}; entry kept in the log`);
+    return NextResponse.json({ ok: true });
+  }
 
   if (result.status === "unconfigured") {
     return NextResponse.json(
