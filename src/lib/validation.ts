@@ -25,7 +25,7 @@ export const assessmentRequestSchema = z.object({
   email: z.string().trim().email("Enter a valid email address."),
   company: z.string().trim().max(120).optional().or(z.literal("")),
   domain: domainSchema,
-  engagement: z.enum(engagementOptions, "Choose an engagement."),
+  engagement: z.enum(engagementOptions, "Choose a scan type."),
   message: z.string().trim().min(20, "Add at least 20 characters.").max(4000),
   authorized: z.literal(
     true,

@@ -16,17 +16,17 @@ function prune(now: number) {
   }
 }
 
-export function isRateLimited(ip: string): boolean {
+export function isRateLimited(key: string, max = MAX_REQUESTS): boolean {
   const now = Date.now();
-  const timestamps = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  const timestamps = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
 
-  if (timestamps.length >= MAX_REQUESTS) {
-    hits.set(ip, timestamps);
+  if (timestamps.length >= max) {
+    hits.set(key, timestamps);
     return true;
   }
 
   timestamps.push(now);
-  hits.set(ip, timestamps);
+  hits.set(key, timestamps);
   prune(now);
   return false;
 }

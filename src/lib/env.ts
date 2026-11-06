@@ -10,6 +10,7 @@ const envSchema = z.object({
   SMTP_PASS: z.string().optional(),
   CONTACT_TO_EMAIL: z.string().optional(),
   CONTACT_FROM_EMAIL: z.string().optional(),
+  CONTACT_LOG_DIR: z.string().optional(),
   NODE_ENV: z
     .enum(["development", "production", "test"])
     .default("development"),
@@ -25,6 +26,7 @@ const parsed = envSchema.parse({
   SMTP_PASS: process.env.SMTP_PASS,
   CONTACT_TO_EMAIL: process.env.CONTACT_TO_EMAIL,
   CONTACT_FROM_EMAIL: process.env.CONTACT_FROM_EMAIL,
+  CONTACT_LOG_DIR: process.env.CONTACT_LOG_DIR,
   NODE_ENV: process.env.NODE_ENV,
 });
 

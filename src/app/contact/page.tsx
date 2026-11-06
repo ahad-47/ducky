@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/Card";
 import { Icon } from "@/components/ui/Icon";
 import Link from "@/components/ui/SiteLink";
 import { CopyEmail } from "@/components/sections/CopyEmail";
+import { ContactForm } from "@/components/sections/ContactForm";
 import { contactCopy } from "@/content/copy/contact";
 import { buildMetadata } from "@/lib/seo";
 
@@ -26,6 +27,9 @@ export default function ContactPage() {
       <Section className="pt-0">
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
           <div className="flex flex-col gap-5 lg:col-span-7">
+            <Card pad="p-6 sm:p-8">
+              <ContactForm />
+            </Card>
             <Card pad="p-6 sm:p-8" className="relative overflow-hidden">
               <div className="relative">
                 <p className="mt-5 font-[family-name:var(--font-mono)] text-[12px] uppercase tracking-wide text-ink-soft">
